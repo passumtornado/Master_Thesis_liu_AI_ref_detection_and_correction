@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "bibtex_mcp": {
+      "transport": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "//Users//passum//Documents//SWEDEN/DSI//THESIS//AI_reference_agent_detection_correction//server",
+        "bibtex_mcp_server.py"
+      ]
+    },
+    "mcp-dblp": {
+      "transport": "stdio",
+      "command": "uvx",
+      "args": ["mcp-dblp"]
+    },
+    "mcp-scholar": {
+      "transport": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "//Users//passum//Documents//SWEDEN/DSI//THESIS//AI_reference_agent_detection_correction//mcp_server_and_agent",
+        "server.py"
+      ]
+    }
+  }
+}

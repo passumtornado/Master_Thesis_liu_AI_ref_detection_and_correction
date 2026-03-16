@@ -1,0 +1,52 @@
+[project]
+name = "ai-reference-agent-detection-correction"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "anthropic>=0.7.0",
+    "bibtexparser>=2.0.0b9",
+    "chromadb>=1.5.2",
+    "fastapi>=0.134.0",
+    "fastmcp>=3.0.2",
+    "fuzzywuzzy>=0.18.0",
+    "langchain[google-genai,openai]>=1.2.10",
+    "langchain-anthropic>=0.1.0",
+    "langchain-chroma>=1.1.0",
+    "langchain-community>=0.4.1",
+    "langchain-huggingface>=0.0.1",
+    "langchain-ollama>=1.0.1",
+    "langchain-text-splitters>=1.1.1",
+    "langgraph>=0.2.0",
+    "matplotlib>=3.10.8",
+    "mcp-dblp>=1.2.1",
+    "mcp-use>=1.6.0",
+    "mcp[cli]>=1.26.0",
+    "numpy>=2.4.2",
+    "onnxruntime==1.19.2",
+    "pandas>=3.0.1",
+    "pydantic>=2.8.0,<3.0.0",
+    "pydantic-core>=2.20.0",
+    "protobuf==3.20.3",
+    "python-Levenshtein>=0.21.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0",
+    "pypdf2>=3.0.1",
+    "requests>=2.32.5",
+    "scipy>=1.17.1",
+    "torch==2.2.2",
+    "transformers>=4.40.0",
+    "langchain-core>=1.2.17",
+    "langchain-mcp-adapters>=0.2.1",
+    "text-generation>=0.7.0",
+    "langchain-google-genai>=4.2.1",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

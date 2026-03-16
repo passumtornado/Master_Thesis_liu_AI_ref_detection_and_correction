@@ -1,0 +1,8 @@
+.env
+
+# Generated pipeline diagnostics
+pipeline_error.txt
+pipeline_snapshot.json
+
+# Generated evaluation artifacts
+evaluation/

@@ -44,7 +44,7 @@ from utils import _extract_text
 
 load_dotenv()
 
-from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_mcp_adapters.client import MultiServerMCPClient
@@ -54,7 +54,8 @@ from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode
 
 
-MAX_REACT_ITERATIONS = 120   # safety cap: 450 entries × ~3 tool calls each
+MAX_REACT_ITERATIONS = 120   # hard cap on tool calls in a single validation run
+REACT_RECURSION_BUFFER = 20  # extra graph steps for START/END + finalization overhead
 
 
 # ─────────────────────────────────────────────────────────────
@@ -365,6 +366,16 @@ class LLMValidationAgent:
         # ── Edge: loop or finish ──────────────────────────────
         def should_continue(state: ReactState) -> str:
             last = state["messages"][-1]
+
+            # Stop deterministically once the tool-call cap is reached.
+            # LangGraph recursion_limit counts node transitions, not tool calls,
+            # so we enforce the tool budget explicitly here.
+            tool_messages_so_far = sum(
+                1 for msg in state["messages"] if isinstance(msg, ToolMessage)
+            )
+            if tool_messages_so_far >= MAX_REACT_ITERATIONS:
+                return END
+
             if (
                 all_tools
                 and isinstance(last, AIMessage)
@@ -425,9 +436,11 @@ class LLMValidationAgent:
         tool_call_count = 0
         final_messages  = []
 
+        recursion_limit = (MAX_REACT_ITERATIONS * 2) + REACT_RECURSION_BUFFER
+
         async for chunk in app.astream(
             {"messages": initial_messages},
-            config={"recursion_limit": MAX_REACT_ITERATIONS},
+            config={"recursion_limit": recursion_limit},
         ):
             for node_name, node_output in chunk.items():
                 msgs = node_output.get("messages", [])
@@ -445,6 +458,15 @@ class LLMValidationAgent:
             if isinstance(msg, AIMessage) and not getattr(msg, "tool_calls", None):
                 raw_text = _extract_text(msg)
                 break
+
+        # If we stopped exactly at the tool budget, the last AI message may still
+        # include tool_calls. Use its text as a best-effort fallback.
+        if not raw_text:
+            for msg in reversed(final_messages):
+                if isinstance(msg, AIMessage):
+                    raw_text = _extract_text(msg)
+                    if raw_text:
+                        break
 
         if not raw_text:
             print("  Warning: could not extract final response from ReAct graph")

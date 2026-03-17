@@ -35,6 +35,20 @@ from utils import _extract_text
 load_dotenv()
 
 
+def _to_float(value: object, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _to_int(value: object, default: int = 0) -> int:
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return default
+
+
 # ─────────────────────────────────────────────────────────────
 # Prompt Strategy  (must match CorrectionAgent)
 # ─────────────────────────────────────────────────────────────
@@ -158,9 +172,9 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         saved_files = self._save_outputs(llm_result, evaluation_payload)
 
         m = llm_result.get("overall_metrics", {})
-        print(f"  ✓ Recall:    {m.get('recall', 0):.3f}")
-        print(f"  ✓ Precision: {m.get('precision', 0):.3f}")
-        print(f"  ✓ F1:        {m.get('f1', 0):.3f}")
+        print(f"  ✓ Recall:    {_to_float(m.get('recall', 0)):.3f}")
+        print(f"  ✓ Precision: {_to_float(m.get('precision', 0)):.3f}")
+        print(f"  ✓ F1:        {_to_float(m.get('f1', 0)):.3f}")
 
         return {
             "strategy":        self.strategy.value,
@@ -286,6 +300,28 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         if not isinstance(markdown_report, str):
             markdown_report = str(markdown_report)
 
+        # Normalize overall metric value types to avoid downstream formatting errors.
+        overall_metrics = {
+            "true_positives":  _to_int(overall_metrics.get("true_positives", 0)),
+            "false_positives": _to_int(overall_metrics.get("false_positives", 0)),
+            "false_negatives": _to_int(overall_metrics.get("false_negatives", 0)),
+            "recall":          _to_float(overall_metrics.get("recall", 0.0)),
+            "precision":       _to_float(overall_metrics.get("precision", 0.0)),
+            "f1":              _to_float(overall_metrics.get("f1", 0.0)),
+        }
+
+        normalized_field_accuracy = {}
+        for field, values in field_accuracy.items():
+            if not isinstance(values, dict):
+                continue
+            normalized_field_accuracy[field] = {
+                "errors_in_original": _to_int(values.get("errors_in_original", 0)),
+                "errors_corrected":   _to_int(values.get("errors_corrected", 0)),
+                "false_corrections":  _to_int(values.get("false_corrections", 0)),
+                "accuracy":           _to_float(values.get("accuracy", 0.0)),
+            }
+        field_accuracy = normalized_field_accuracy
+
         metrics_path = self.output_dir / "evaluation_metrics.json"
         metrics_path.write_text(
             json.dumps(
@@ -347,12 +383,12 @@ def build_comparison_report(
         m = r.get("overall_metrics", {})
         md += (
             f"| {r.get('strategy', '?'):12s} "
-            f"| {m.get('precision', 0):.3f} "
-            f"| {m.get('recall', 0):.3f} "
-            f"| {m.get('f1', 0):.3f} "
-            f"| {m.get('true_positives', 0)} "
-            f"| {m.get('false_positives', 0)} "
-            f"| {m.get('false_negatives', 0)} |\n"
+            f"| {_to_float(m.get('precision', 0)):.3f} "
+            f"| {_to_float(m.get('recall', 0)):.3f} "
+            f"| {_to_float(m.get('f1', 0)):.3f} "
+            f"| {_to_int(m.get('true_positives', 0))} "
+            f"| {_to_int(m.get('false_positives', 0))} "
+            f"| {_to_int(m.get('false_negatives', 0))} |\n"
         )
 
     # ── Field-level accuracy per strategy ────────────────────
@@ -373,26 +409,26 @@ def build_comparison_report(
                 fa = r.get("field_accuracy", {}).get(field, {})
                 md += (
                     f"| {r.get('strategy', '?'):12s} "
-                    f"| {fa.get('errors_in_original', 0)} "
-                    f"| {fa.get('errors_corrected', 0)} "
-                    f"| {fa.get('false_corrections', 0)} "
-                    f"| {fa.get('accuracy', 0):.3f} |\n"
+                    f"| {_to_int(fa.get('errors_in_original', 0))} "
+                    f"| {_to_int(fa.get('errors_corrected', 0))} "
+                    f"| {_to_int(fa.get('false_corrections', 0))} "
+                    f"| {_to_float(fa.get('accuracy', 0)):.3f} |\n"
                 )
             md += "\n"
 
     # ── Key insights ──────────────────────────────────────────
     if results:
-        best_f1        = max(results, key=lambda r: r.get("overall_metrics", {}).get("f1", 0))
-        best_precision = max(results, key=lambda r: r.get("overall_metrics", {}).get("precision", 0))
-        best_recall    = max(results, key=lambda r: r.get("overall_metrics", {}).get("recall", 0))
+        best_f1        = max(results, key=lambda r: _to_float(r.get("overall_metrics", {}).get("f1", 0)))
+        best_precision = max(results, key=lambda r: _to_float(r.get("overall_metrics", {}).get("precision", 0)))
+        best_recall    = max(results, key=lambda r: _to_float(r.get("overall_metrics", {}).get("recall", 0)))
 
         md += "## Key Insights\n\n"
         md += f"- **Best F1**        : `{best_f1.get('strategy')}` "
-        md += f"({best_f1.get('overall_metrics', {}).get('f1', 0):.3f})\n"
+        md += f"({_to_float(best_f1.get('overall_metrics', {}).get('f1', 0)):.3f})\n"
         md += f"- **Best Precision** : `{best_precision.get('strategy')}` "
-        md += f"({best_precision.get('overall_metrics', {}).get('precision', 0):.3f})\n"
+        md += f"({_to_float(best_precision.get('overall_metrics', {}).get('precision', 0)):.3f})\n"
         md += f"- **Best Recall**    : `{best_recall.get('strategy')}` "
-        md += f"({best_recall.get('overall_metrics', {}).get('recall', 0):.3f})\n"
+        md += f"({_to_float(best_recall.get('overall_metrics', {}).get('recall', 0)):.3f})\n"
 
     # ── Save ──────────────────────────────────────────────────
     md_path = folder / "comparison.md"

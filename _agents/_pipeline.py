@@ -33,24 +33,21 @@ from langgraph.graph import END, START, StateGraph
 
 from _correction_agent import CorrectionAgent
 from _correction_agent import PromptStrategy as CPromptStrategy
-from _evaluation_agent import EvaluationAgent
-from _evaluation_agent import PromptStrategy as EPromptStrategy
-from _evaluation_agent import build_comparison_report
+# from _evaluation_agent import EvaluationAgent
+# from _evaluation_agent import PromptStrategy as EPromptStrategy
+# from _evaluation_agent import build_comparison_report
+from deterministic_eval_agent import EvaluationAgent
+from deterministic_eval_agent import PromptStrategy as EPromptStrategy
+from deterministic_eval_agent import build_comparison_report
 from _preparation_agent import PreparationAgent
-# from _validation_agent import LLMValidationAgent
-# from _validation_agent import PromptStrategy as VPromptStrategy
 
 # ── Manual agent (default) ────────────────────────────────────
-# from _validation_agent import LLMValidationAgent
-# from _validation_agent import PromptStrategy as VPromptStrategy
-# from _validation_agent_react import LLMValidationAgent
-# from _validation_agent_react import PromptStrategy as VPromptStrategy
+from _validation_agent import LLMValidationAgent
+from _validation_agent import PromptStrategy as VPromptStrategy
 
 # ── ReAct agent ───────────────────────────────────────────────
-# from _validation_agent import LLMValidationAgent
-# from _validation_agent import PromptStrategy as VPromptStrategy
-from _validation_agent_react import LLMValidationAgent
-from _validation_agent_react import PromptStrategy as VPromptStrategy
+# from _validation_agent_react import LLMValidationAgent
+# from _validation_agent_react import PromptStrategy as VPromptStrategy
 
 
 
@@ -82,6 +79,7 @@ class PipelineState(TypedDict):
     corrections_summary: str
 
     # ── evaluation ────────────────────────────────────────────
+    ground_truth_path: str
     evaluation_metrics:        dict
     evaluation_field_accuracy: dict
     evaluation_error:          str
@@ -189,7 +187,7 @@ async def evaluation_node(state: PipelineState) -> dict:
     try:
         strategy   = EPromptStrategy(state.get("strategy", "rag"))
         output_dir = Path(state["output_dir"]) / "evaluation"
-        agent      = EvaluationAgent(str(output_dir), strategy=strategy)
+        agent      = EvaluationAgent(str(output_dir), strategy=strategy, ground_truth_path=state.get("ground_truth_path", "bibtex/ground_truth/ground_truth.json"))
 
         result = await agent.evaluate(raw_data=raw_data, corrections=corrections)
         return {
@@ -292,6 +290,7 @@ async def run_pipeline(
     mcp_config_path: str | None = None,
     output_dir:      str | None = None,
     strategy:        str = "rag",
+    ground_truth_path: str = "bibtex/ground_truth/ground_truth.json",
 ) -> PipelineState:
     """Run the full pipeline with a single prompting strategy."""
     project_root = Path(__file__).parent.parent
@@ -302,7 +301,7 @@ async def run_pipeline(
         "source_type":     source_type,
         "output_dir":      output_dir or str(project_root / "evaluation"),
         "strategy":        strategy,
-
+        "ground_truth_path": ground_truth_path,
         "prepared_entries":      [],
         "preparation_report":    {},
         "warnings_by_entry":     {},
@@ -346,6 +345,7 @@ async def run_experiment(
     source_type:     str = "file",
     mcp_config_path: str | None = None,
     output_dir:      str | None = None,
+    ground_truth_path: str = "bibtex/ground_truth/ground_truth.json",
 ) -> dict:
     """
     Run all three prompting strategies against the same .bib file
@@ -373,6 +373,7 @@ async def run_experiment(
             mcp_config_path=mcp_config_path,
             output_dir=output_dir,
             strategy=strategy,
+            ground_truth_path=ground_truth_path,
         )
 
         all_results.append({
@@ -479,6 +480,7 @@ Examples:
             mcp_config_path=args.mcp_config,
             output_dir=args.output_dir,
             strategy=args.strategy,
+            ground_truth_path="bibtex/ground_truth/ground_truth.json",
         ))
 
 

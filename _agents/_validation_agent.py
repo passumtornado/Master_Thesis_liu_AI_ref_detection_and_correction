@@ -188,19 +188,19 @@ class LLMValidationAgent:
         self,
         mcp_config_path: str,
         strategy: PromptStrategy = PromptStrategy.RAG,
-        model: str = "gpt-oss:120b-cloud" #"qwen3-coder:480b-cloud",
+        model: str =  "qwen3-coder:480b-cloud",
     ):
         self.mcp_config_path = mcp_config_path
         self.strategy        = strategy
 
-        # self.llm = ChatOllama(
-        #     model=model,
-        #     base_url="https://ollama.com",
-        #     temperature=0.1,
-        #     client_kwargs={
-        #         "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-        #     },
-        # )
+        self.llm = ChatOllama(
+            model=model,
+            base_url="https://ollama.com",
+            temperature=0.1,
+            client_kwargs={
+                "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+            },
+        )
         #OpenAI backend (uncomment to switch)
         # self.llm = ChatOpenAI(
         #     model="gpt-5.2",
@@ -209,11 +209,11 @@ class LLMValidationAgent:
         # )
         
         # GOOGLE GEMINI BACKEND (uncomment to switch)
-        self.llm = ChatGoogleGenerativeAI(
-            model="gemini-3.1-pro-preview",
-            temperature=0.1,
-            google_api_key=os.getenv("GOOGLE_API_KEY"),
-        )   
+        # self.llm = ChatGoogleGenerativeAI(
+        #     model="gemini-3.1-pro-preview",
+        #     temperature=0.1,
+        #     google_api_key=os.getenv("GOOGLE_API_KEY"),
+        # )   
          
         # Optional HuggingFace backend — uncomment to switch
         # self.llm = ChatHuggingFace(
@@ -463,7 +463,9 @@ class LLMValidationAgent:
             try:
                 data       = json.loads(json_block)
                 structured = data.get("results", [])
-            except json.JSONDecodeError:
+                print(f"\n  [DEBUG] Validation structured results: {len(structured)} entries found in JSON")
+            except json.JSONDecodeError as e:
+                print(f"\n  [DEBUG] JSON parse error: {e}")
                 pass
         else:
             markdown = raw_text

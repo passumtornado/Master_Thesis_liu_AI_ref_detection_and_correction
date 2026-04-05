@@ -231,6 +231,10 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
                 "changes":      changes,
             })
 
+        print(f"\n  [DEBUG EVAL] Payload built:")
+        print(f"    - raw_data entries:    {len(raw_data)}")
+        print(f"    - corrections entries: {len(corr_map)}")
+        print(f"    - payload entries:     {len(payload)}")
         return payload
 
     # ── private: LLM call ─────────────────────────────────────
@@ -258,8 +262,14 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
             raw_text = raw_text.strip()
 
         try:
-            return json.loads(raw_text)
-        except json.JSONDecodeError:
+            result = json.loads(raw_text)
+            m = result.get("overall_metrics", {})
+            print(f"\n  [DEBUG EVAL LLM Response]:")
+            print(f"    - TP: {m.get('true_positives', 0)}, FP: {m.get('false_positives', 0)}, FN: {m.get('false_negatives', 0)}")
+            print(f"    - Raw metrics keys: {list(m.keys())}")
+            return result
+        except json.JSONDecodeError as e:
+            print(f"\n  [DEBUG EVAL] JSON parse error: {e}")
             # Fallback keeps pipeline alive even when model returns malformed JSON
             return {
                 "overall_metrics": {

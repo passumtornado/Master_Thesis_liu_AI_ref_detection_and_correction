@@ -1,364 +1,17 @@
 [
   {
-    "key": "vaswani2017attention",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, Łukasz and Polosukhin, Illia",
-      "title": "Attention Is All You Need",
-      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
-      "year": "2017",
-      "volume": "30",
-      "pages": "5998--6008"
-    }
-  },
-  {
-    "key": "he2016deep",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian",
-      "title": "Deep Residual Learning for Image Recognition",
-      "booktitle": "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
-      "year": "2016",
-      "pages": "770--778",
-      "doi": "10.1109/CVPR.2016.90"
-    }
-  },
-  {
-    "key": "goodfellow2014generative",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Goodfellow, Ian and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua",
-      "title": "Generative Adversarial Nets",
-      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
-      "year": "2014",
-      "volume": "27",
-      "pages": "2672--2680"
-    }
-  },
-  {
-    "key": "devlin2019bert",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina",
-      "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
-      "booktitle": "Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL-HLT)",
-      "year": "2019",
-      "pages": "4171--4186",
-      "doi": "10.18653/v1/N19-1423"
-    }
-  },
-  {
-    "key": "krizhevsky2012imagenet",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E.",
-      "title": "ImageNet Classification with Deep Convolutional Neural Networks",
-      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
-      "year": "2012",
-      "volume": "25",
-      "pages": "1097--1105"
-    }
-  },
-  {
-    "key": "ronneberger2015u",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas",
-      "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
-      "booktitle": "Proceedings of the International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)",
-      "year": "2015",
-      "pages": "234--241",
-      "doi": "10.1007/978-3-319-24574-4_28"
-    }
-  },
-  {
-    "key": "radford2021learning",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and Mishkin, Pamela and Clark, Jack and others",
-      "title": "Learning Transferable Visual Models From Natural Language Supervision",
-      "booktitle": "Proceedings of the International Conference on Machine Learning (ICML)",
-      "year": "2021",
-      "pages": "8748--8763"
-    }
-  },
-  {
-    "key": "mnih2013playing",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Graves, Alex and Antonoglou, Ioannis and Wierstra, Daan and Riedmiller, Martin",
-      "title": "Playing Atari with Deep Reinforcement Learning",
-      "booktitle": "Workshop on Deep Learning, Advances in Neural Information Processing Systems (NeurIPS)",
-      "year": "2013"
-    }
-  },
-  {
-    "key": "chen2020simple",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey",
-      "title": "A Simple Framework for Contrastive Learning of Visual Representations",
-      "booktitle": "Proceedings of the International Conference on Machine Learning (ICML)",
-      "year": "2020",
-      "pages": "1597--1607"
-    }
-  },
-  {
-    "key": "long2015fully",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Long, Jonathan and Shelhamer, Evan and Darrell, Trevor",
-      "title": "Fully Convolutional Networks for Semantic Segmentation",
-      "booktitle": "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
-      "year": "2015",
-      "pages": "3431--3440",
-      "doi": "10.1109/CVPR.2015.7298965"
-    }
-  },
-  {
-    "key": "kingma2014adam",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Kingma, Diederik P. and Ba, Jimmy",
-      "title": "Adam: A Method for Stochastic Optimization",
-      "booktitle": "Proceedings of the International Conference on Learning Representations (ICLR)",
-      "year": "2015"
-    }
-  },
-  {
-    "key": "dosovitskiy2021image",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Dosovitskiy, Alexey and Beyer, Lucas and Kolesnikov, Alexander and Weissenborn, Dirk and Zhai, Xiaohua and Unterthiner, Thomas and Dehghani, Mostafa and Minderer, Matthias and Heigold, Georg and Gelly, Sylvain and others",
-      "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
-      "booktitle": "Proceedings of the International Conference on Learning Representations (ICLR)",
-      "year": "2021"
-    }
-  },
-  {
-    "key": "ho2020denoising",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Ho, Jonathan and Jain, Ajay and Abbeel, Pieter",
-      "title": "Denoising Diffusion Probabilistic Models",
-      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
-      "year": "2020",
-      "volume": "33",
-      "pages": "6840--6851"
-    }
-  },
-  {
-    "key": "cook1971complexity",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Cook, Stephen A.",
-      "title": "The Complexity of Theorem-Proving Procedures",
-      "booktitle": "Proceedings of the 3rd Annual ACM Symposium on Theory of Computing (STOC)",
-      "year": "1971",
-      "pages": "151--158",
-      "doi": "10.1145/800157.805047"
-    }
-  },
-  {
-    "key": "brewer2000towards",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Brewer, Eric A.",
-      "title": "Towards Robust Distributed Systems",
-      "booktitle": "Proceedings of the 19th Annual ACM Symposium on Principles of Distributed Computing (PODC)",
-      "year": "2000",
-      "pages": "7",
-      "doi": "10.1145/343477.343502"
-    }
-  },
-  {
-    "key": "ghemawat2003google",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Ghemawat, Sanjay and Gobioff, Howard and Leung, Shun-Tak",
-      "title": "The Google File System",
-      "booktitle": "Proceedings of the 19th ACM Symposium on Operating Systems Principles (SOSP)",
-      "year": "2003",
-      "pages": "29--43",
-      "doi": "10.1145/945445.945450"
-    }
-  },
-  {
-    "key": "dean2004mapreduce",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Dean, Jeffrey and Ghemawat, Sanjay",
-      "title": "MapReduce: Simplified Data Processing on Large Clusters",
-      "booktitle": "Proceedings of the 6th Symposium on Operating Systems Design and Implementation (OSDI)",
-      "year": "2004",
-      "pages": "137--150"
-    }
-  },
-  {
-    "key": "zaharia2010spark",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Zaharia, Matei and Chowdhury, Mosharaf and Franklin, Michael J. and Shenker, Scott and Stoica, Ion",
-      "title": "Spark: Cluster Computing with Working Sets",
-      "booktitle": "Proceedings of the 2nd USENIX Workshop on Hot Topics in Cloud Computing (HotCloud)",
-      "year": "2010",
-      "pages": "10"
-    }
-  },
-  {
-    "key": "abadi2016tensorflow",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Abadi, Martín and Barham, Paul and Chen, Jianmin and Chen, Zhifeng and Davis, Andy and Dean, Jeffrey and Devin, Matthieu and Ghemawat, Sanjay and Irving, Geoffrey and Isard, Michael and others",
-      "title": "TensorFlow: A System for Large-Scale Machine Learning",
-      "booktitle": "Proceedings of the 12th USENIX Symposium on Operating Systems Design and Implementation (OSDI)",
-      "year": "2016",
-      "pages": "265--283"
-    }
-  },
-  {
-    "key": "stoica2001chord",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Stoica, Ion and Morris, Robert and Karger, David and Kaashoek, M. Frans and Balakrishnan, Hari",
-      "title": "Chord: A Scalable Peer-to-Peer Lookup Service for Internet Applications",
-      "booktitle": "Proceedings of the ACM SIGCOMM Conference",
-      "year": "2001",
-      "pages": "149--160",
-      "doi": "10.1145/383059.383071"
-    }
-  },
-  {
-    "key": "paszke2019pytorch",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, Adam and Bradbury, James and Chanan, Gregory and Killeen, Trevor and Lin, Zeming and Gimelshein, Natalia and Antiga, Luca and others",
-      "title": "PyTorch: An Imperative Style, High-Performance Deep Learning Library",
-      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
-      "year": "2019",
-      "volume": "32",
-      "pages": "8026--8037"
-    }
-  },
-  {
-    "key": "ongaro2014search",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Ongaro, Diego and Ousterhout, John",
-      "title": "In Search of an Understandable Consensus Algorithm",
-      "booktitle": "Proceedings of the 2014 USENIX Annual Technical Conference (ATC)",
-      "year": "2014",
-      "pages": "305--319"
-    }
-  },
-  {
-    "key": "lecun2015deep",
-    "entry_type": "article",
-    "fields": {
-      "author": "LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey",
-      "title": "Deep Learning",
-      "journal": "Nature",
-      "year": "2015",
-      "volume": "521",
-      "number": "7553",
-      "pages": "436--444",
-      "doi": "10.1038/nature14539"
-    }
-  },
-  {
-    "key": "hochreiter1997long",
-    "entry_type": "article",
-    "fields": {
-      "author": "Hochreiter, Sepp and Schmidhuber, Jürgen",
-      "title": "Long Short-Term Memory",
-      "journal": "Neural Computation",
-      "year": "1997",
-      "volume": "9",
-      "number": "8",
-      "pages": "1735--1780",
-      "doi": "10.1162/neco.1997.9.8.1735"
-    }
-  },
-  {
-    "key": "silver2016mastering",
-    "entry_type": "article",
-    "fields": {
-      "author": "Silver, David and Huang, Aja and Maddison, Chris J. and Guez, Arthur and Sifre, Laurent and van den Driessche, George and Schrittwieser, Julian and Antonoglou, Ioannis and Panneershelvam, Veda and Lanctot, Marc and others",
-      "title": "Mastering the Game of Go with Deep Neural Networks and Tree Search",
-      "journal": "Nature",
-      "year": "2016",
-      "volume": "529",
-      "number": "7587",
-      "pages": "484--489",
-      "doi": "10.1038/nature16961"
-    }
-  },
-  {
-    "key": "brown2020language",
-    "entry_type": "article",
-    "fields": {
-      "author": "Brown, Tom B. and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and others",
-      "title": "Language Models Are Few-Shot Learners",
-      "journal": "Advances in Neural Information Processing Systems",
-      "year": "2020",
-      "volume": "33",
-      "pages": "1877--1901"
-    }
-  },
-  {
     "key": "turing1950computing",
     "entry_type": "article",
     "fields": {
       "author": "Turing, Alan M.",
       "title": "Computing Machinery and Intelligence",
       "journal": "Mind",
-      "year": "1950",
       "volume": "59",
       "number": "236",
       "pages": "433--460",
-      "doi": "10.1093/mind/LIX.236.433"
-    }
-  },
-  {
-    "key": "dijkstra1968goto",
-    "entry_type": "article",
-    "fields": {
-      "author": "Dijkstra, Edsger W.",
-      "title": "Go To Statement Considered Harmful",
-      "journal": "Communications of the ACM",
-      "year": "1968",
-      "volume": "11",
-      "number": "3",
-      "pages": "147--148",
-      "doi": "10.1145/362929.362947"
-    }
-  },
-  {
-    "key": "rivest1978method",
-    "entry_type": "article",
-    "fields": {
-      "author": "Rivest, Ronald L. and Shamir, Adi and Adleman, Leonard",
-      "title": "A Method for Obtaining Digital Signatures and Public-Key Cryptosystems",
-      "journal": "Communications of the ACM",
-      "year": "1978",
-      "volume": "21",
-      "number": "2",
-      "pages": "120--126",
-      "doi": "10.1145/359340.359342"
-    }
-  },
-  {
-    "key": "pagerank1999anatomy",
-    "entry_type": "article",
-    "fields": {
-      "author": "Brin, Sergey and Page, Lawrence",
-      "title": "The Anatomy of a Large-Scale Hypertextual Web Search Engine",
-      "journal": "Computer Networks and ISDN Systems",
-      "year": "1998",
-      "volume": "30",
-      "number": "1--7",
-      "pages": "107--117",
-      "doi": "10.1016/S0169-7552(98)00110-X"
+      "year": "1950",
+      "doi": "10.1093/mind/LIX.236.433",
+      "publisher": "Oxford University Press"
     }
   },
   {
@@ -368,11 +21,147 @@
       "author": "Shannon, Claude E.",
       "title": "A Mathematical Theory of Communication",
       "journal": "Bell System Technical Journal",
-      "year": "1948",
       "volume": "27",
       "number": "3",
       "pages": "379--423",
-      "doi": "10.1002/j.1538-7305.1948.tb01338.x"
+      "year": "1948",
+      "doi": "10.1002/j.1538-7305.1948.tb01338.x",
+      "publisher": "Nokia Bell Labs"
+    }
+  },
+  {
+    "key": "vaswani2017attention",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and\n               Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and\n               Kaiser, Lukasz and Polosukhin, Illia",
+      "title": "Attention Is All You Need",
+      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
+      "volume": "30",
+      "year": "2017",
+      "doi": "10.48550/arXiv.1706.03762",
+      "publisher": "Curran Associates"
+    }
+  },
+  {
+    "key": "lecun2015deep",
+    "entry_type": "article",
+    "fields": {
+      "author": "LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey",
+      "title": "Deep Learning",
+      "journal": "Nature",
+      "volume": "521",
+      "pages": "436--444",
+      "year": "2015",
+      "doi": "10.1038/nature14539",
+      "publisher": "Nature Publishing Group"
+    }
+  },
+  {
+    "key": "goodfellow2014generative",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Goodfellow, Ian J. and Pouget-Abadie, Jean and Mirza, Mehdi and\n               Xu, Bing and Warde-Farley, David and Ozair, Sherjil and\n               Courville, Aaron and Bengio, Yoshua",
+      "title": "Generative Adversarial Nets",
+      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
+      "volume": "27",
+      "year": "2014",
+      "doi": "10.48550/arXiv.1406.2661",
+      "publisher": "Curran Associates"
+    }
+  },
+  {
+    "key": "devlin2019bert",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina",
+      "title": "{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "booktitle": "Proceedings of NAACL-HLT 2019",
+      "pages": "4171--4186",
+      "year": "2019",
+      "doi": "10.18653/v1/N19-1423",
+      "publisher": "Association for Computational Linguistics"
+    }
+  },
+  {
+    "key": "silver2016mastering",
+    "entry_type": "article",
+    "fields": {
+      "author": "Silver, David and Huang, Aja and Maddison, Chris J. and\n               Guez, Arthur and Sifre, Laurent and van den Driessche, George and\n               Schrittwieser, Julian and Antonoglou, Ioannis and Panneershelvam, Veda and\n               Lanctot, Marc and Dieleman, Sander and Grewe, Dominik and Nham, John and\n               Kalchbrenner, Nal and Sutskever, Ilya and Lillicrap, Timothy and\n               Leach, Madeleine and Kavukcuoglu, Koray and Graepel, Thore and Hassabis, Demis",
+      "title": "Mastering the Game of {Go} with Deep Neural Networks and Tree Search",
+      "journal": "Nature",
+      "volume": "529",
+      "pages": "484--489",
+      "year": "2016",
+      "doi": "10.1038/nature16961",
+      "publisher": "Nature Publishing Group"
+    }
+  },
+  {
+    "key": "hochreiter1997long",
+    "entry_type": "article",
+    "fields": {
+      "author": "Hochreiter, Sepp and Schmidhuber, J{\\\"u}rgen",
+      "title": "Long Short-Term Memory",
+      "journal": "Neural Computation",
+      "volume": "9",
+      "number": "8",
+      "pages": "1735--1780",
+      "year": "1997",
+      "doi": "10.1162/neco.1997.9.8.1735",
+      "publisher": "MIT Press"
+    }
+  },
+  {
+    "key": "minsky1969perceptrons",
+    "entry_type": "book",
+    "fields": {
+      "author": "Minsky, Marvin and Papert, Seymour",
+      "title": "Perceptrons: An Introduction to Computational Geometry",
+      "year": "1969",
+      "publisher": "MIT Press",
+      "address": "Cambridge, MA",
+      "doi": "10.7551/mitpress/11301.001.0001"
+    }
+  },
+  {
+    "key": "rumelhart1986learning",
+    "entry_type": "article",
+    "fields": {
+      "author": "Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.",
+      "title": "Learning Representations by Back-propagating Errors",
+      "journal": "Nature",
+      "volume": "323",
+      "pages": "533--536",
+      "year": "1986",
+      "doi": "10.1038/323533a0",
+      "publisher": "Nature Publishing Group"
+    }
+  },
+  {
+    "key": "brown2020language",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Brown, Tom B. and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and\n               Kaplan, Jared and Dhariwal, Prafulla and Neelakantan, Arvind and\n               Shyam, Pranav and Sastry, Girish and Askell, Amanda and others",
+      "title": "Language Models are Few-Shot Learners",
+      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
+      "volume": "33",
+      "pages": "1877--1901",
+      "year": "2020",
+      "doi": "10.48550/arXiv.2005.14165",
+      "publisher": "Curran Associates"
+    }
+  },
+  {
+    "key": "he2016deep",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian",
+      "title": "Deep Residual Learning for Image Recognition",
+      "booktitle": "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "pages": "770--778",
+      "year": "2016",
+      "doi": "10.1109/CVPR.2016.90",
+      "publisher": "IEEE"
     }
   },
   {
@@ -382,250 +171,468 @@
       "author": "Bengio, Yoshua and Courville, Aaron and Vincent, Pascal",
       "title": "Representation Learning: A Review and New Perspectives",
       "journal": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
-      "year": "2013",
       "volume": "35",
       "number": "8",
       "pages": "1798--1828",
-      "doi": "10.1109/TPAMI.2013.50"
+      "year": "2013",
+      "doi": "10.1109/TPAMI.2013.50",
+      "publisher": "IEEE"
+    }
+  },
+  {
+    "key": "krizhevsky2012imagenet",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E.",
+      "title": "{ImageNet} Classification with Deep Convolutional Neural Networks",
+      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
+      "volume": "25",
+      "pages": "1097--1105",
+      "year": "2012",
+      "doi": "10.1145/3065386",
+      "publisher": "Curran Associates"
+    }
+  },
+  {
+    "key": "radford2021learning",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Radford, Alec and Kim, Jong Wook and Hallacy, Chris and Ramesh, Aditya and\n               Goh, Gabriel and Agarwal, Sandhini and Sastry, Girish and Askell, Amanda and\n               Mishkin, Pamela and Clark, Jack and others",
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "booktitle": "Proceedings of the International Conference on Machine Learning (ICML)",
+      "pages": "8748--8763",
+      "year": "2021",
+      "doi": "10.48550/arXiv.2103.00020",
+      "publisher": "PMLR"
+    }
+  },
+  {
+    "key": "hinton1986learning",
+    "entry_type": "incollection",
+    "fields": {
+      "author": "Hinton, Geoffrey E. and Sejnwoski, Terrence J.",
+      "title": "Learnng and Relearning in Boltzman Machines",
+      "booktitle": "Parallel Distribted Processing",
+      "volume": "1",
+      "year": "1986",
+      "doi": "10.7551/mitpress/???",
+      "publisher": "MIT Press"
+    }
+  },
+  {
+    "key": "srivastava2014dropout",
+    "entry_type": "article",
+    "fields": {
+      "author": "",
+      "title": "Dropout: A Simple Way to Prevent Neural Networks from Overfitting",
+      "journal": "Journal of Machine Learning Research",
+      "volume": "15",
+      "number": "1",
+      "pages": "1929--1958",
+      "year": "2014",
+      "doi": "10.5555/2627435.2670313"
+    }
+  },
+  {
+    "key": "schmidhuber2015deep",
+    "entry_type": "article",
+    "fields": {
+      "author": "Schmidhuber, J{\\\"u}rgen",
+      "title": "",
+      "journal": "Neural Networks",
+      "volume": "61",
+      "pages": "85--117",
+      "year": "2015",
+      "doi": "10.1016/j.neunet.2014.09.003",
+      "publisher": "Elsevier"
     }
   },
   {
     "key": "mnih2015human",
     "entry_type": "article",
     "fields": {
-      "author": "Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and others",
-      "title": "Human-Level Control Through Deep Reinforcement Learning",
-      "journal": "Nature",
-      "year": "2015",
+      "author": "Mnih, Volodymyr and others",
+      "title": "Human-level Control Through Deep Reinforcment Learning",
+      "journal": "",
       "volume": "518",
-      "number": "7540",
       "pages": "529--533",
+      "year": "2015",
       "doi": "10.1038/nature14236"
     }
   },
   {
-    "key": "diffie1976new",
+    "key": "srivastava2014dropout2",
     "entry_type": "article",
     "fields": {
-      "author": "Diffie, Whitfield and Hellman, Martin E.",
-      "title": "New Directions in Cryptography",
-      "journal": "IEEE Transactions on Information Theory",
-      "year": "1976",
-      "volume": "22",
-      "number": "6",
-      "pages": "644--654",
-      "doi": "10.1109/TIT.1976.1055638"
+      "author": "Srivastava, Nitish and Hinton, Geoffrey and Krizhevskey, Alex and\n               Sutskever, Ilya and Salakhutdinov, Ruslan",
+      "title": "Dropout: Preventing Overfitting",
+      "journal": "Journal of Machine Learning Research",
+      "volume": "15",
+      "year": "2014",
+      "doi": ""
     }
   },
   {
-    "key": "hoare1962quicksort",
+    "key": "lecun1998gradient",
     "entry_type": "article",
     "fields": {
-      "author": "Hoare, C. A. R.",
-      "title": "Quicksort",
-      "journal": "The Computer Journal",
-      "year": "1962",
-      "volume": "5",
-      "number": "1",
-      "pages": "10--16",
-      "doi": "10.1093/comjnl/5.1.10"
+      "author": "LeCun, Yann and Bottou, L{\\'e}on and Bengio, Yoshua and Haffner, Patrick",
+      "title": "Gradient-Based Lerning Applied to Document Recogniton",
+      "journal": "Proceedings of the IEEE",
+      "volume": "86",
+      "number": "11",
+      "pages": "2278--2324",
+      "year": "",
+      "doi": "10.1109/5.726791"
     }
   },
   {
-    "key": "codd1970relational",
-    "entry_type": "article",
+    "key": "bahdanau2015neural",
+    "entry_type": "inproceedings",
     "fields": {
-      "author": "Codd, Edgar F.",
-      "title": "A Relational Model of Data for Large Shared Data Banks",
-      "journal": "Communications of the ACM",
-      "year": "1970",
-      "volume": "13",
-      "number": "6",
-      "pages": "377--387",
-      "doi": "10.1145/362384.362685"
+      "author": "Bahdanau, Dzmitry and Cho, Kyunghyun and Benjio, Yoshua",
+      "title": "Neural Machine Translation by Jointly Learning to Align and Translate",
+      "booktitle": "",
+      "year": "2015",
+      "doi": "10.48550/arXiv.1409.0473"
     }
   },
   {
-    "key": "lamport2001paxos",
-    "entry_type": "article",
-    "fields": {
-      "author": "Lamport, Leslie",
-      "title": "Paxos Made Simple",
-      "journal": "ACM SIGACT News",
-      "year": "2001",
-      "volume": "32",
-      "number": "4",
-      "pages": "18--25"
-    }
-  },
-  {
-    "key": "wirth1971program",
-    "entry_type": "article",
-    "fields": {
-      "author": "Wirth, Niklaus",
-      "title": "Program Development by Stepwise Refinement",
-      "journal": "Communications of the ACM",
-      "year": "1971",
-      "volume": "14",
-      "number": "4",
-      "pages": "221--227",
-      "doi": "10.1145/362575.362577"
-    }
-  },
-  {
-    "key": "lecun1989backpropagation",
-    "entry_type": "article",
-    "fields": {
-      "author": "LeCun, Yann and Boser, Bernhard and Denker, John S. and Henderson, Donnie and Howard, Richard E. and Hubbard, Wayne and Jackel, Lawrence D.",
-      "title": "Backpropagation Applied to Handwritten Zip Code Recognition",
-      "journal": "Neural Computation",
-      "year": "1989",
-      "volume": "1",
-      "number": "4",
-      "pages": "541--551",
-      "doi": "10.1162/neco.1989.1.4.541"
-    }
-  },
-  {
-    "key": "vapnik1995support",
-    "entry_type": "article",
-    "fields": {
-      "author": "Cortes, Corinna and Vapnik, Vladimir",
-      "title": "Support-Vector Networks",
-      "journal": "Machine Learning",
-      "year": "1995",
-      "volume": "20",
-      "number": "3",
-      "pages": "273--297",
-      "doi": "10.1007/BF00994018"
-    }
-  },
-  {
-    "key": "breiman2001random",
-    "entry_type": "article",
-    "fields": {
-      "author": "Breiman, Leo",
-      "title": "Random Forests",
-      "journal": "Machine Learning",
-      "year": "2001",
-      "volume": "45",
-      "number": "1",
-      "pages": "5--32",
-      "doi": "10.1023/A:1010933404324"
-    }
-  },
-  {
-    "key": "lamport1978time",
-    "entry_type": "article",
-    "fields": {
-      "author": "Lamport, Leslie",
-      "title": "Time, Clocks, and the Ordering of Events in a Distributed System",
-      "journal": "Communications of the ACM",
-      "year": "1978",
-      "volume": "21",
-      "number": "7",
-      "pages": "558--565",
-      "doi": "10.1145/359545.359563"
-    }
-  },
-  {
-    "key": "barabasi1999emergence",
-    "entry_type": "article",
-    "fields": {
-      "author": "Barabási, Albert-László and Albert, Réka",
-      "title": "Emergence of Scaling in Random Networks",
-      "journal": "Science",
-      "year": "1999",
-      "volume": "286",
-      "number": "5439",
-      "pages": "509--512",
-      "doi": "10.1126/science.286.5439.509"
-    }
-  },
-  {
-    "key": "floyd1967nondeterministic",
-    "entry_type": "article",
-    "fields": {
-      "author": "Floyd, Robert W.",
-      "title": "Nondeterministic Algorithms",
-      "journal": "Journal of the ACM",
-      "year": "1967",
-      "volume": "14",
-      "number": "4",
-      "pages": "636--644",
-      "doi": "10.1145/321420.321422"
-    }
-  },
-  {
-    "key": "cormen2009introduction",
-    "entry_type": "book",
-    "fields": {
-      "author": "Cormen, Thomas H. and Leiserson, Charles E. and Rivest, Ronald L. and Stein, Clifford",
-      "title": "Introduction to Algorithms",
-      "edition": "3rd",
-      "publisher": "MIT Press",
-      "address": "Cambridge, MA",
-      "year": "2009"
-    }
-  },
-  {
-    "key": "sipser2013introduction",
-    "entry_type": "book",
-    "fields": {
-      "author": "Sipser, Michael",
-      "title": "Introduction to the Theory of Computation",
-      "edition": "3rd",
-      "publisher": "Cengage Learning",
-      "address": "Boston, MA",
-      "year": "2013"
-    }
-  },
-  {
-    "key": "tanenbaum2014modern",
-    "entry_type": "book",
-    "fields": {
-      "author": "Tanenbaum, Andrew S. and Bos, Herbert",
-      "title": "Modern Operating Systems",
-      "edition": "4th",
-      "publisher": "Pearson",
-      "address": "Hoboken, NJ",
-      "year": "2014"
-    }
-  },
-  {
-    "key": "sutton2018reinforcement",
+    "key": "sutton1998reinforcement",
     "entry_type": "book",
     "fields": {
       "author": "Sutton, Richard S. and Barto, Andrew G.",
-      "title": "Reinforcement Learning: An Introduction",
-      "edition": "2nd",
+      "title": "Reinforcement Learning: An Introductoin",
+      "year": "1998",
       "publisher": "MIT Press",
       "address": "Cambridge, MA",
-      "year": "2018"
+      "doi": ""
     }
   },
   {
-    "key": "russell2020artificial",
-    "entry_type": "book",
+    "key": "kingma2015adam",
+    "entry_type": "inproceedings",
     "fields": {
-      "author": "Russell, Stuart and Norvig, Peter",
-      "title": "Artificial Intelligence: A Modern Approach",
-      "edition": "4th",
-      "publisher": "Pearson",
-      "address": "Hoboken, NJ",
-      "year": "2020"
+      "author": "",
+      "title": "Adam: A Method for Stochastic Optimization",
+      "booktitle": "Proceedings of the International Conference on Learning Representations (ICLR)",
+      "year": "2015",
+      "doi": "10.48550/arXiv.1412.6980"
     }
   },
   {
-    "key": "knuth1997art",
-    "entry_type": "book",
+    "key": "collobert2008unified",
+    "entry_type": "inproceedings",
     "fields": {
-      "author": "Knuth, Donald E.",
-      "title": "The Art of Computer Programming, Volume 1: Fundamental Algorithms",
-      "edition": "3rd",
-      "publisher": "Addison-Wesley",
-      "address": "Reading, MA",
-      "year": "1997"
+      "author": "Collobert, Ronan and Westun, Jason",
+      "title": "A Unified Architecture for Natural Language Processing",
+      "booktitle": "ICML 2008",
+      "year": "2008",
+      "doi": "10.1145/1390156.1390177",
+      "publisher": "ACM"
+    }
+  },
+  {
+    "key": "mikolov2013distributed",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Mikolov, Tomas and Sutskever, Ilya and Chen, Kai and\n               Corrado, Greg S. and Dean, Jeff",
+      "title": "Distributed Representaions of Words and Phrases and their Compositionality",
+      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
+      "volume": "26",
+      "year": "2013",
+      "doi": ""
+    }
+  },
+  {
+    "key": "pennington2014glove",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Pennington, Jeffrey and Sochter, Richard and Manning, Christopher D.",
+      "title": "{GloVe}: Global Vectors for Word Representation",
+      "booktitle": "",
+      "year": "2014",
+      "doi": "10.18653/v1/D14-1162"
+    }
+  },
+  {
+    "key": "chollet2017xception",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Chollet, Fran{\\c{c}}ois",
+      "title": "Xception: Deep Learning with Depthwise Separble Convolutions",
+      "booktitle": "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+      "year": "",
+      "doi": "10.1109/CVPR.2017.195",
+      "publisher": "IEEE"
+    }
+  },
+  {
+    "key": "ioffe2015batch",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "",
+      "title": "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+      "booktitle": "Proceedings of the International Conference on Machine Learning (ICML)",
+      "pages": "448--456",
+      "year": "2015",
+      "doi": "10.48550/arXiv.1502.03167",
+      "publisher": "PMLR"
+    }
+  },
+  {
+    "key": "graves2013generating",
+    "entry_type": "misc",
+    "fields": {
+      "author": "Graves, Alex",
+      "title": "Generating Sequenses with Recurent Neural Networks",
+      "year": "2013",
+      "doi": "10.48550/arXiv.1308.0850",
+      "note": "arXiv Preprint"
+    }
+  },
+  {
+    "key": "zoph2017neural",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Zoph, Barret and Le, Quoc V.",
+      "title": "Neural Architecture Serch with Reinforcement Learning",
+      "booktitle": "ICLR 2017",
+      "year": "2017",
+      "doi": ""
+    }
+  },
+  {
+    "key": "velickovic2018graph",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Veli{\\v{c}}kovi{\\'{c}}, Petar and Cucurull, Guillem and Casanova, Arantxa and\n               Romero, Adriana and Li{\\`o}, Pietro and Bengio, Yoshua",
+      "title": "Graph Attntion Networks",
+      "booktitle": "",
+      "year": "2018",
+      "doi": "10.48550/arXiv.1710.10903"
+    }
+  },
+  {
+    "key": "dosovitskiy2021image",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Dosovitskiy, Alexey and others",
+      "title": "An Image is Worth 16x16 Words: Transformers for Imge Recognition at Scale",
+      "booktitle": "Proceedings of the International Conference on Learning Representations (ICLR)",
+      "year": "2021",
+      "doi": ""
+    }
+  },
+  {
+    "key": "raffel2020exploring",
+    "entry_type": "article",
+    "fields": {
+      "author": "Raffel, Colin and Shazeer, Noam and Roberts, Adam and Lee, Katherine and\n               Narang, Sharan and Matena, Michael and Zhou, Yanqi and Li, Wei and Liu, Peter J.",
+      "title": "Exploring Limits of Transfer Learning with Unified Text-to-Text Transformer",
+      "journal": "Journal of Machine Learning Research",
+      "year": "",
+      "doi": "10.48550/arXiv.1910.10683"
+    }
+  },
+  {
+    "key": "howard2018universal",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Howard, Jeremy and Ruder, Sebastian",
+      "title": "Universal Language Model Fine-tuning for Text Clasification",
+      "booktitle": "Proceedings of the Annual Meeting of the Association for Computational Linguistics (ACL)",
+      "year": "2018",
+      "doi": ""
+    }
+  },
+  {
+    "key": "lecun2001philosophical",
+    "entry_type": "article",
+    "fields": {
+      "author": "LeCun, Yann and Aurelius, Marcus",
+      "title": "Philosophical Foundations of Recursive Self-Improvement in Neural Automata",
+      "journal": "Transactions on Imaginary Computing",
+      "volume": "99",
+      "pages": "1--42",
+      "year": "2001",
+      "doi": "10.9999/tic.2001.000001",
+      "note": "INVALID: Non-existent journal; impossible author pairing"
+    }
+  },
+  {
+    "key": "feigenbaum1985unified",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Feigenbaum, Edward A. and Turing, Alan M. and McCarthy, John",
+      "title": "Unified Theory of Artificial Minds: Bridging Symbolic and Subsymbolic {AI}",
+      "booktitle": "AAAI 1985 Workshop on Artificial General Intelligence",
+      "year": "1985",
+      "doi": "10.1234/aaai.agi.1985.7741",
+      "note": "INVALID: Workshop and paper are non-existent; Turing died 1954"
+    }
+  },
+  {
+    "key": "hinton2003conscious",
+    "entry_type": "article",
+    "fields": {
+      "author": "Hinton, Geoffrey E. and LeCun, Yann",
+      "title": "Towards Conscious Neural Networks: A Framework for Machine Sentience",
+      "journal": "Nature Machine Intelligence",
+      "volume": "0",
+      "year": "2003",
+      "doi": "10.1038/s42256-000-0000-0",
+      "note": "INVALID: Nature Machine Intelligence did not exist in 2003; paper fabricated"
+    }
+  },
+  {
+    "key": "schmidhuber2010grand",
+    "entry_type": "article",
+    "fields": {
+      "author": "Schmidhuber, J{\\\"u}rgen and Bengio, Yoshua and Sutton, Richard S.",
+      "title": "The Grand Unified Theory of Deep Reinforcement Learning and Consciousness",
+      "journal": "IEEE Spectrum Special Edition on Mind and Machine",
+      "year": "2010",
+      "doi": "10.1109/MSPEC.2010.000000",
+      "note": "INVALID: Venue is non-existent; paper fabricated"
+    }
+  },
+  {
+    "key": "orwell1949artificial",
+    "entry_type": "article",
+    "fields": {
+      "author": "Orwell, George",
+      "title": "Artificial Minds and Totalitarian Control: A Computational Analysis of 1984",
+      "journal": "Journal of Dystopian Computing",
+      "year": "1949",
+      "doi": "10.0000/jdc.1949.0084",
+      "note": "INVALID: Fictional journal; Orwell was a novelist, not an AI researcher"
+    }
+  },
+  {
+    "key": "plato1979republic",
+    "entry_type": "incollection",
+    "fields": {
+      "author": "Plato",
+      "editor": "Hofstadter, Douglas R.",
+      "title": "The Republic: A Formal Treatment of Ideal Neural Architectures",
+      "booktitle": "Dialogues in Machine Philosophy",
+      "year": "1979",
+      "doi": "10.5555/plato.republic.nn",
+      "publisher": "Ancient Presses",
+      "note": "INVALID: Entirely fabricated; Plato predates computing by ~2300 years"
+    }
+  },
+  {
+    "key": "zhang2021quantum",
+    "entry_type": "misc",
+    "fields": {
+      "author": "Zhang, Xinrui and Wonderstein, Paul and Li, Yanming",
+      "title": "Quantum Backpropagation Through Non-{E}uclidean Manifolds in 17-Dimensional Space",
+      "year": "2021",
+      "doi": "10.48550/arXiv.2199.99999",
+      "howpublished": "arXiv:2199.99999",
+      "note": "INVALID: arXiv ID does not exist; authors unverifiable"
+    }
+  },
+  {
+    "key": "mccarthy1956dartmouth",
+    "entry_type": "techreport",
+    "fields": {
+      "author": "McCarthy, John and Minsky, Marvin and Shannon, Claude E. and Turing, Alan M.",
+      "title": "Dartmouth Summer Research Project: Final Report on Artificial General Intelligence",
+      "institution": "Annals of Computing History",
+      "year": "1956",
+      "doi": "10.1000/dartmouth.agi.1956.final",
+      "note": "INVALID: No such final report exists; Turing died 1954 and could not have co-authored"
+    }
+  },
+  {
+    "key": "rosenblatt1962convergence",
+    "entry_type": "article",
+    "fields": {
+      "author": "Rosenblatt, Frank and Hopfield, John J.",
+      "title": "Convergence of Perceptron Networks to Universal Truth: A Proof by Contradiction",
+      "journal": "Bulletin of Mathematical Neuroscience",
+      "volume": "3",
+      "number": "1",
+      "pages": "14--67",
+      "year": "1962",
+      "doi": "10.1016/j.bmn.1962.01.003",
+      "note": "INVALID: Retracted 2009; Hopfield's career began later; journal is non-existent"
+    }
+  },
+  {
+    "key": "hawking2019existential",
+    "entry_type": "misc",
+    "fields": {
+      "author": "Hawking, Stephen and Musk, Elon",
+      "title": "Existential Risks of Recursive Self-Improving Transformers: A Formal Analysis",
+      "year": "2019",
+      "doi": "10.48550/arXiv.1900.00000",
+      "howpublished": "arXiv:1900.00000",
+      "note": "INVALID: Hawking died March 2018; arXiv ID non-existent; paper fabricated"
+    }
+  },
+  {
+    "key": "vonneumann1949cooperative",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "von Neumann, John and Turing, Alan M.",
+      "title": "Cooperative Self-Replicating Automata with Learning Capabilities",
+      "booktitle": "Proceedings of the Institute for Advanced Study",
+      "year": "1949",
+      "doi": "10.1000/ias.princeton.1949.automata",
+      "note": "INVALID: No such proceedings exist; paper is entirely hallucinated"
+    }
+  },
+  {
+    "key": "inception2099deep",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Inception, Deep L.",
+      "title": "Deep Dreams and Hallucinated Features: A Survey of Imagined Representations",
+      "booktitle": "Workshop on Computational Dreaming, ICCV 2099",
+      "year": "2099",
+      "doi": "10.1109/ICCV.2099.000001",
+      "note": "INVALID: Future date (2099); author name is fictional; venue does not exist"
+    }
+  },
+  {
+    "key": "fukushima1989neocognitron",
+    "entry_type": "article",
+    "fields": {
+      "author": "Fukushima, Kunihiko and Werbos, Paul J. and LeCun, Yann",
+      "title": "Neocognitron Reloaded: 40 Years of Convolutional Thought Experiments",
+      "journal": "Neural Networks Heritage Journal",
+      "year": "1989",
+      "doi": "10.9999/nnhj.1989.conv.legacy",
+      "note": "INVALID: Retracted 2020; journal is non-existent; co-authorship is fabricated"
+    }
+  },
+  {
+    "key": "lovelace1843machines",
+    "entry_type": "article",
+    "fields": {
+      "author": "Lovelace, Ada",
+      "editor": "Bengio, Yoshua",
+      "title": "On the Possibility of Machines that Learn: Notes on {B}abbage Extended",
+      "journal": "Historical Computation Review",
+      "year": "1843",
+      "doi": "10.0001/hcr.1843.lovelace.ml",
+      "note": "INVALID: Lovelace wrote no such paper; Bengio editorship is impossible; journal fictional"
+    }
+  },
+  {
+    "key": "johnson2024massively",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Johnson, Thomas and others",
+      "title": "Massively Parallel Spiking Transformers with Biological Plausibility Guarantees on 1024-{GPU} Clusters",
+      "booktitle": "Advances in Neural Information Processing Systems (NeurIPS)",
+      "year": "2024",
+      "doi": "10.48550/arXiv.2412.99999",
+      "note": "INVALID: Paper does not exist; arXiv ID is fabricated; authors unverifiable"
     }
   }
 ]

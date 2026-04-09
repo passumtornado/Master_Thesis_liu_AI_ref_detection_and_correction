@@ -19,9 +19,9 @@ from enum import Enum
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils import _extract_text
+from utils import _ainvoke_with_retry, _extract_text, parse_validation_results
 
-load_dotenv()
+load_dotenv('.env')
 
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
@@ -65,6 +65,15 @@ Rules:
 After your analysis produce a complete markdown report grouped by status
 with a summary statistics table.
 
+Markdown format requirements (MANDATORY):
+1. Include these exact section headers in this exact order:
+    - ## 🟢 Valid References
+    - ## 🟡 Partially Valid References
+    - ## 🔴 Invalid References
+2. Every reference must appear in exactly one of those three sections.
+3. Do not create any other status section names.
+4. Keep entry IDs in each section so they are easy to trace.
+
 Then append a JSON block in EXACTLY this format:
 ```json
 {
@@ -104,6 +113,15 @@ it invalid. Use partially_valid and describe corrections needed.
 After your analysis produce a complete markdown report with a summary
 statistics table, grouped sections by status, and per-entry details
 including the DBLP/Scholar evidence used.
+
+Markdown format requirements (MANDATORY):
+1. Include these exact section headers in this exact order:
+    - ## 🟢 Valid References
+    - ## 🟡 Partially Valid References
+    - ## 🔴 Invalid References
+2. Every reference must appear in exactly one of those three sections.
+3. Do not create any other status section names.
+4. Keep entry IDs in each section so they are easy to trace.
 
 Then append a JSON block in EXACTLY this format:
 ```json
@@ -153,6 +171,15 @@ Step 5 — Final verdict:
 Show your step-by-step reasoning for each entry, then produce a full
 markdown report with a summary statistics table and per-entry details.
 
+Markdown format requirements (MANDATORY):
+1. Include these exact section headers in this exact order:
+    - ## 🟢 Valid References
+    - ## 🟡 Partially Valid References
+    - ## 🔴 Invalid References
+2. Every reference must appear in exactly one of those three sections.
+3. Do not create any other status section names.
+4. Keep entry IDs in each section so they are easy to trace.
+
 Then append a JSON block in EXACTLY this format:
 ```json
 {
@@ -193,20 +220,20 @@ class LLMValidationAgent:
         self.mcp_config_path = mcp_config_path
         self.strategy        = strategy
 
-        self.llm = ChatOllama(
-            model=model,
-            base_url="https://ollama.com",
-            temperature=0.1,
-            client_kwargs={
-                "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-            },
-        )
-        #OpenAI backend (uncomment to switch)
-        # self.llm = ChatOpenAI(
-        #     model="gpt-5.2",
+        # self.llm = ChatOllama(
+        #     model=model,
+        #     base_url="https://ollama.com",
         #     temperature=0.1,
-        #     openai_api_key=os.getenv("OPENAI_API_KEY"),
+        #     client_kwargs={
+        #         "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+        #     },
         # )
+        #OpenAI backend (uncomment to switch)
+        self.llm = ChatOpenAI(
+            model="gpt-5.2",
+            temperature=0.1,
+            openai_api_key=os.getenv("OPENAI_API_KEY"),
+        )
         
         # GOOGLE GEMINI BACKEND (uncomment to switch)
         # self.llm = ChatGoogleGenerativeAI(
@@ -440,7 +467,7 @@ class LLMValidationAgent:
             )),
         ]
 
-        response  = await self.llm.ainvoke(messages)
+        response  = await _ainvoke_with_retry(self.llm, messages, attempts=4, base_delay=1.0)
         raw_text  = _extract_text(response)
         # raw_text  = response.content.strip()
 
@@ -462,8 +489,10 @@ class LLMValidationAgent:
             json_block = parts[1].split("```")[0].strip()
             try:
                 data       = json.loads(json_block)
-                structured = data.get("results", [])
-                print(f"\n  [DEBUG] Validation structured results: {len(structured)} entries found in JSON")
+                structured, schema_errors = parse_validation_results(data)
+                if schema_errors:
+                    print(f"\n  [DEBUG] Validation schema warnings: {len(schema_errors)}")
+                print(f"\n  [DEBUG] Validation structured results: {len(structured)} valid entries found in JSON")
             except json.JSONDecodeError as e:
                 print(f"\n  [DEBUG] JSON parse error: {e}")
                 pass

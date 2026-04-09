@@ -33,11 +33,12 @@ from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils import _extract_text
+from utils import _ainvoke_with_retry, _extract_text
 
-load_dotenv()
+load_dotenv('/Users/passum/Documents/SWEDEN/DSI/THESIS/AI_reference_agent_detection_correction/.env')
 
 
 # ─────────────────────────────────────────────────────────────
@@ -209,6 +210,13 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
                 "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
             },
         )
+        # OpenAI backend (uncomment to switch)
+        self.llm = ChatOpenAI(
+            model="gpt-5.2",
+            temperature=0.1,
+            openai_api_key=os.getenv("OPENAI_API_KEY"),
+        )
+
 
     # ── public ────────────────────────────────────────────────
 
@@ -405,7 +413,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         ]
 
         try:
-            response = await self.llm.ainvoke(messages)
+            response = await _ainvoke_with_retry(self.llm, messages, attempts=4, base_delay=1.0)
             return _extract_text(response)
         except Exception as e:
             print(f"  ⚠ LLM report generation failed: {e}")
@@ -507,7 +515,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
                 f"```json\n{json.dumps(payload, indent=2, ensure_ascii=False)}\n```"
             )),
         ]
-        response = await self.llm.ainvoke(messages)
+        response = await _ainvoke_with_retry(self.llm, messages, attempts=4, base_delay=1.0)
         raw_text = _extract_text(response)
 
         if "```json" in raw_text:

@@ -1,48 +1,24 @@
 [
   {
-    "entry_id": "turing1950computing",
+    "entry_id": "turing1936computable",
     "entry_type": "article",
     "expected_status": "valid",
     "corruptions": []
   },
   {
     "entry_id": "shannon1948mathematical",
-    "entry_type": "article",
+    "entry_type": "book",
     "expected_status": "valid",
     "corruptions": []
   },
   {
-    "entry_id": "vaswani2017attention",
+    "entry_id": "mccarthy1956proposal",
     "entry_type": "inproceedings",
     "expected_status": "valid",
     "corruptions": []
   },
   {
-    "entry_id": "lecun2015deep",
-    "entry_type": "article",
-    "expected_status": "valid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "goodfellow2014generative",
-    "entry_type": "inproceedings",
-    "expected_status": "valid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "devlin2019bert",
-    "entry_type": "inproceedings",
-    "expected_status": "valid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "silver2016mastering",
-    "entry_type": "article",
-    "expected_status": "valid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "hochreiter1997long",
+    "entry_id": "perceptron1958",
     "entry_type": "article",
     "expected_status": "valid",
     "corruptions": []
@@ -54,25 +30,19 @@
     "corruptions": []
   },
   {
-    "entry_id": "rumelhart1986learning",
+    "entry_id": "backprop1986",
     "entry_type": "article",
     "expected_status": "valid",
     "corruptions": []
   },
   {
-    "entry_id": "brown2020language",
+    "entry_id": "lecun1989backprop",
     "entry_type": "inproceedings",
     "expected_status": "valid",
     "corruptions": []
   },
   {
-    "entry_id": "he2016deep",
-    "entry_type": "inproceedings",
-    "expected_status": "valid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "bengio2013representation",
+    "entry_id": "hinton2006fast",
     "entry_type": "article",
     "expected_status": "valid",
     "corruptions": []
@@ -84,121 +54,13 @@
     "corruptions": []
   },
   {
-    "entry_id": "radford2021learning",
-    "entry_type": "inproceedings",
+    "entry_id": "vaswani2017attention",
+    "entry_type": "article",
     "expected_status": "valid",
     "corruptions": []
   },
   {
-    "entry_id": "hinton1986learning",
-    "entry_type": "incollection",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "author",
-        "original_correct_value": "Hinton, Geoffrey E. and Sejnowski, Terrence J.",
-        "corrupted_value": "Hinton, Geoffrey E. and Sejnwoski, Terrence J.",
-        "corruption_type": "author_corruption"
-      },
-      {
-        "field": "title",
-        "original_correct_value": "Learning and Relearning in Boltzmann Machines",
-        "corrupted_value": "Learnng and Relearning in Boltzman Machines",
-        "corruption_type": "title_mutation"
-      },
-      {
-        "field": "booktitle",
-        "original_correct_value": "Parallel Distributed Processing",
-        "corrupted_value": "Parallel Distribted Processing",
-        "corruption_type": "venue_substitution"
-      }
-    ]
-  },
-  {
-    "entry_id": "srivastava2014dropout",
-    "entry_type": "article",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "author",
-        "original_correct_value": "Srivastava, Nitish and Hinton, Geoffrey and Krizhevsky, Alex and Sutskever, Ilya and Salakhutdinov, Ruslan",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "schmidhuber2015deep",
-    "entry_type": "article",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "title",
-        "original_correct_value": "Deep Learning in Neural Networks: An Overview",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "mnih2015human",
-    "entry_type": "article",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "title",
-        "original_correct_value": "Human-level Control Through Deep Reinforcement Learning",
-        "corrupted_value": "Human-level Control Through Deep Reinforcment Learning",
-        "corruption_type": "title_mutation"
-      },
-      {
-        "field": "journal",
-        "original_correct_value": "Nature",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "srivastava2014dropout2",
-    "entry_type": "article",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "author",
-        "original_correct_value": "Srivastava, Nitish and Hinton, Geoffrey and Krizhevsky, Alex and Sutskever, Ilya and Salakhutdinov, Ruslan",
-        "corrupted_value": "Srivastava, Nitish and Hinton, Geoffrey and Krizhevskey, Alex and\n               Sutskever, Ilya and Salakhutdinov, Ruslan",
-        "corruption_type": "author_corruption"
-      },
-      {
-        "field": "doi",
-        "original_correct_value": "10.5555/2627435.2670313",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "lecun1998gradient",
-    "entry_type": "article",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "title",
-        "original_correct_value": "Gradient-Based Learning Applied to Document Recognition",
-        "corrupted_value": "Gradient-Based Lerning Applied to Document Recogniton",
-        "corruption_type": "title_mutation"
-      },
-      {
-        "field": "year",
-        "original_correct_value": "1998",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "bahdanau2015neural",
+    "entry_id": "bahdanau2015neural2",
     "entry_type": "inproceedings",
     "expected_status": "partially_valid",
     "corruptions": [
@@ -217,316 +79,450 @@
     ]
   },
   {
-    "entry_id": "sutton1998reinforcement",
-    "entry_type": "book",
+    "entry_id": "mnih2015human2",
+    "entry_type": "article",
     "expected_status": "partially_valid",
     "corruptions": [
       {
-        "field": "title",
-        "original_correct_value": "Reinforcement Learning: An Introduction",
-        "corrupted_value": "Reinforcement Learning: An Introductoin",
-        "corruption_type": "title_mutation"
+        "field": "year",
+        "original_correct_value": "2015",
+        "corrupted_value": "2016",
+        "corruption_type": "year_shift"
       },
       {
         "field": "doi",
-        "original_correct_value": "10.7551/mitpress/11490.001.0001",
+        "original_correct_value": "10.1038/nature14236",
         "corrupted_value": "",
         "corruption_type": "missing_field"
       }
     ]
   },
   {
-    "entry_id": "kingma2015adam",
+    "entry_id": "hinton2006fast2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "Hinton, Geoffrey E. and Salakhutdinov, Ruslan R.",
+        "corrupted_value": "Hiton, Geoffrey E. and Salakhutdinov, Ruslan R.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "Reducing the Dimensionality of Data with Neural Networks",
+        "corrupted_value": "Reducing the Dimensionality of Data",
+        "corruption_type": "title_mutation"
+      }
+    ]
+  },
+  {
+    "entry_id": "krizhevsky2012imagenet2",
     "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "booktitle",
+        "original_correct_value": "Advances in Neural Information Processing Systems (NeurIPS)",
+        "corrupted_value": "European Conference on Computer Vision (ECCV)",
+        "corruption_type": "venue_substitution"
+      }
+    ]
+  },
+  {
+    "entry_id": "vaswani2017attention2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, Lukasz and Polosukhin, Illia",
+        "corrupted_value": "",
+        "corruption_type": "missing_field"
+      }
+    ]
+  },
+  {
+    "entry_id": "devlin2019bert2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "year",
+        "original_correct_value": "2019",
+        "corrupted_value": "2018",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "goodfellow2016deep2",
+    "entry_type": "book",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "publisher",
+        "original_correct_value": "MIT Press",
+        "corrupted_value": "",
+        "corruption_type": "missing_field"
+      }
+    ]
+  },
+  {
+    "entry_id": "kingma2014adam2",
+    "entry_type": "article",
     "expected_status": "partially_valid",
     "corruptions": [
       {
         "field": "author",
         "original_correct_value": "Kingma, Diederik P. and Ba, Jimmy",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "collobert2008unified",
-    "entry_type": "inproceedings",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "author",
-        "original_correct_value": "Collobert, Ronan and Weston, Jason",
-        "corrupted_value": "Collobert, Ronan and Westun, Jason",
+        "corrupted_value": "Kingma, D. P. and Ba, Jimmy",
         "corruption_type": "author_corruption"
       }
     ]
   },
   {
-    "entry_id": "mikolov2013distributed",
-    "entry_type": "inproceedings",
+    "entry_id": "hochreiter1997long2",
+    "entry_type": "article",
     "expected_status": "partially_valid",
     "corruptions": [
       {
-        "field": "title",
-        "original_correct_value": "Distributed Representations of Words and Phrases and their Compositionality",
-        "corrupted_value": "Distributed Representaions of Words and Phrases and their Compositionality",
-        "corruption_type": "title_mutation"
+        "field": "volume",
+        "original_correct_value": "9",
+        "corrupted_value": "",
+        "corruption_type": "missing_field"
       },
       {
-        "field": "doi",
-        "original_correct_value": "10.48550/arXiv.1310.4546",
+        "field": "number",
+        "original_correct_value": "8",
         "corrupted_value": "",
         "corruption_type": "missing_field"
       }
     ]
   },
   {
-    "entry_id": "pennington2014glove",
+    "entry_id": "ioffe2015batch2",
     "entry_type": "inproceedings",
     "expected_status": "partially_valid",
     "corruptions": [
       {
+        "field": "doi",
+        "original_correct_value": "10.48550/arXiv.1502.03167",
+        "corrupted_value": "10.5555/1234567",
+        "corruption_type": "field_corruption"
+      }
+    ]
+  },
+  {
+    "entry_id": "mnih2015human3",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "journal",
+        "original_correct_value": "Nature",
+        "corrupted_value": "Natur",
+        "corruption_type": "venue_substitution"
+      }
+    ]
+  },
+  {
+    "entry_id": "rumelhart1986learning2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
         "field": "author",
-        "original_correct_value": "Pennington, Jeffrey and Socher, Richard and Manning, Christopher D.",
-        "corrupted_value": "Pennington, Jeffrey and Sochter, Richard and Manning, Christopher D.",
+        "original_correct_value": "Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.",
+        "corrupted_value": "Rumelhart, David E.",
         "corruption_type": "author_corruption"
-      },
-      {
-        "field": "booktitle",
-        "original_correct_value": "Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
       }
     ]
   },
   {
-    "entry_id": "chollet2017xception",
+    "entry_id": "lecun1989backprop2",
     "entry_type": "inproceedings",
     "expected_status": "partially_valid",
     "corruptions": [
       {
         "field": "title",
-        "original_correct_value": "Xception: Deep Learning with Depthwise Separable Convolutions",
-        "corrupted_value": "Xception: Deep Learning with Depthwise Separble Convolutions",
-        "corruption_type": "title_mutation"
-      },
-      {
-        "field": "year",
-        "original_correct_value": "2017",
+        "original_correct_value": "Backpropagation Applied to Handwritten Zip Code Recognition",
         "corrupted_value": "",
         "corruption_type": "missing_field"
       }
     ]
   },
   {
-    "entry_id": "ioffe2015batch",
+    "entry_id": "szegedy2015going2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "year",
+        "original_correct_value": "2015",
+        "corrupted_value": "2099",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "simonyan2014very2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "journal",
+        "original_correct_value": "Proceedings of the International Conference on Learning Representations",
+        "corrupted_value": "Proceedings of the ICLR (this is a wrong venue)",
+        "corruption_type": "venue_substitution"
+      }
+    ]
+  },
+  {
+    "entry_id": "hochreiter1997long3",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "Hochreiter, Sepp and Schmidhuber, Juergen",
+        "corrupted_value": "Hochreiter-S, Sepp and Schmidhuber, Juergen",
+        "corruption_type": "author_corruption"
+      }
+    ]
+  },
+  {
+    "entry_id": "hebb1949organization2",
+    "entry_type": "book",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "publisher",
+        "original_correct_value": "John Wiley and Sons",
+        "corrupted_value": "",
+        "corruption_type": "missing_field"
+      }
+    ]
+  },
+  {
+    "entry_id": "hopfield1982neural2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "volume",
+        "original_correct_value": "79",
+        "corrupted_value": "79",
+        "corruption_type": "field_corruption"
+      }
+    ]
+  },
+  {
+    "entry_id": "ackley1985learning2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "year",
+        "original_correct_value": "1985",
+        "corrupted_value": "1986",
+        "corruption_type": "year_shift"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "1",
+        "corrupted_value": "",
+        "corruption_type": "missing_field"
+      }
+    ]
+  },
+  {
+    "entry_id": "lecun1998mnist2",
     "entry_type": "inproceedings",
     "expected_status": "partially_valid",
     "corruptions": [
       {
         "field": "author",
-        "original_correct_value": "Ioffe, Sergey and Szegedy, Christian",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
+        "original_correct_value": "LeCun, Yann and Bottou, Leon and Bengio, Yoshua and Haffner, Patrick",
+        "corrupted_value": "Lecun, Yann and Bottou, Leon and Bengio, Yoshua and Haffner, Patrick",
+        "corruption_type": "author_corruption"
       }
     ]
   },
   {
-    "entry_id": "graves2013generating",
-    "entry_type": "misc",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "title",
-        "original_correct_value": "Generating Sequences with Recurrent Neural Networks",
-        "corrupted_value": "Generating Sequenses with Recurent Neural Networks",
-        "corruption_type": "title_mutation"
-      }
-    ]
-  },
-  {
-    "entry_id": "zoph2017neural",
-    "entry_type": "inproceedings",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "title",
-        "original_correct_value": "Neural Architecture Search with Reinforcement Learning",
-        "corrupted_value": "Neural Architecture Serch with Reinforcement Learning",
-        "corruption_type": "title_mutation"
-      },
-      {
-        "field": "doi",
-        "original_correct_value": "10.48550/arXiv.1611.01578",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "velickovic2018graph",
-    "entry_type": "inproceedings",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "title",
-        "original_correct_value": "Graph Attention Networks",
-        "corrupted_value": "Graph Attntion Networks",
-        "corruption_type": "title_mutation"
-      },
-      {
-        "field": "booktitle",
-        "original_correct_value": "Proceedings of the International Conference on Learning Representations (ICLR)",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "dosovitskiy2021image",
-    "entry_type": "inproceedings",
-    "expected_status": "partially_valid",
-    "corruptions": [
-      {
-        "field": "title",
-        "original_correct_value": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
-        "corrupted_value": "An Image is Worth 16x16 Words: Transformers for Imge Recognition at Scale",
-        "corruption_type": "title_mutation"
-      },
-      {
-        "field": "doi",
-        "original_correct_value": "10.48550/arXiv.2010.11929",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
-      }
-    ]
-  },
-  {
-    "entry_id": "raffel2020exploring",
+    "entry_id": "cortes1995support2",
     "entry_type": "article",
     "expected_status": "partially_valid",
     "corruptions": [
       {
         "field": "title",
-        "original_correct_value": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
-        "corrupted_value": "Exploring Limits of Transfer Learning with Unified Text-to-Text Transformer",
+        "original_correct_value": "Support-Vector Networks",
+        "corrupted_value": "Support-Vector",
         "corruption_type": "title_mutation"
+      }
+    ]
+  },
+  {
+    "entry_id": "breiman2001random2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "doi",
+        "original_correct_value": "10.1023/A:1010933404324",
+        "corrupted_value": "",
+        "corruption_type": "missing_field"
       },
+      {
+        "field": "journal",
+        "original_correct_value": "Machine Learning",
+        "corrupted_value": "Mach. Learn.",
+        "corruption_type": "venue_substitution"
+      }
+    ]
+  },
+  {
+    "entry_id": "chen2016xgboost2",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
       {
         "field": "year",
-        "original_correct_value": "2020",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
+        "original_correct_value": "2016",
+        "corrupted_value": "2015",
+        "corruption_type": "year_shift"
       }
     ]
   },
   {
-    "entry_id": "howard2018universal",
-    "entry_type": "inproceedings",
+    "entry_id": "ke2017lightgbm2",
+    "entry_type": "article",
     "expected_status": "partially_valid",
     "corruptions": [
       {
-        "field": "title",
-        "original_correct_value": "Universal Language Model Fine-tuning for Text Classification",
-        "corrupted_value": "Universal Language Model Fine-tuning for Text Clasification",
-        "corruption_type": "title_mutation"
-      },
-      {
-        "field": "doi",
-        "original_correct_value": "10.18653/v1/P18-1031",
-        "corrupted_value": "",
-        "corruption_type": "missing_field"
+        "field": "author",
+        "original_correct_value": "Ke, Guolin and Meng, Qi and Finley, Thomas and Wang, Taifeng and Chen, Wei and Ma, Weidong and Ye, Qiwei and Liu, Tie-Yan",
+        "corrupted_value": "Guolin, Ke and Qi, Meng and Thomas, Finley and Taifeng, Wang and Wei, Chen and Weidong, Ma and Qiwei, Ye and Tie-Yan, Liu",
+        "corruption_type": "author_corruption"
       }
     ]
   },
   {
-    "entry_id": "lecun2001philosophical",
+    "entry_id": "prokhorenkova2018catboost2",
     "entry_type": "article",
-    "expected_status": "invalid",
-    "corruptions": []
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "volume",
+        "original_correct_value": "31",
+        "corrupted_value": "",
+        "corruption_type": "missing_field"
+      }
+    ]
   },
   {
     "entry_id": "feigenbaum1985unified",
     "entry_type": "inproceedings",
     "expected_status": "invalid",
+    "invalid_reason": "Author pairing includes Turing (died 1954) and McCarthy (born 1927) with Feigenbaum on a non-existent paper.",
     "corruptions": []
   },
   {
-    "entry_id": "hinton2003conscious",
+    "entry_id": "galton1889mental",
     "entry_type": "article",
     "expected_status": "invalid",
+    "invalid_reason": "Anachronistic — Turing (1912–1954) could not co-author with Galton (1822–1911) in 1889.",
     "corruptions": []
   },
   {
-    "entry_id": "schmidhuber2010grand",
+    "entry_id": "newell2025agi",
     "entry_type": "article",
     "expected_status": "invalid",
+    "invalid_reason": "Future-dated — year 2025 has not yet occurred (dataset created in 2023/2024).",
     "corruptions": []
   },
   {
-    "entry_id": "orwell1949artificial",
+    "entry_id": "hopper1999neural",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "invalid_reason": "Lovelace died in 1852, Hopper died in 1992 — cannot co-author in 1999.",
+    "corruptions": []
+  },
+  {
+    "entry_id": "hallucinated2020",
     "entry_type": "article",
     "expected_status": "invalid",
+    "invalid_reason": "Entirely hallucinated — authors, journal, and DOI do not exist.",
     "corruptions": []
   },
   {
-    "entry_id": "plato1979republic",
-    "entry_type": "incollection",
+    "entry_id": "arxiv9999",
+    "entry_type": "article",
     "expected_status": "invalid",
+    "invalid_reason": "Non-existent arXiv ID (arXiv:9999.99999 is not a valid identifier).",
     "corruptions": []
   },
   {
-    "entry_id": "zhang2021quantum",
+    "entry_id": "retracted2015",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "invalid_reason": "This paper was retracted from ICLR 2015 and removed from all databases.",
+    "corruptions": []
+  },
+  {
+    "entry_id": "anachronistic1940",
+    "entry_type": "book",
+    "expected_status": "invalid",
+    "invalid_reason": "Anachronistic — discusses neural networks and quantum computing concepts not existing in 1940.",
+    "corruptions": []
+  },
+  {
+    "entry_id": "nonexistent_journal",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "invalid_reason": "Journal \"International Journal of Imaginary Science\" does not exist.",
+    "corruptions": []
+  },
+  {
+    "entry_id": "dead_conference",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "invalid_reason": "Conference year 2099 is in the future.",
+    "corruptions": []
+  },
+  {
+    "entry_id": "impossible_author_pair",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "invalid_reason": "Isaac Newton died in 1727, cannot co-author with Elon Musk in 2021.",
+    "corruptions": []
+  },
+  {
+    "entry_id": "hallucinated_techreport",
     "entry_type": "misc",
     "expected_status": "invalid",
+    "invalid_reason": "GPT-10 does not exist (GPT-4 is latest as of 2023); future year.",
     "corruptions": []
   },
   {
-    "entry_id": "mccarthy1956dartmouth",
-    "entry_type": "techreport",
-    "expected_status": "invalid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "rosenblatt1962convergence",
+    "entry_id": "retracted_arxiv",
     "entry_type": "article",
     "expected_status": "invalid",
+    "invalid_reason": "arXiv:2001.12345 was retracted and removed from arXiv.",
     "corruptions": []
   },
   {
-    "entry_id": "hawking2019existential",
-    "entry_type": "misc",
-    "expected_status": "invalid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "vonneumann1949cooperative",
+    "entry_id": "future_proceedings",
     "entry_type": "inproceedings",
     "expected_status": "invalid",
+    "invalid_reason": "Year 2100 is far in the future.",
     "corruptions": []
   },
   {
-    "entry_id": "inception2099deep",
-    "entry_type": "inproceedings",
-    "expected_status": "invalid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "fukushima1989neocognitron",
+    "entry_id": "impossible_doi",
     "entry_type": "article",
     "expected_status": "invalid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "lovelace1843machines",
-    "entry_type": "article",
-    "expected_status": "invalid",
-    "corruptions": []
-  },
-  {
-    "entry_id": "johnson2024massively",
-    "entry_type": "inproceedings",
-    "expected_status": "invalid",
+    "invalid_reason": "DOI 10.5555/abcde does not conform to any known prefix.",
     "corruptions": []
   }
 ]

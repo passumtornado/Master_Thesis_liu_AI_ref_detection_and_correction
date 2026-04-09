@@ -143,21 +143,7 @@ def search_google_scholar(
     if not title:
         return []
 
-    query_parts = [f'"{title}"']
     first_author = (author.split(" and ")[0] if author else "").strip()
-    if first_author:
-        query_parts.append(first_author)
-    if year:
-        query_parts.append(str(year))
-
-    params = {
-        "hl": "en",
-        "q": " ".join(part for part in query_parts if part),
-        "num": max(max_results, 1),
-    }
-    if year:
-        params["as_ylo"] = str(year)
-        params["as_yhi"] = str(year)
 
     headers = {
         "User-Agent": (
@@ -169,14 +155,58 @@ def search_google_scholar(
     }
 
     http = session or requests.Session()
-    try:
-        response = http.get(GOOGLE_SCHOLAR_URL, params=params, headers=headers, timeout=timeout)
-        response.raise_for_status()
-    except requests.RequestException:
-        return []
+    query_variants = []
 
-    hits = extract_scholar_hits(response.text, query_title=title, query_author=author, query_year=str(year or ""))
-    return hits[:max_results]
+    strict_parts = [f'"{title}"']
+    if first_author:
+        strict_parts.append(first_author)
+    if year:
+        strict_parts.append(str(year))
+    query_variants.append({
+        "q": " ".join(part for part in strict_parts if part),
+        "pin_year": bool(year),
+    })
+
+    medium_parts = [title]
+    if first_author:
+        medium_parts.append(first_author)
+    query_variants.append({
+        "q": " ".join(part for part in medium_parts if part),
+        "pin_year": False,
+    })
+
+    loose_parts = [title]
+    query_variants.append({
+        "q": " ".join(part for part in loose_parts if part),
+        "pin_year": False,
+    })
+
+    for variant in query_variants:
+        params = {
+            "hl": "en",
+            "q": variant["q"],
+            "num": max(max_results, 1),
+        }
+        if year and variant["pin_year"]:
+            params["as_ylo"] = str(year)
+            params["as_yhi"] = str(year)
+
+        try:
+            response = http.get(GOOGLE_SCHOLAR_URL, params=params, headers=headers, timeout=timeout)
+            response.raise_for_status()
+        except requests.RequestException:
+            continue
+
+        body_lower = response.text.lower()
+        if "please show you're not a robot" in body_lower or "sorry/index" in body_lower:
+            # Scholar is challenge-blocking this request; further retries are unlikely to help.
+            return []
+
+        hits = extract_scholar_hits(response.text, query_title=title, query_author=author, query_year=str(year or ""))
+        if hits:
+            return hits[:max_results]
+
+    return []
 
 
 def _extract_surnames(value: str) -> set[str]:

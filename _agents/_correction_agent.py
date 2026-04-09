@@ -27,7 +27,8 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_ollama import ChatOllama
-from utils import _extract_text
+from langchain_openrouter import ChatOpenRouter
+from utils import _ainvoke_with_retry, _extract_text, parse_correction_payload
 
 # ─────────────────────────────────────────────────────────────
 # Prompt Strategy
@@ -148,6 +149,7 @@ class CorrectionAgent:
 
         self.llm = ChatOllama(
                 model= "qwen3-coder:480b-cloud",
+                #  model = "deepseek-v3.2:cloud",
                 base_url="https://ollama.com",
                 temperature=0.1,
                 client_kwargs={
@@ -171,12 +173,26 @@ class CorrectionAgent:
         # Optional HuggingFace backend — uncomment to switch
         # self.llm = ChatHuggingFace(
         #     llm=HuggingFaceEndpoint(
-        #         repo_id="openai/gpt-oss-20b",
+        #         repo_id="deepseek-ai/DeepSeek-R1",
         #         task="text-generation",
         #         huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
         #         max_new_tokens=2048,
         #         temperature=0.1,
         #     )
+        # )
+         # OpenAI fallback — uncomment to switch
+        # self.llm = ChatOpenAI(
+        #     model="gpt-5.4",
+        #     temperature=0.1,
+        #     openai_api_key=os.getenv("OPENAI_API_KEY"),
+        # )
+        
+        # self.llm = ChatOpenRouter(
+        #     # model="anthropic/claude-sonnet-4.6",
+        #       model="google/gemini-2.5-pro", 
+        #         temperature=0.1,
+        #         max_tokens=1024,
+        #         openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
         # )
 
     # ── public ────────────────────────────────────────────────
@@ -197,6 +213,9 @@ class CorrectionAgent:
             correction_data=correction_data,
             validation_context=validation_markdown,
         )
+
+        raw_path = self.output_dir / "llm_raw_response.txt"
+        raw_path.write_text(llm_response or "", encoding="utf-8")
 
         corrected_entries, corrections_list, markdown_report = (
             self._parse_llm_response(llm_response, raw_data)
@@ -228,12 +247,13 @@ class CorrectionAgent:
         print(f"  ✓ corrected.bib            → {bib_path}")
         print(f"  ✓ corrections_summary.md   → {md_path}")
         print(f"  ✓ corrections_metadata.json → {meta_path}")
+        print(f"  ✓ llm_raw_response.txt     → {raw_path}")
 
         return {
             "corrected_entries":  corrected_entries,
             "corrections":        corrections_list,
             "correction_summary": markdown_report,
-            "saved_files":        [str(bib_path), str(md_path), str(meta_path)],
+            "saved_files":        [str(bib_path), str(md_path), str(meta_path), str(raw_path)],
         }
 
     # ── private: data preparation ─────────────────────────────
@@ -286,14 +306,15 @@ class CorrectionAgent:
         else:
             payload = correction_data  # RAG and CoT receive full DBLP evidence
 
-        response = await self.llm.ainvoke([
+        messages = [
             SystemMessage(content=STRATEGY_PROMPTS[self.strategy]),
             HumanMessage(content=(
                 "Correct these BibTeX entries:\n\n"
                 f"```json\n{json.dumps(payload, indent=2, ensure_ascii=False)}\n```\n\n"
                 f"Validation context:\n{validation_context[:800]}"
             )),
-        ])
+        ]
+        response = await _ainvoke_with_retry(self.llm, messages, attempts=4, base_delay=1.0)
         # update to use _extract_text for consistent response parsing across backends
         raw_text = _extract_text(response)
         return raw_text
@@ -353,7 +374,9 @@ class CorrectionAgent:
 
         corrected_entries = []
         corrections_list  = []
-        markdown_report   = llm_data.get("markdown_summary", "")
+        markdown_report, llm_corrected, schema_errors = parse_correction_payload(llm_data)
+        if schema_errors:
+            print(f"  [DEBUG] Correction schema warnings: {len(schema_errors)}")
 
         # Build lookup for original entries
         raw_map = {}
@@ -367,10 +390,6 @@ class CorrectionAgent:
             if entry_id:
                 raw_map[entry_id] = entry
 
-        llm_corrected = llm_data.get("corrected_entries", [])
-        if not isinstance(llm_corrected, list):
-            llm_corrected = []
-
         for llm_entry in llm_corrected:
             if not isinstance(llm_entry, dict):
                 continue
@@ -383,8 +402,14 @@ class CorrectionAgent:
             if not isinstance(corrections, list):
                 corrections = []
 
-            # Parse corrected field values from BibTeX string for EvaluationAgent
-            corrected_fields = self._parse_bibtex_fields(corrected_bibtex) or original
+            # Parse corrected values from BibTeX when available; otherwise accept dict-form corrected payloads.
+            corrected_fields = self._parse_bibtex_fields(corrected_bibtex)
+            if not corrected_fields and isinstance(llm_entry.get("corrected"), dict):
+                corrected_fields = llm_entry.get("corrected")
+            if not corrected_fields and isinstance(llm_entry.get("corrected_fields"), dict):
+                corrected_fields = llm_entry.get("corrected_fields")
+            if not corrected_fields:
+                corrected_fields = original
 
             corrected_entries.append({
                 "entry_id":        entry_id,

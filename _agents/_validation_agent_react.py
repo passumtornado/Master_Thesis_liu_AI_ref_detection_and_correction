@@ -40,9 +40,9 @@ from typing import Annotated, TypedDict
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils import _extract_text
+from utils import _extract_text, parse_validation_results
 
-load_dotenv()
+load_dotenv('/Users/passum/Documents/SWEDEN/DSI/THESIS/AI_reference_agent_detection_correction/.env')
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -52,9 +52,11 @@ from langchain_ollama import ChatOllama
 from langgraph.graph import END, START, StateGraph
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import ToolNode
+from langchain_openai import ChatOpenAI
+from langchain_openrouter import ChatOpenRouter
 
-
-MAX_REACT_ITERATIONS = 120   # hard cap on tool calls in a single validation run
+# Base cap used as a lower bound. Actual per-run cap is scaled by entry count.
+MAX_REACT_ITERATIONS = 120
 REACT_RECURSION_BUFFER = 20  # extra graph steps for START/END + finalization overhead
 
 
@@ -96,6 +98,15 @@ Rules:
 Produce a complete markdown report grouped by status with a summary
 statistics table and per-entry details.
 
+Markdown format requirements (MANDATORY):
+1. Include these exact section headers in this exact order:
+  - ## 🟢 Valid References
+  - ## 🟡 Partially Valid References
+  - ## 🔴 Invalid References
+2. Every reference must appear in exactly one of those three sections.
+3. Do not create any other status section names.
+4. Keep entry IDs in each section so they are easy to trace.
+
 Then append a JSON block in EXACTLY this format:
 ```json
 {
@@ -118,7 +129,7 @@ DBLP and Google Scholar search tools.
 
 You will receive a list of BibTeX entries. For EACH entry:
 
-1. SEARCH — call dblp_fuzzy_title_search with the entry title.
+1. SEARCH — call dblp_fuzzy_title_search with the entry title and authors.
    - similarity >= 0.75  -> strong evidence, no need for Scholar.
    - similarity < 0.75   -> call google_scholar_search as fallback.
    - Scholar also fails  -> try DBLP again with a shorter title (3-5 keywords).
@@ -135,10 +146,19 @@ You will receive a list of BibTeX entries. For EACH entry:
 EFFICIENCY RULES:
   - Do NOT call Scholar if DBLP similarity is already >= 0.75
   - One DBLP call per entry is usually enough
-  - Only retry with a shorter query if the full-title search returns nothing
+  - Only retry with a shorter query search with the dblp_search tool if the full-title search returns nothing
 
 Produce a complete markdown report with summary table and per-entry
 details showing which evidence source was used and what issues were found.
+
+Markdown format requirements (MANDATORY):
+1. Include these exact section headers in this exact order:
+  - ## 🟢 Valid References
+  - ## 🟡 Partially Valid References
+  - ## 🔴 Invalid References
+2. Every reference must appear in exactly one of those three sections.
+3. Do not create any other status section names.
+4. Keep entry IDs in each section so they are easy to trace.
 
 Then append a JSON block in EXACTLY this format:
 ```json
@@ -196,6 +216,15 @@ EFFICIENCY RULES:
 
 Show your step-by-step reasoning for each entry, then produce a full
 markdown report with summary table and per-entry details.
+
+Markdown format requirements (MANDATORY):
+1. Include these exact section headers in this exact order:
+  - ## 🟢 Valid References
+  - ## 🟡 Partially Valid References
+  - ## 🔴 Invalid References
+2. Every reference must appear in exactly one of those three sections.
+3. Do not create any other status section names.
+4. Keep entry IDs in each section so they are easy to trace.
 
 Then append a JSON block in EXACTLY this format:
 ```json
@@ -265,10 +294,25 @@ class LLMValidationAgent:
         #     temperature=0.1,
         #     google_api_key=os.getenv("GOOGLE_API_KEY"),
         # )
+        
+        # OpenAI fallback — uncomment to switch
+        # self.llm = ChatOpenAI(
+        #     model="gpt-5.4",
+        #     temperature=0.1,
+        #     openai_api_key=os.getenv("OPENAI_API_KEY"),
+        # )
+        
+        # self.llm = ChatOpenRouter(
+        #     # model="anthropic/claude-sonnet-4.6",
+        #     model="google/gemini-2.5-pro",
+        #     temperature=0.1,
+        #     openrouter_api_key=os.getenv("OPENROUTER_API_KEY")
+        # )
 
         # Ollama backend — uncomment to switch
         self.llm = ChatOllama(
             model="qwen3-coder:480b-cloud",
+            # model="deepseek-v3.2:cloud",
             base_url="https://ollama.com",
             temperature=0.1,
             client_kwargs={
@@ -276,10 +320,10 @@ class LLMValidationAgent:
             },
         )
 
-        # HuggingFace backend — uncomment to switch
+        #HuggingFace backend — uncomment to switch
         # self.llm = ChatHuggingFace(
         #     llm=HuggingFaceEndpoint(
-        #         repo_id="openai/gpt-oss-20b",
+        #         repo_id="deepseek-ai/DeepSeek-R1",
         #         task="text-generation",
         #         huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
         #         max_new_tokens=4096,
@@ -355,6 +399,14 @@ class LLMValidationAgent:
             all_tools      = dblp_tools + scholar_tools
             llm_with_tools = self.llm.bind_tools(all_tools)
 
+        # Scale tool budget so medium-sized runs (e.g., 50 entries) do not
+        # terminate early before the agent has covered all entries.
+        tool_budget = MAX_REACT_ITERATIONS
+        if all_tools:
+          # Empirically: ~1-3 tool calls per entry on healthy runs.
+          # Use generous headroom for retries and Scholar fallbacks.
+          tool_budget = max(MAX_REACT_ITERATIONS, len(entries) * 6)
+
         # ── Node: LLM reasons and decides next action ─────────
         async def llm_node(state: ReactState) -> dict:
             response = await llm_with_tools.ainvoke(state["messages"])
@@ -373,7 +425,7 @@ class LLMValidationAgent:
             tool_messages_so_far = sum(
                 1 for msg in state["messages"] if isinstance(msg, ToolMessage)
             )
-            if tool_messages_so_far >= MAX_REACT_ITERATIONS:
+            if tool_messages_so_far >= tool_budget:
                 return END
 
             if (
@@ -431,12 +483,12 @@ class LLMValidationAgent:
         if self.strategy == PromptStrategy.ZERO_SHOT:
             print(f"  Running [{strategy_label}] — no tools, single pass ...")
         else:
-            print(f"  Running [{strategy_label}] — max {MAX_REACT_ITERATIONS} tool calls ...")
+          print(f"  Running [{strategy_label}] — max {tool_budget} tool calls ...")
 
         tool_call_count = 0
         final_messages  = []
 
-        recursion_limit = (MAX_REACT_ITERATIONS * 2) + REACT_RECURSION_BUFFER
+        recursion_limit = (tool_budget * 2) + REACT_RECURSION_BUFFER
 
         async for chunk in app.astream(
             {"messages": initial_messages},
@@ -451,6 +503,11 @@ class LLMValidationAgent:
                 final_messages = msgs
 
         print(f"  Total tool calls: {tool_call_count}")
+        if all_tools and tool_call_count >= tool_budget:
+          print(
+            "  Warning: ReAct run reached the tool-call budget; "
+            "results may be partial for this batch."
+          )
 
         # ── Extract final LLM text ────────────────────────────
         raw_text = ""
@@ -540,14 +597,16 @@ class LLMValidationAgent:
         structured = []
 
         if "```json" in raw_text:
-            parts      = raw_text.split("```json", 1)
-            markdown   = parts[0].strip()
-            json_block = parts[1].split("```")[0].strip()
-            try:
-                data       = json.loads(json_block)
-                structured = data.get("results", [])
-            except json.JSONDecodeError:
-                pass
+          parts      = raw_text.split("```json", 1)
+          markdown   = parts[0].strip()
+          json_block = parts[1].split("```")[0].strip()
+          try:
+            data = json.loads(json_block)
+            structured, schema_errors = parse_validation_results(data)
+            if schema_errors:
+              print(f"\n  [DEBUG] Validation schema warnings: {len(schema_errors)}")
+          except json.JSONDecodeError:
+            pass
         else:
             markdown = raw_text
 

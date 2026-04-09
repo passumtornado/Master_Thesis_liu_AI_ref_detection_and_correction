@@ -28,6 +28,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_ollama import ChatOllama
+from langchain_openrouter import ChatOpenRouter
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils import _extract_text
@@ -124,6 +125,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
 
         self.llm = ChatOllama(
             model=self.MODEL,
+            # model = "deepseek-v3.2:cloud",
             base_url="https://ollama.com",
             temperature=0.1,
             client_kwargs={
@@ -137,7 +139,13 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         #     temperature=0.1,
         #     openai_api_key=os.getenv("OPENAI_API_KEY"),
         # )
-        
+        # self.llm = ChatOpenRouter(
+        #     # model="anthropic/claude-sonnet-4.6",
+        #         model="google/gemini-2.5-pro",
+        #         temperature=0.1,
+        #         max_tokens=1024,
+        #         openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
+        # )
         
         # self.llm = ChatGoogleGenerativeAI(
         #     model="gemini-3.1-pro-preview",
@@ -149,7 +157,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         # Optional HuggingFace backend — uncomment to switch
         # self.llm = ChatHuggingFace(
         #     llm=HuggingFaceEndpoint(
-        #         repo_id="openai/gpt-oss-20b",
+        #         repo_id="deepseek-ai/DeepSeek-R1",
         #         task="text-generation",
         #         huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
         #         max_new_tokens=2048,

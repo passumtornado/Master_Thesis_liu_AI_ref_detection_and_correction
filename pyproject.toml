@@ -41,6 +41,7 @@ dependencies = [
     "langchain-mcp-adapters>=0.2.1",
     "text-generation>=0.7.0",
     "langchain-google-genai>=4.2.1",
+    "langchain-openrouter>=0.2.1",
 ]
 
 [tool.uv.sources]

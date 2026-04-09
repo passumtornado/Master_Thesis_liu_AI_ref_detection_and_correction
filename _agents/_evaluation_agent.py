@@ -123,15 +123,15 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         self.output_dir = Path(output_dir) / strategy.value
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-        self.llm = ChatOllama(
-            model=self.MODEL,
-            # model = "deepseek-v3.2:cloud",
-            base_url="https://ollama.com",
-            temperature=0.1,
-            client_kwargs={
-                "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-            },
-        )
+        # self.llm = ChatOllama(
+        #     model=self.MODEL,
+        #     # model = "deepseek-v3.2:cloud",
+        #     base_url="https://ollama.com",
+        #     temperature=0.1,
+        #     client_kwargs={
+        #         "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+        #     },
+        # )
         
         #OpenAI backend (uncomment to switch)
         # self.llm = ChatOpenAI(
@@ -139,13 +139,13 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         #     temperature=0.1,
         #     openai_api_key=os.getenv("OPENAI_API_KEY"),
         # )
-        # self.llm = ChatOpenRouter(
-        #     # model="anthropic/claude-sonnet-4.6",
-        #         model="google/gemini-2.5-pro",
-        #         temperature=0.1,
-        #         max_tokens=1024,
-        #         openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
-        # )
+        self.llm = ChatOpenRouter(
+            # model="anthropic/claude-sonnet-4.6",
+                model="google/gemini-2.5-pro",
+                temperature=0.1,
+                max_tokens=1024,
+                openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
+        )
         
         # self.llm = ChatGoogleGenerativeAI(
         #     model="gemini-3.1-pro-preview",

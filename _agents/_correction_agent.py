@@ -42,13 +42,17 @@ class PromptStrategy(Enum):
 
 ZERO_SHOT_PROMPT = """You are an expert BibTeX reference correction system.
 
-You will receive original BibTeX entries with NO external database evidence.
-Rely only on your pre-trained knowledge to identify and correct wrong fields.
+You will receive original BibTeX entries with validation results showing detected issues
+and suggested fixes. You have NO external database evidence (DBLP).
+
+USE THE VALIDATION STRUCTURED DATA. It identifies issues and suggests fixes.
+Refer to your pre-trained knowledge as a secondary check.
 
 For each entry:
-1. Identify which fields are likely incorrect.
-2. Propose corrected values based on your knowledge.
-3. Generate the corrected BibTeX string.
+1. Review the validation entry for status, issues, and suggested_fixes.
+2. Apply the suggested fixes where confidence is high (especially if status = partially_valid or invalid).
+3. Use your pre-trained knowledge to verify and refine corrections if needed.
+4. Generate the corrected BibTeX string.
 
 You MUST respond with valid JSON in EXACTLY this structure — no extra text:
 ```json
@@ -69,14 +73,19 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text:
 
 RAG_PROMPT = """You are an expert BibTeX reference correction system.
 
-You will receive original BibTeX entries together with the best matching
-record from DBLP. Use the DBLP record as ground truth.
+You will receive:
+  - Original BibTeX entries
+  - The best matching record from DBLP (use as ground truth)
+  - Validation results: entry status, detected issues, suggested fixes from the validation agent
 
+USE THE VALIDATION STRUCTURED DATA FIRST. It contains issues and suggested fixes already identified.
 For each entry:
-1. Compare each field against the DBLP record.
-2. Correct only fields that genuinely differ — do NOT blindly copy all DBLP fields.
-3. Preserve fields that are already correct.
-4. Generate the corrected BibTeX string.
+1. Review the validation entry for status, issues, and suggested_fixes.
+2. Apply the suggested fixes where confidence is high (especially if status = partially_valid or invalid).
+3. Compare remaining fields against the DBLP record.
+4. Correct only fields that genuinely differ — do NOT blindly copy all DBLP fields.
+5. Preserve fields that are already correct.
+6. Generate the corrected BibTeX string.
 
 You MUST respond with valid JSON in EXACTLY this structure — no extra text:
 ```json
@@ -97,14 +106,23 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text:
 
 COT_PROMPT = """You are an expert BibTeX reference correction system.
 
-For EACH entry reason step by step through the DBLP evidence before correcting:
+You will receive:
+  - Original BibTeX entries
+  - The best matching record from DBLP (use as ground truth)
+  - Validation results: entry status, detected issues, suggested fixes from the validation agent
 
-Step 1 — Title: Does it match the DBLP hit? Note any differences.
-Step 2 — Authors: Are names spelled correctly and complete?
-Step 3 — Year: Does it match DBLP? Flag if off by more than 1.
-Step 4 — Venue: Does journal/booktitle match DBLP?
-Step 5 — Decision: Which fields need correction based on steps 1–4?
-           Only correct fields with clear evidence of error.
+USE THE VALIDATION STRUCTURED DATA FIRST. It contains issues and suggested fixes already identified.
+
+For EACH entry reason step by step:
+
+Step 0 — Pre-identified Issues: Review the validation entry for status, issues, suggested_fixes.
+         If status = invalid or partially_valid, noted issues are likely correct.
+Step 1 — Title: Does original match DBLP? Apply validation suggestion if available.
+Step 2 — Authors: Are names correct? Apply validation suggestion if available.
+Step 3 — Year: Does it match DBLP? Flag if off by more than 1. Apply validation suggestion if available.
+Step 4 — Venue: Does journal/booktitle match? Apply validation suggestion if available.
+Step 5 — Decision: Which additional fields need correction beyond validation suggestions?
+         Only correct fields with clear evidence of error.
 
 Show your reasoning, then output valid JSON in EXACTLY this structure:
 ```json
@@ -147,15 +165,15 @@ class CorrectionAgent:
         self.output_dir = Path(output_dir) / strategy.value
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-        self.llm = ChatOllama(
-                model= "qwen3-coder:480b-cloud",
-                #  model = "deepseek-v3.2:cloud",
-                base_url="https://ollama.com",
-                temperature=0.1,
-                client_kwargs={
-                    "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-                },
-            )
+        # self.llm = ChatOllama(
+        #         model= "qwen3-coder:480b-cloud",
+        #         #  model = "deepseek-v3.2:cloud",
+        #         base_url="https://ollama.com",
+        #         temperature=0.1,
+        #         client_kwargs={
+        #             "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+        #         },
+        #     )
         
         #OpenAI fallback — uncomment to switch
         # self.llm = ChatOpenAI(
@@ -187,27 +205,34 @@ class CorrectionAgent:
         #     openai_api_key=os.getenv("OPENAI_API_KEY"),
         # )
         
-        # self.llm = ChatOpenRouter(
-        #     # model="anthropic/claude-sonnet-4.6",
-        #       model="google/gemini-2.5-pro", 
-        #         temperature=0.1,
-        #         max_tokens=1024,
-        #         openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
-        # )
+        self.llm = ChatOpenRouter(
+                model="anthropic/claude-sonnet-4.6",
+            #   model="google/gemini-2.5-pro", 
+                temperature=0.1,
+                max_tokens=1024,
+                openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
+        )
 
     # ── public ────────────────────────────────────────────────
 
     async def correct_entries(
         self,
         raw_data: list[dict],
+        validation_structured: list[dict] | None = None,
         validation_markdown: str = "",
     ) -> dict:
-        """Generate corrected entries and save correction artefacts."""
+        """Generate corrected entries and save correction artefacts.
+        
+        Args:
+            raw_data: List of raw validation records with original entries and DBLP hits.
+            validation_structured: List of structured validation results with issues and suggested fixes.
+            validation_markdown: Validation markdown report for context (secondary usage now).
+        """
         print(f"\n{'='*60}")
         print(f"CORRECTION AGENT [{self.strategy.value.upper()}]")
         print(f"{'='*60}\n")
 
-        correction_data = self._prepare_correction_data(raw_data)
+        correction_data = self._prepare_correction_data(raw_data, validation_structured)
 
         llm_response = await self._generate_corrections_with_llm(
             correction_data=correction_data,
@@ -259,9 +284,24 @@ class CorrectionAgent:
     # ── private: data preparation ─────────────────────────────
 
     @staticmethod
-    def _prepare_correction_data(raw_data: list[dict]) -> list[dict]:
-        """Prepare original + best DBLP match pairs for LLM correction."""
+    def _prepare_correction_data(
+        raw_data: list[dict],
+        validation_structured: list[dict] | None = None,
+    ) -> list[dict]:
+        """Prepare original + DBLP + validation results for LLM correction.
+        
+        Merges raw validation evidence with structured validation classified results.
+        """
         correction_data = []
+        validation_map = {}
+        
+        # Index validation results by entry_id for fast lookup
+        if validation_structured:
+            validation_map = {
+                v.get("entry_id"): v
+                for v in validation_structured
+                if isinstance(v, dict) and v.get("entry_id")
+            }
 
         for item in raw_data:
             if not isinstance(item, dict):
@@ -269,6 +309,7 @@ class CorrectionAgent:
             entry = item.get("entry", {})
             if not isinstance(entry, dict):
                 continue
+            entry_id = entry.get("id")
             dblp_hits = item.get("dblp_hits", [])
             if not isinstance(dblp_hits, list) or not dblp_hits:
                 continue
@@ -276,11 +317,15 @@ class CorrectionAgent:
             if not isinstance(best_hit, dict):
                 continue
 
+            # Include validation result if available
+            validation_result = validation_map.get(entry_id, {})
+
             correction_data.append({
-                "entry_id":        entry.get("id"),
+                "entry_id":        entry_id,
                 "original_entry":  entry,
                 "dblp_corrected":  best_hit,
                 "similarity_score": best_hit.get("similarity_score", 0),
+                "validation_result": validation_result,  # Structured validation output
             })
 
         return correction_data
@@ -294,17 +339,18 @@ class CorrectionAgent:
     ) -> str:
         """Ask the LLM to generate corrected entries using the active strategy."""
 
-        # Zero-shot: strip DBLP evidence so LLM relies on pre-trained knowledge
+        # Zero-shot: strip DBLP evidence but include validation guidance
         if self.strategy == PromptStrategy.ZERO_SHOT:
             payload = [
                 {
                     "entry_id":       d["entry_id"],
                     "original_entry": d["original_entry"],
+                    "validation_result": d.get("validation_result", {}),
                 }
                 for d in correction_data
             ]
         else:
-            payload = correction_data  # RAG and CoT receive full DBLP evidence
+            payload = correction_data  # RAG and CoT receive full DBLP + validation evidence
 
         messages = [
             SystemMessage(content=STRATEGY_PROMPTS[self.strategy]),

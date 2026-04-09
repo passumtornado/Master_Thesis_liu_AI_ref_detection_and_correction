@@ -34,6 +34,7 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
+from langchain_openrouter import ChatOpenRouter
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils import _ainvoke_with_retry, _extract_text
@@ -119,23 +120,39 @@ class EvaluationAgent:
       - Full evaluation delegated to LLM
       - Metrics may vary between runs
     """
-
+  
     REPORT_SYSTEM_PROMPT = """You are an expert bibliographic data quality evaluator.
 
-You will receive:
-  - Pre-computed evaluation metrics (TP, FP, FN, Precision, Recall, F1)
-  - Per-field accuracy breakdown
-  - Detailed per-entry results showing what was wrong, what was corrected,
-    and whether the correction was accurate
+You may receive a performance summary that includes BOTH:
+    - Validation agent metrics (classification quality)
+    - Correction agent metrics (TP, FP, FN, Precision, Recall, F1)
+as well as per-field correction accuracy and detailed per-entry outcomes.
 
-Your task is to write a clear, professional markdown evaluation report that:
-  1. Opens with an overall metrics summary table
-  2. Shows field-level accuracy in a table
-  3. Groups entries by outcome: correctly fixed, missed errors, false corrections
-  4. Provides key insights about what the correction agent did well and where it failed
-  5. Concludes with actionable recommendations
+Your task is to write a clear, professional markdown evaluation report that interprets
+the end-to-end pipeline quality across validation and correction.
 
-Write in an academic style suitable for a Master's thesis.
+Required structure:
+    1. Executive Summary
+    2. Validation Agent Performance
+         - Interpret classification quality from available validation metrics.
+         - Explain what strong/weak validation implies for downstream correction.
+         - If validation metrics are missing, explicitly state that and avoid guessing.
+    3. Correction Agent Performance
+         - Show overall metrics table (TP, FP, FN, Precision, Recall, F1).
+         - Show field-level accuracy table.
+         - Group examples by outcome: correctly fixed, missed errors, false corrections.
+    4. Joint Interpretation (Validation -> Correction)
+         - Explain how validation quality likely affected correction outcomes.
+         - Highlight where errors were likely introduced in validation vs correction.
+    5. Actionable Recommendations
+         - Prioritized improvements for validation first, then correction.
+
+Style and constraints:
+    - Write in academic style suitable for a Master's thesis.
+    - Ground every claim in provided metrics or entry evidence.
+    - Do not invent unavailable metrics.
+    - Keep tone analytical and objective.
+
 Output only the markdown report — no JSON, no preamble, no extra text.
 """
 
@@ -202,19 +219,27 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         # )
 
         # Ollama backend — uncomment to switch
-        self.llm = ChatOllama(
-            model="qwen3-coder:480b-cloud",
-            base_url="https://ollama.com",
-            temperature=0.1,
-            client_kwargs={
-                "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-            },
-        )
+        # self.llm = ChatOllama(
+        #     model="qwen3-coder:480b-cloud",
+        #     base_url="https://ollama.com",
+        #     temperature=0.1,
+        #     client_kwargs={
+        #         "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+        #     },
+        # )
         # OpenAI backend (uncomment to switch)
-        self.llm = ChatOpenAI(
-            model="gpt-5.2",
-            temperature=0.1,
-            openai_api_key=os.getenv("OPENAI_API_KEY"),
+        # self.llm = ChatOpenAI(
+        #     model="gpt-5.2",
+        #     temperature=0.1,
+        #     openai_api_key=os.getenv("OPENAI_API_KEY"),
+        # )
+        
+        self.llm = ChatOpenRouter(
+            model="anthropic/claude-sonnet-4.6",
+            #   model="google/gemini-2.5-pro", 
+                temperature=0.1,
+                max_tokens=1024,
+                openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
         )
 
 

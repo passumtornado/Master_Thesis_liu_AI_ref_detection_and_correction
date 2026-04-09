@@ -444,6 +444,7 @@ async def correction_node(state: PipelineState) -> dict:
 
         result = await agent.correct_entries(
             raw_data=raw_data,
+            validation_structured=state.get("validation_structured", []),
             validation_markdown=state.get("markdown_report", ""),
         )
 
@@ -691,7 +692,7 @@ async def run_experiment(
     source_type:     str = "file",
     mcp_config_path: str | None = None,
     output_dir:      str | None = None,
-    ground_truth_path: str = "bibtex/ground_truth/test_truth.json",
+    ground_truth_path: str = "bibtex/ground_truth/ground_truth.json",
     batch_size: int = 25,
 ) -> dict:
     """
@@ -835,7 +836,7 @@ Examples:
             mcp_config_path=args.mcp_config,
             output_dir=args.output_dir,
             strategy=args.strategy,
-            ground_truth_path="bibtex/ground_truth/test_truth.json",
+            ground_truth_path="bibtex/ground_truth/ground_truth.json",
             batch_size=args.batch_size,
         ))
 

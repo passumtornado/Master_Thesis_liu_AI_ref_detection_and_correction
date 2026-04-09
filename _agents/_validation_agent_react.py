@@ -302,23 +302,23 @@ class LLMValidationAgent:
         #     openai_api_key=os.getenv("OPENAI_API_KEY"),
         # )
         
-        # self.llm = ChatOpenRouter(
-        #     # model="anthropic/claude-sonnet-4.6",
-        #     model="google/gemini-2.5-pro",
-        #     temperature=0.1,
-        #     openrouter_api_key=os.getenv("OPENROUTER_API_KEY")
-        # )
+        self.llm = ChatOpenRouter(
+            model="anthropic/claude-sonnet-4.6",
+            # model="google/gemini-2.5-pro",
+            temperature=0.1,
+            openrouter_api_key=os.getenv("OPENROUTER_API_KEY")
+        )
 
         # Ollama backend — uncomment to switch
-        self.llm = ChatOllama(
-            model="qwen3-coder:480b-cloud",
-            # model="deepseek-v3.2:cloud",
-            base_url="https://ollama.com",
-            temperature=0.1,
-            client_kwargs={
-                "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-            },
-        )
+        # self.llm = ChatOllama(
+        #     model="qwen3-coder:480b-cloud",
+        #     # model="deepseek-v3.2:cloud",
+        #     base_url="https://ollama.com",
+        #     temperature=0.1,
+        #     client_kwargs={
+        #         "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+        #     },
+        # )
 
         #HuggingFace backend — uncomment to switch
         # self.llm = ChatHuggingFace(

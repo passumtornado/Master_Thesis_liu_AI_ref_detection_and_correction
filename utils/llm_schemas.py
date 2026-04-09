@@ -34,6 +34,7 @@ class CorrectionEntry(BaseModel):
 
     entry_id: str
     corrected_bibtex: str = ""
+    corrected: dict[str, Any] = Field(default_factory=dict)
     corrections_applied: list[CorrectionChange] = Field(default_factory=list)
 
 
@@ -102,6 +103,7 @@ def parse_correction_payload(payload: dict[str, Any]) -> tuple[str, list[dict], 
         mapped = {
             "entry_id": item.get("entry_id") or item.get("id"),
             "corrected_bibtex": item.get("corrected_bibtex") or item.get("bibtex") or "",
+            "corrected": item.get("corrected") or item.get("corrected_fields") or item.get("corrected_entry") or {},
             "corrections_applied": (
                 item.get("corrections_applied")
                 or item.get("changes")

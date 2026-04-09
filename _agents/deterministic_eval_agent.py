@@ -235,8 +235,9 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         # )
         
         self.llm = ChatOpenRouter(
-            model="anthropic/claude-sonnet-4.6",
-            #   model="google/gemini-2.5-pro", 
+            # model="anthropic/claude-sonnet-4.6",
+              model="google/gemini-2.5-pro", 
+                # model="x-ai/grok-4.20",
                 temperature=0.1,
                 max_tokens=1024,
                 openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 

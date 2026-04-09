@@ -54,14 +54,26 @@ For each entry:
 3. Use your pre-trained knowledge to verify and refine corrections if needed.
 4. Generate the corrected BibTeX string.
 
-You MUST respond with valid JSON in EXACTLY this structure — no extra text:
+You MUST respond with valid JSON in EXACTLY this structure — no extra text.
+The `corrected_entries` array is mandatory. Do not return markdown only.
 ```json
 {
-  "markdown_summary": "<markdown correction report>",
+    "markdown_summary": "<brief markdown correction report>",
   "corrected_entries": [
     {
       "entry_id": "...",
       "corrected_bibtex": "@article{...}",
+            "corrected": {
+                "id": "...",
+                "type": "article",
+                "title": "...",
+                "author": "...",
+                "year": "...",
+                "journal": "...",
+                "booktitle": "...",
+                "publisher": "...",
+                "doi": "..."
+            },
       "corrections_applied": [
         {"field": "...", "original": "...", "corrected": "..."}
       ]
@@ -87,14 +99,26 @@ For each entry:
 5. Preserve fields that are already correct.
 6. Generate the corrected BibTeX string.
 
-You MUST respond with valid JSON in EXACTLY this structure — no extra text:
+You MUST respond with valid JSON in EXACTLY this structure — no extra text.
+The `corrected_entries` array is mandatory. Do not return markdown only.
 ```json
 {
-  "markdown_summary": "<markdown correction report>",
+    "markdown_summary": "<brief markdown correction report>",
   "corrected_entries": [
     {
       "entry_id": "...",
       "corrected_bibtex": "@article{...}",
+            "corrected": {
+                "id": "...",
+                "type": "article",
+                "title": "...",
+                "author": "...",
+                "year": "...",
+                "journal": "...",
+                "booktitle": "...",
+                "publisher": "...",
+                "doi": "..."
+            },
       "corrections_applied": [
         {"field": "...", "original": "...", "corrected": "..."}
       ]
@@ -124,14 +148,26 @@ Step 4 — Venue: Does journal/booktitle match? Apply validation suggestion if a
 Step 5 — Decision: Which additional fields need correction beyond validation suggestions?
          Only correct fields with clear evidence of error.
 
-Show your reasoning, then output valid JSON in EXACTLY this structure:
+Show your reasoning, then output valid JSON in EXACTLY this structure.
+The `corrected_entries` array is mandatory. Do not return markdown only.
 ```json
 {
-  "markdown_summary": "<markdown correction report including your reasoning>",
+    "markdown_summary": "<brief markdown correction report including your reasoning>",
   "corrected_entries": [
     {
       "entry_id": "...",
       "corrected_bibtex": "@article{...}",
+            "corrected": {
+                "id": "...",
+                "type": "article",
+                "title": "...",
+                "author": "...",
+                "year": "...",
+                "journal": "...",
+                "booktitle": "...",
+                "publisher": "...",
+                "doi": "..."
+            },
       "corrections_applied": [
         {"field": "...", "original": "...", "corrected": "..."}
       ]
@@ -206,12 +242,15 @@ class CorrectionAgent:
         # )
         
         self.llm = ChatOpenRouter(
-                model="anthropic/claude-sonnet-4.6",
-            #   model="google/gemini-2.5-pro", 
+                # model="anthropic/claude-sonnet-4.6",
+              model="google/gemini-2.5-pro", 
+                # model="x-ai/grok-4.20",
                 temperature=0.1,
-                max_tokens=1024,
+                # max_tokens=8192,
                 openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
         )
+        # Reduce truncation risk by splitting correction requests into smaller chunks.
+        self.correction_batch_size = 10
 
     # ── public ────────────────────────────────────────────────
 
@@ -357,12 +396,59 @@ class CorrectionAgent:
             HumanMessage(content=(
                 "Correct these BibTeX entries:\n\n"
                 f"```json\n{json.dumps(payload, indent=2, ensure_ascii=False)}\n```\n\n"
-                f"Validation context:\n{validation_context[:800]}"
+                f"Validation context:\n{validation_context[:800]}\n\n"
+                "IMPORTANT OUTPUT RULES:\n"
+                "1) Return valid JSON only.\n"
+                "2) Include corrected_entries for every entry_id in the input.\n"
+                "3) Keep markdown_summary short (max 6 lines, no long tables).\n"
+                "4) corrected_bibtex may be empty if corrected field dict is present."
             )),
         ]
         response = await _ainvoke_with_retry(self.llm, messages, attempts=4, base_delay=1.0)
         # update to use _extract_text for consistent response parsing across backends
         raw_text = _extract_text(response)
+
+        # If the model returned markdown-only or truncated JSON, do one strict repair pass.
+        preview_data = self._extract_json(raw_text)
+        _, preview_entries, _ = parse_correction_payload(preview_data)
+        if len(preview_entries) < len(correction_data):
+            print(
+                "  [DEBUG] Correction output incomplete "
+                f"({len(preview_entries)}/{len(correction_data)} entries). "
+                "Running strict JSON repair pass..."
+            )
+            repair_messages = [
+                SystemMessage(content=(
+                    "You are a JSON repair assistant. Output valid JSON only. "
+                    "No prose, no markdown fences."
+                )),
+                HumanMessage(content=(
+                    "Rewrite the correction output as valid JSON with this exact shape:\n"
+                    "{\n"
+                    "  \"markdown_summary\": \"...\",\n"
+                    "  \"corrected_entries\": [\n"
+                    "    {\n"
+                    "      \"entry_id\": \"...\",\n"
+                    "      \"corrected_bibtex\": \"...\",\n"
+                    "      \"corrected\": {\"id\": \"...\", \"type\": \"...\", \"title\": \"...\", \"author\": \"...\", \"year\": \"...\", \"journal\": \"...\", \"booktitle\": \"...\", \"publisher\": \"...\", \"doi\": \"...\"},\n"
+                    "      \"corrections_applied\": [{\"field\": \"...\", \"original\": \"...\", \"corrected\": \"...\"}]\n"
+                    "    }\n"
+                    "  ]\n"
+                    "}\n\n"
+                    f"Input payload entry count: {len(correction_data)}\n"
+                    "Use these exact entry_ids and include one corrected_entries item per id:\n"
+                    f"{json.dumps([d.get('entry_id') for d in correction_data], ensure_ascii=False)}\n\n"
+                    "Here is the original model output to repair:\n"
+                    f"{raw_text}"
+                )),
+            ]
+            repaired = await _ainvoke_with_retry(self.llm, repair_messages, attempts=2, base_delay=1.0)
+            repaired_text = _extract_text(repaired)
+            repaired_data = self._extract_json(repaired_text)
+            _, repaired_entries, _ = parse_correction_payload(repaired_data)
+            if len(repaired_entries) >= len(preview_entries):
+                raw_text = repaired_text
+
         return raw_text
 
     # ── private: response parsing ─────────────────────────────
@@ -423,6 +509,7 @@ class CorrectionAgent:
         markdown_report, llm_corrected, schema_errors = parse_correction_payload(llm_data)
         if schema_errors:
             print(f"  [DEBUG] Correction schema warnings: {len(schema_errors)}")
+        print(f"  [DEBUG] Parsed corrected entries: {len(llm_corrected)}")
 
         # Build lookup for original entries
         raw_map = {}
@@ -461,6 +548,7 @@ class CorrectionAgent:
                 "entry_id":        entry_id,
                 "original":        original,
                 "corrected_bibtex": corrected_bibtex,
+                "corrected":       corrected_fields,
             })
 
             corrections_list.append({

@@ -44,18 +44,18 @@ The validation agent is performing reasonably well overall, especially on the `i
 
 ### Interpretation
 
-- Precision is perfect because the few corrections that were applied were correct.
-- Recall is very low because the correction agent fixed only 4 of the 31 field-level errors that were available for correction.
-- The low F1 follows directly from that imbalance: the model is safe, but too conservative.
+- Precision is perfect (1.000), which means every applied correction in this run was correct.
+- Recall is low (0.129): only 4 out of 31 field-level errors were fixed, while 27 remained unresolved.
+- F1 is therefore low (0.229), reflecting strong correction reliability but weak correction coverage.
 
 ### Why Recall Is Still Low
 
 The main reason is coverage, not correctness.
 
-- The validation stage still misses many `partially_valid` cases, so the correction stage does not receive enough strong correction opportunities.
-- Even when validation flags an entry, the correction agent may only fix the most obvious fields and leave the rest unchanged.
-- Field-level evaluation is strict: every uncorrected wrong field counts as a false negative, so recall drops quickly when the model leaves many issues untouched.
+- The validation stage still misses many `partially_valid` cases, so the correction stage does not receive enough actionable correction opportunities.
+- Even when validation flags an entry, the correction agent may only fix obvious fields and leave secondary errors unchanged.
+- Field-level evaluation is strict: each uncorrected wrong field is counted as a false negative.
 
 ### Overall Takeaway
 
-This run shows a pipeline that is **highly precise but under-correcting**. The next improvement should focus on increasing correction coverage, especially for `partially_valid` entries, while keeping precision high.
+This run shows a pipeline that is **highly precise but under-correcting**. The next improvement should target correction coverage (recall) while preserving the current high precision.

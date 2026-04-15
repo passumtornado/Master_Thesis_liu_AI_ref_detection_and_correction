@@ -1,626 +1,177 @@
 [
   {
-    "key": "turing1936computable",
+    "key": "DBLP:journals/algorithms/HammadZOG25",
     "entry_type": "article",
     "fields": {
-      "author": "Turing, Alan M.",
-      "title": "On Computable Numbers, with an Application to the {Entscheidungsproblem}",
-      "journal": "Proceedings of the London Mathematical Society",
-      "volume": "42",
-      "number": "1",
-      "pages": "230--265",
-      "year": "1936",
-      "doi": "10.1112/plms/s2-42.1.230"
-    }
-  },
-  {
-    "key": "shannon1948mathematical",
-    "entry_type": "book",
-    "fields": {
-      "author": "Shannon, Claude E.",
-      "title": "A Mathematical Theory of Communication",
-      "publisher": "University of Illinois Press",
-      "year": "1948",
-      "doi": "10.1002/j.1538-7305.1948.tb01338.x"
-    }
-  },
-  {
-    "key": "mccarthy1956proposal",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "McCarthy, John and Minsky, Marvin L. and Rochester, Nathaniel and Shannon, Claude E.",
-      "title": "A Proposal for the {Dartmouth} Summer Research Project on Artificial Intelligence",
-      "booktitle": "Dartmouth Conference",
-      "year": "1956",
-      "doi": "10.5555/1123890.1123891"
-    }
-  },
-  {
-    "key": "perceptron1958",
-    "entry_type": "article",
-    "fields": {
-      "author": "Rosenblatt, Frank",
-      "title": "The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain",
-      "journal": "Psychological Review",
-      "volume": "65",
-      "number": "6",
-      "pages": "386--408",
-      "year": "1958",
-      "doi": "10.1037/h0042519"
-    }
-  },
-  {
-    "key": "minsky1969perceptrons",
-    "entry_type": "book",
-    "fields": {
-      "author": "Minsky, Marvin L. and Papert, Seymour A.",
-      "title": "Perceptrons: An Introduction to Computational Geometry",
-      "publisher": "{MIT} Press",
-      "year": "1969",
-      "doi": "10.7551/mitpress/11301.001.0001"
-    }
-  },
-  {
-    "key": "backprop1986",
-    "entry_type": "article",
-    "fields": {
-      "author": "Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.",
-      "title": "Learning Representations by Back-Propagating Errors",
-      "journal": "Nature",
-      "volume": "323",
-      "number": "6088",
-      "pages": "533--536",
-      "year": "1986",
-      "doi": "10.1038/323533a0"
-    }
-  },
-  {
-    "key": "lecun1989backprop",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "LeCun, Yann and Boser, Bernhard and Denker, John S. and Henderson, Donnie and Howard, Richard E. and Hubbard, Wayne and Jackel, Lawrence D.",
-      "title": "Backpropagation Applied to Handwritten Zip Code Recognition",
-      "booktitle": "Neural Computation",
-      "year": "1989",
-      "doi": "10.1162/neco.1989.1.4.541"
-    }
-  },
-  {
-    "key": "hinton2006fast",
-    "entry_type": "article",
-    "fields": {
-      "author": "Hinton, Geoffrey E. and Salakhutdinov, Ruslan R.",
-      "title": "Reducing the Dimensionality of Data with Neural Networks",
-      "journal": "Science",
-      "volume": "313",
-      "number": "5786",
-      "pages": "504--507",
-      "year": "2006",
-      "doi": "10.1126/science.1127647"
-    }
-  },
-  {
-    "key": "krizhevsky2012imagenet",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E.",
-      "title": "{ImageNet} Classification with Deep Convolutional Neural Networks",
-      "booktitle": "Advances in Neural Information Processing Systems ({NeurIPS})",
-      "volume": "25",
-      "pages": "1097--1105",
-      "year": "2012",
-      "doi": "10.1145/3065386"
-    }
-  },
-  {
-    "key": "vaswani2017attention",
-    "entry_type": "article",
-    "fields": {
-      "author": "Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\\L}ukasz and Polosukhin, Illia",
-      "title": "Attention Is All You Need",
-      "journal": "Advances in Neural Information Processing Systems",
-      "volume": "30",
-      "pages": "5998--6008",
-      "year": "2017",
-      "doi": "10.48550/arXiv.1706.03762"
-    }
-  },
-  {
-    "key": "bahdanau2015neural2",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Bahdanau, Dzmitry and Cho, Kyunghyun and Benjio, Yoshua",
-      "title": "Neural Machine Translation by Jointly Learning to Align and Translate",
-      "booktitle": "",
-      "year": "2015",
-      "doi": "10.48550/arXiv.1409.0473"
-    }
-  },
-  {
-    "key": "mnih2015human2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and others",
-      "title": "Human-level Control Through Deep Reinforcement Learning",
-      "journal": "Nature",
-      "volume": "518",
-      "number": "7540",
-      "pages": "529--533",
-      "year": "2016",
-      "doi": ""
-    }
-  },
-  {
-    "key": "hinton2006fast2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Hiton, Geoffrey E. and Salakhutdinov, Ruslan R.",
-      "title": "Reducing the Dimensionality of Data",
-      "journal": "Science",
-      "volume": "313",
-      "number": "5786",
-      "pages": "504--507",
-      "year": "2006",
-      "doi": "10.1126/science.1127647"
-    }
-  },
-  {
-    "key": "krizhevsky2012imagenet2",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E.",
-      "title": "{ImageNet} Classification with Deep Convolutional Neural Networks",
-      "booktitle": "European Conference on Computer Vision ({ECCV})",
-      "year": "2012",
-      "doi": "10.1145/3065386"
-    }
-  },
-  {
-    "key": "vaswani2017attention2",
-    "entry_type": "article",
-    "fields": {
-      "title": "Attention Is All You Need",
-      "journal": "Advances in Neural Information Processing Systems",
-      "volume": "30",
-      "pages": "5998--6008",
-      "year": "2017",
-      "doi": "10.48550/arXiv.1706.03762"
-    }
-  },
-  {
-    "key": "devlin2019bert2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina",
-      "title": "{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding",
-      "journal": "Proceedings of the {NAACL}",
-      "year": "2018",
-      "doi": "10.18653/v1/N19-1423"
-    }
-  },
-  {
-    "key": "goodfellow2016deep2",
-    "entry_type": "book",
-    "fields": {
-      "author": "Goodfellow, Ian and Bengio, Yoshua and Courville, Aaron",
-      "title": "Deep Learning",
-      "publisher": "",
-      "year": "2016",
-      "doi": "10.7551/mitpress/11490.001.0001"
-    }
-  },
-  {
-    "key": "kingma2014adam2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Kingma, D. P. and Ba, Jimmy",
-      "title": "Adam: A Method for Stochastic Optimization",
-      "journal": "Proceedings of the 3rd International Conference on Learning Representations ({ICLR})",
-      "year": "2014",
-      "doi": "10.48550/arXiv.1412.6980"
-    }
-  },
-  {
-    "key": "hochreiter1997long2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Hochreiter, Sepp and Schmidhuber, J{\\\"u}rgen",
-      "title": "Long Short-Term Memory",
-      "journal": "Neural Computation",
-      "year": "1997",
-      "doi": "10.1162/neco.1997.9.8.1735"
-    }
-  },
-  {
-    "key": "ioffe2015batch2",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Ioffe, Sergey and Szegedy, Christian",
-      "title": "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
-      "booktitle": "Proceedings of the 32nd International Conference on Machine Learning ({ICML})",
-      "year": "2015",
-      "doi": "10.5555/1234567"
-    }
-  },
-  {
-    "key": "mnih2015human3",
-    "entry_type": "article",
-    "fields": {
-      "author": "Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and others",
-      "title": "Human-level Control Through Deep Reinforcement Learning",
-      "journal": "Natur",
-      "volume": "518",
-      "number": "7540",
-      "pages": "529--533",
-      "year": "2015",
-      "doi": "10.1038/nature14236"
-    }
-  },
-  {
-    "key": "rumelhart1986learning2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Rumelhart, David E.",
-      "title": "Learning Representations by Back-Propagating Errors",
-      "journal": "Nature",
-      "volume": "323",
-      "number": "6088",
-      "pages": "533--536",
-      "year": "1986",
-      "doi": "10.1038/323533a0"
-    }
-  },
-  {
-    "key": "lecun1989backprop2",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "LeCun, Yann and Boser, Bernhard and Denker, John S. and Henderson, Donnie and Howard, Richard E. and Hubbard, Wayne and Jackel, Lawrence D.",
-      "title": "",
-      "booktitle": "Neural Computation",
-      "year": "1989",
-      "doi": "10.1162/neco.1989.1.4.541"
-    }
-  },
-  {
-    "key": "szegedy2015going2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Szegedy, Christian and Liu, Wei and Jia, Yangqing and Sermanet, Pierre and Reed, Scott and Anguelov, Dragomir and Erhan, Dumitru and Vanhoucke, Vincent and Rabinovich, Andrew",
-      "title": "Going Deeper with Convolutions",
-      "journal": "{CVPR}",
-      "year": "2099",
-      "doi": "10.1109/CVPR.2015.7298594"
-    }
-  },
-  {
-    "key": "simonyan2014very2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Simonyan, Karen and Zisserman, Andrew",
-      "title": "Very Deep Convolutional Networks for Large-Scale Image Recognition",
-      "journal": "Proceedings of the {ICLR} (this is a wrong venue)",
-      "year": "2014",
-      "doi": "10.48550/arXiv.1409.1556"
-    }
-  },
-  {
-    "key": "hochreiter1997long3",
-    "entry_type": "article",
-    "fields": {
-      "author": "Hochreiter-S, Sepp and Schmidhuber, J{\\\"u}rgen",
-      "title": "Long Short-Term Memory",
-      "journal": "Neural Computation",
-      "volume": "9",
-      "number": "8",
-      "pages": "1735--1780",
-      "year": "1997",
-      "doi": "10.1162/neco.1997.9.8.1735"
-    }
-  },
-  {
-    "key": "hebb1949organization2",
-    "entry_type": "book",
-    "fields": {
-      "author": "Hebb, Donald O.",
-      "title": "The Organization of Behavior: A Neuropsychological Theory",
-      "publisher": "",
-      "year": "1949",
-      "doi": "10.4324/9781410612403"
-    }
-  },
-  {
-    "key": "hopfield1982neural2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Hopfield, John J.",
-      "title": "Neural Networks and Physical Systems with Emergent Collective Computational Abilities",
-      "journal": "Proceedings of the National Academy of Sciences",
-      "volume": "79",
-      "number": "8",
-      "pages": "2554--2558",
-      "year": "1982",
-      "doi": "10.1073/pnas.79.8.2554"
-    }
-  },
-  {
-    "key": "ackley1985learning2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Ackley, David H. and Hinton, Geoffrey E. and Sejnowski, Terrence J.",
-      "title": "A Learning Algorithm for Boltzmann Machines",
-      "journal": "Cognitive Science",
-      "volume": "9",
-      "pages": "147--169",
-      "year": "1986",
-      "doi": "10.1207/s15516709cog0901_7"
-    }
-  },
-  {
-    "key": "lecun1998mnist2",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Lecun, Yann and Bottou, L{\\'e}on and Bengio, Yoshua and Haffner, Patrick",
-      "title": "Gradient-Based Learning Applied to Document Recognition",
-      "booktitle": "Proceedings of the {IEEE}",
-      "volume": "86",
-      "number": "11",
-      "pages": "2278--2324",
-      "year": "1998",
-      "doi": "10.1109/5.726791"
-    }
-  },
-  {
-    "key": "cortes1995support2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Cortes, Corinna and Vapnik, Vladimir",
-      "title": "Support-Vector",
-      "journal": "Machine Learning",
-      "volume": "20",
-      "number": "3",
-      "pages": "273--297",
-      "year": "1995",
-      "doi": "10.1007/BF00994018"
-    }
-  },
-  {
-    "key": "breiman2001random2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Breiman, Leo",
-      "title": "Random Forests",
-      "journal": "Mach. Learn.",
-      "volume": "45",
-      "number": "1",
-      "pages": "5--32",
-      "year": "2001",
-      "doi": ""
-    }
-  },
-  {
-    "key": "chen2016xgboost2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Chen, Tianqi and Guestrin, Carlos",
-      "title": "{XGBoost}: A Scalable Tree Boosting System",
-      "journal": "Proceedings of the 22nd {ACM} {SIGKDD} International Conference on Knowledge Discovery and Data Mining",
-      "pages": "785--794",
-      "year": "2015",
-      "doi": "10.1145/2939672.2939785"
-    }
-  },
-  {
-    "key": "ke2017lightgbm2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Guolin, Ke and Qi, Meng and Thomas, Finley and Taifeng, Wang and Wei, Chen and Weidong, Ma and Qiwei, Ye and Tie-Yan, Liu",
-      "title": "{LightGBM}: A Highly Efficient Gradient Boosting Decision Tree",
-      "journal": "Advances in Neural Information Processing Systems",
-      "volume": "30",
-      "pages": "3146--3254",
-      "year": "2017",
-      "doi": "10.5555/3294996.3295074"
-    }
-  },
-  {
-    "key": "prokhorenkova2018catboost2",
-    "entry_type": "article",
-    "fields": {
-      "author": "Prokhorenkova, Liudmila and Gusev, Gleb and Vorobev, Aleksandr and Dorogush, Anna Veronika and Gulin, Andrey",
-      "title": "{CatBoost}: Unbiased Boosting with Categorical Features",
-      "journal": "Advances in Neural Information Processing Systems",
-      "pages": "6638--6648",
-      "year": "2018",
-      "doi": "10.5555/3327757.3327770"
-    }
-  },
-  {
-    "key": "feigenbaum1985unified",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Feigenbaum, Edward A. and Turing, Alan M. and McCarthy, John",
-      "title": "Unified Theory of Artificial Minds: Bridging Symbolic and Subsymbolic {AI}",
-      "booktitle": "{AAAI} 1985 Workshop on Artificial General Intelligence",
-      "year": "1985",
-      "doi": "10.1234/aaai.agi.1985.7741",
-      "note": "INVALID: Author pairing includes Turing (died 1954) and McCarthy (born 1927) with Feigenbaum on a non-existent paper."
-    }
-  },
-  {
-    "key": "galton1889mental",
-    "entry_type": "article",
-    "fields": {
-      "author": "Galton, Francis and Turing, Alan M.",
-      "title": "Mental Inheritance and the Turing Test",
-      "journal": "Journal of Psychological Studies",
-      "volume": "1",
-      "pages": "1--10",
-      "year": "1889",
-      "doi": "10.1234/jps.1889.0001",
-      "note": "INVALID: Anachronistic — Turing (1912–1954) could not co-author with Galton (1822–1911) in 1889."
-    }
-  },
-  {
-    "key": "newell2025agi",
-    "entry_type": "article",
-    "fields": {
-      "author": "Newell, Allen and Simon, Herbert A.",
-      "title": "The Future of Artificial General Intelligence in 2025",
-      "journal": "{AI} Magazine",
-      "volume": "46",
-      "number": "1",
-      "pages": "1--15",
+      "author": "Ma'mon Abu Hammad and\n                  Imane Zouak and\n                  Adel Ouannas and\n                  Giuseppe Grassi",
+      "title": "Fractional Discrete Computer Virus System: Chaos and Complexity Algorithms",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "7",
+      "pages": "444",
       "year": "2025",
-      "doi": "10.1609/aimag.v46i1.12345",
-      "note": "INVALID: Future-dated — year 2025 has not yet occurred (dataset created in 2023/2024)."
+      "url": "https://doi.org/10.3390/a18070444",
+      "doi": "10.3390/A18070444",
+      "timestamp": "Tue, 30 Sep 2025 08:54:44 +0200",
+      "biburl": "https://dblp.org/rec/journals/algorithms/HammadZOG25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "hopper1999neural",
+    "key": "DBLP:conf/acmrep/ZhengS24",
     "entry_type": "inproceedings",
     "fields": {
-      "author": "Hopper, Grace and Lovelace, Ada",
-      "title": "Neural Networks in Early Computing",
-      "booktitle": "Proceedings of the {IEEE} History of Computing",
-      "year": "1999",
-      "doi": "10.1109/HOC.1999.1234567",
-      "note": "INVALID: Lovelace died in 1852, Hopper died in 1992 — cannot co-author in 1999."
+      "author": "Yantong Zheng and\n                  Victoria Stodden",
+      "title": "The Idealized Machine Learning Pipeline {(IMLP)} for Advancing Reproducibility\n                  in Machine Learning",
+      "booktitle": "Proceedings of the 2nd {ACM} Conference on Reproducibility and Replicability,\n                  {ACM} {REP} 2024, Rennes, France, June 18-20, 2024",
+      "publisher": "{ACM}",
+      "year": "2024",
+      "url": "https://doi.org/10.1145/3641525.3663630",
+      "doi": "10.1145/3641525.3663630",
+      "timestamp": "Sun, 19 Jan 2025 13:40:30 +0100",
+      "biburl": "https://dblp.org/rec/conf/acmrep/ZhengS24.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "hallucinated2020",
+    "key": "DBLP:journals/algorithms/BoiangiuVSTV25",
     "entry_type": "article",
     "fields": {
-      "author": "Fake, Author and Nonexistent, Researcher",
-      "title": "Completely Fabricated Deep Learning Breakthrough",
-      "journal": "Journal of Nonexistent Research",
-      "volume": "99",
-      "pages": "1--100",
-      "year": "2020",
-      "doi": "10.5555/12345678",
-      "note": "INVALID: Entirely hallucinated — authors, journal, and DOI do not exist."
+      "author": "Costin{-}Anton Boiangiu and\n                  Giorgiana Violeta Vlasceanu and\n                  Constantin{-}Eduard Staniloiu and\n                  Nicolae Tarba and\n                  Mihai{-}Lucian Voncila",
+      "title": "A Novel Connected-Components Algorithm for 2D Binarized Images",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "6",
+      "pages": "344",
+      "year": "2025",
+      "url": "https://doi.org/10.3390/a18060344",
+      "doi": "10.3390/A18060344",
+      "timestamp": "Tue, 30 Sep 2025 08:54:43 +0200",
+      "biburl": "https://dblp.org/rec/journals/algorithms/BoiangiuVSTV25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "arxiv9999",
+    "key": "DBLP:journals/access/VillegasChGS24a",
     "entry_type": "article",
     "fields": {
-      "author": "Smith, John and Doe, Jane",
-      "title": "Impossible {arXiv} Paper",
-      "journal": "arXiv preprint",
-      "year": "2023",
-      "doi": "10.48550/arXiv.9999.99999",
-      "note": "INVALID: Non-existent arXiv ID (arXiv:9999.99999 is not a valid identifier)."
-    }
-  },
-  {
-    "key": "retracted2015",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Lee, Young and Kim, Jae",
-      "title": "A Retracted Study on Deep Learning",
-      "booktitle": "Proceedings of the {ICLR} (Retracted)",
-      "year": "2015",
-      "doi": "10.1234/retracted.2015.001",
-      "note": "INVALID: This paper was retracted from ICLR 2015 and removed from all databases."
-    }
-  },
-  {
-    "key": "anachronistic1940",
-    "entry_type": "book",
-    "fields": {
-      "author": "Einstein, Albert and Turing, Alan M.",
-      "title": "Quantum Neural Networks: A 21st Century Perspective",
-      "publisher": "Future Publishing",
-      "year": "1940",
-      "doi": "10.1234/qnn.1940.0001",
-      "note": "INVALID: Anachronistic — discusses neural networks and quantum computing concepts not existing in 1940."
-    }
-  },
-  {
-    "key": "nonexistent_journal",
-    "entry_type": "article",
-    "fields": {
-      "author": "Brown, Robert",
-      "title": "Non-Existent Journal Article",
-      "journal": "International Journal of Imaginary Science",
+      "author": "William Eduardo Villegas{-}Ch. and\n                  Joselin Garc{\\'{\\i}}a{-}Ortiz and\n                  Santiago S{\\'{a}}nchez{-}Viteri",
+      "title": "Personalization of Learning: Machine Learning Models for Adapting\n                  Educational Content to Individual Learning Styles",
+      "journal": "{IEEE} Access",
       "volume": "12",
-      "pages": "1--5",
-      "year": "2018",
-      "doi": "10.1234/ijis.2018.0001",
-      "note": "INVALID: Journal \"International Journal of Imaginary Science\" does not exist."
+      "pages": "121114--121130",
+      "year": "2024",
+      "url": "https://doi.org/10.1109/ACCESS.2024.3452592",
+      "doi": "10.1109/ACCESS.2024.3452592",
+      "timestamp": "Thu, 03 Oct 2024 00:45:22 +0200",
+      "biburl": "https://dblp.org/rec/journals/access/VillegasChGS24a.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "dead_conference",
+    "key": "DBLP:journals/cluster/ChenLL25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Jingrong Chen and\n                  Yange Li and\n                  Xue Li",
+      "title": "3-Path Vertex Cover Problem based on the Variable Neighborhood Search\n                  algorithm and the Artificial Bee Colony algorithm",
+      "journal": "Clust. Comput.",
+      "volume": "28",
+      "number": "16",
+      "pages": "1015",
+      "year": "2025",
+      "url": "https://doi.org/10.1007/s10586-025-05713-2",
+      "doi": "10.1007/S10586-025-05713-2",
+      "timestamp": "Sat, 15 Nov 2025 13:51:18 +0100",
+      "biburl": "https://dblp.org/rec/journals/cluster/ChenLL25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/algorithms/Dronyuk25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Ivanna Dronyuk",
+      "title": "Algorithms for Calculating Generalized Trigonometric Functions",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "2",
+      "pages": "60",
+      "year": "2025",
+      "url": "https://doi.org/10.3390/a18020060",
+      "doi": "10.3390/A18020060",
+      "timestamp": "Tue, 30 Sep 2025 08:54:39 +0200",
+      "biburl": "https://dblp.org/rec/journals/algorithms/Dronyuk25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:conf/ei-mlsi/GuoSBGVLAL22",
     "entry_type": "inproceedings",
     "fields": {
-      "author": "Williams, Sarah",
-      "title": "Paper at a Conference That Never Happened",
-      "booktitle": "World {AI} Summit 2099",
-      "year": "2099",
-      "doi": "10.1234/wais.2099.001",
-      "note": "INVALID: Conference year 2099 is in the future."
-    }
-  },
-  {
-    "key": "impossible_author_pair",
-    "entry_type": "article",
-    "fields": {
-      "author": "Newton, Isaac and Musk, Elon",
-      "title": "Gravity and Electric Vehicles: A Unified Theory",
-      "journal": "Physics Review Letters",
-      "year": "2021",
-      "doi": "10.1103/PhysRevLett.126.123456",
-      "note": "INVALID: Isaac Newton died in 1727, cannot co-author with Elon Musk in 2021."
-    }
-  },
-  {
-    "key": "hallucinated_techreport",
-    "entry_type": "misc",
-    "fields": {
-      "author": "OpenAI",
-      "title": "{GPT-10}: A 1000-Trillion Parameter Language Model",
-      "year": "2030",
-      "note": "INVALID: GPT-10 does not exist (GPT-4 is latest as of 2023); future year."
-    }
-  },
-  {
-    "key": "retracted_arxiv",
-    "entry_type": "article",
-    "fields": {
-      "author": "Zhang, Wei",
-      "title": "Retracted {arXiv} Paper on {GAN} Stability",
-      "journal": "arXiv preprint",
-      "year": "2020",
-      "doi": "10.48550/arXiv.2001.12345",
-      "note": "INVALID: arXiv:2001.12345 was retracted and removed from arXiv."
-    }
-  },
-  {
-    "key": "future_proceedings",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Future, Author",
-      "title": "Proceedings from the Year 2100",
-      "booktitle": "Proceedings of the 2100 {NeurIPS}",
-      "year": "2100",
-      "doi": "10.1234/nips.2100.001",
-      "note": "INVALID: Year 2100 is far in the future."
-    }
-  },
-  {
-    "key": "impossible_doi",
-    "entry_type": "article",
-    "fields": {
-      "author": "Fabricated, Name",
-      "title": "Paper with Fake {DOI}",
-      "journal": "Fake Journal",
-      "volume": "1",
-      "pages": "1",
+      "author": "Zhen Guo and\n                  Jung Ki Song and\n                  George Barbastathis and\n                  Michael E. Glinsky and\n                  Courtenay T. Vaughan and\n                  Kurt W. Larson and\n                  Bradley K. Alpert and\n                  Zachary H. Levine",
+      "editor": "Marc Louis Klasky and\n                  Jong Chul Ye",
+      "title": "Advantage of Machine Learning over Maximum Likelihood in Limited-Angle\n                  Low-Photon X-Ray Tomography",
+      "booktitle": "Machine Learning for Scientific Imaging 2022, online, January 15-26,\n                  2022",
+      "pages": "1--6",
+      "publisher": "Society for Imaging Science and Technology",
       "year": "2022",
-      "doi": "10.5555/abcde",
-      "note": "INVALID: DOI 10.5555/abcde does not conform to any known prefix."
+      "url": "https://doi.org/10.2352/EI.2022.34.5.MLSI-202",
+      "doi": "10.2352/EI.2022.34.5.MLSI-202",
+      "timestamp": "Mon, 28 Aug 2023 21:17:52 +0200",
+      "biburl": "https://dblp.org/rec/conf/ei-mlsi/GuoSBGVLAL22.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:conf/iccai/TangZ22",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Junfei Tang and\n                  Luming Zhang",
+      "title": "An Adaptive Feature Recognition Algorithm and Its Hardware Accelerator\n                  for Arc Fault Recognition: The hardware accelerator of the algorithm\n                  is improved from the discrete wavelet transform algorithm and is used\n                  for power grid arc fault detection",
+      "booktitle": "{ICCAI} '22: 8th International Conference on Computing and Artificial\n                  Intelligence, Tianjin, China, March 18 - 21, 2022",
+      "pages": "375--379",
+      "publisher": "{ACM}",
+      "year": "2022",
+      "url": "https://doi.org/10.1145/3532213.3532269",
+      "doi": "10.1145/3532213.3532269",
+      "timestamp": "Sun, 19 Jan 2025 13:35:56 +0100",
+      "biburl": "https://dblp.org/rec/conf/iccai/TangZ22.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:conf/iscas/0002YCC25",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Jun Qi and\n                  Chao{-}Han Huck Yang and\n                  Samuel Yen{-}Chi Chen and\n                  Pin{-}Yu Chen",
+      "title": "Quantum Machine Learning: An Interplay Between Quantum Computing and\n                  Machine Learning",
+      "booktitle": "{IEEE} International Symposium on Circuits and Systems, {ISCAS} 2025,\n                  London, United Kingdom, May 25-28, 2025",
+      "pages": "1--5",
+      "publisher": "{IEEE}",
+      "year": "2025",
+      "url": "https://doi.org/10.1109/ISCAS56072.2025.11043890",
+      "doi": "10.1109/ISCAS56072.2025.11043890",
+      "timestamp": "Sun, 02 Nov 2025 21:27:44 +0100",
+      "biburl": "https://dblp.org/rec/conf/iscas/0002YCC25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/algorithms/FengL25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Yuming Feng and\n                  Violeta Leoreanu{-}Fotea",
+      "title": "Algorithm for Determining the Strong Fuzzy Grade of a Hypergroup",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "9",
+      "pages": "540",
+      "year": "2025",
+      "url": "https://doi.org/10.3390/a18090540",
+      "doi": "10.3390/A18090540",
+      "timestamp": "Fri, 31 Oct 2025 14:41:58 +0100",
+      "biburl": "https://dblp.org/rec/journals/algorithms/FengL25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   }
 ]

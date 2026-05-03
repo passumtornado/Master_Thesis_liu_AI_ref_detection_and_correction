@@ -1,0 +1,877 @@
+[
+  {
+    "entry_id": "DBLP:journals/access/VillegasChGS24a",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/cluster/ChenLL25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/ZuoFLLZZ25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/jais/PumplunPGB23",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/bigdataconf/ZhengSCKPSMFK24",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/MariettouKT25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/ZhaoTMSL25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/Wallace23",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/ir/HuXWYZG25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/ijhci/HuW24",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/LoudikiK25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/ijmms/VicenteMFC25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/iet-qtc/DharaAR25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/fdata/QayyumIUIQEA20",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/dmaa/OzgurUTK25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/access/CapogrossoCCFC24",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/fat/Benbouzid23",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/aaaiss/000321",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/cais/KuhlHBSS21",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/jss/NtentosWZ25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/bib/ShenHWZZWYXCH21",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/access/EssaCH23",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/cor/LiuHWGZZ25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/tnn/PuYZ17",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/biodb/HeithoffTLBGFDP19",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/biodb/NecciPT18",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "church1936unsolvable",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Church, Alonzo",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "345--363",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "An Unsolvable Problem of Elementary Number Theory",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1936",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "newell1956logic",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Newell, Allen and Shaw, J. C. and Simon, Herbert A.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1109/TIT.1956.1056797",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "{IRE} Transactions on Information Theory",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "3",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "230--256",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "The Logic Theory Machine: A Complex Information Processing System",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "2",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1956",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "hochreiter1997long",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Hochreiter, Sepp and Schmidhuber, J{\\\"u}rgen",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1162/neco.1997.9.8.1735",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Neural Computation",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "8",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "1735--1780",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Long Short-Term Memory",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "9",
+        "corruption_type": "field_corruption"
+      }
+    ]
+  },
+  {
+    "entry_id": "lafferty2001conditional",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Lafferty, John D. and McCallum, Andrew and Pereira, Fernando C. N.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Proceedings of the 18th International Conference on Machine Learning",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "11--290",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Conditional Random Fields: Probabilistic Models for Segmenting and Labeling Sequence Data",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2001",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "och2002discriminative",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Och, Franz Josef and Ney, Hermann",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "{ACL} '02",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.3115/1073083.1073133",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "295--302",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Discriminative Training and Maximum Entropy Models for Statistical Machine Translation",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2002",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "berger1996maximum",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Berger, Adam L. and Pietra, Vincent J. Della and Pietra, Stephen A. Della",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Computational Linguistics and Computationnal Linguistics Applications",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "39--71",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Maximum Entropy Approach to Natural Language Processing",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "22",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1996",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "goodfellow2014generative",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Goodfellow, Ian J. and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Advances in Neural Information Processing Systems",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "2672--2680",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Generative Adversarial Nets",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2013",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "vaswani2017attention",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "archiveprefix",
+        "original_correct_value": "",
+        "corrupted_value": "arXiv",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, {\\L}ukasz and Polosukhin, Illia",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.48055/arXiv.1706.03762",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "eprint",
+        "original_correct_value": "",
+        "corrupted_value": "1706.03762",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Attention Is All You Need",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2017",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "brown2020language",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Brown, Tom B. and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and Agarwal, Sandhini and Herbert-Voss, Ariel and Krueger, Gretchen and Henighan, Tom and Child, Rewon and Ramesh, Aditya and Ziegler, Daniel M. and Wu, Jeffrey and Winter, Clemens and Hesse, Christopher and Chen, Mark and Sigler, Eric and Litwin, Mateusz and Gray, Scott and Chess, Benjamin and Clark, Jack and Berner, Christopher and McCandlish, Sam and Radford, Alec and Sutskever, Ilya and Amodei, Dario",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Advances in Neural Information Processing Systems",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Language Models are Few-Shot Learners",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "53",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2020",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "brown2020gpt3arxiv",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "archiveprefix",
+        "original_correct_value": "",
+        "corrupted_value": "arXiv",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Brown, Tom B. and others",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "eprint",
+        "original_correct_value": "",
+        "corrupted_value": "2005.1416",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "primaryclass",
+        "original_correct_value": "",
+        "corrupted_value": "cs.CL",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Language Models are Few-Shot Learners",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2020",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "ouyang2022training",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Ouyang, Long and Wu, Jeffrey and Jiang, Xu and Almeida, Diogo and Wainwright, Carroll L. and Mishkin, Pamela and Zhang, Chong and Agarwal, Sandhini and Slama, Katarina and Ray, Alex and Schulman, John and Hilton, Jacob and Kelton, Fraser and Miller, Luke and Simens, Maddie and Askell, Amanda and Welinder, Peter and Christiano, Paul and Leike, Jan and Lowe, Ryan",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Advances in Neural Information Processing Systems",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "pp. 27730--27744",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Training Language Models to Follow Instructions with Human Feedback",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2022",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "schulhoff2024prompt",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "archiveprefix",
+        "original_correct_value": "",
+        "corrupted_value": "arXiv",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Schulhoff, Sander and Ilie, Michael and Balepur, Nishant and Kahadze, Konstantine and Liu, Amanda and Si, Chenglei and Li, Yinheng and Gupta, Aayush and Han, HyoJung",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "eprint",
+        "original_correct_value": "",
+        "corrupted_value": "2406.066081",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "primaryclass",
+        "original_correct_value": "",
+        "corrupted_value": "cs.CL",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "The Prompt Report: A Systematic Survey of Prompting Techniques",
+        "corruption_type": "title_mutation"
+      }
+    ]
+  },
+  {
+    "entry_id": "huang2025hallucination",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Huang, Lei and Yu, Weijiang and Ma, Weitao and Zhong, Weihong and Feng, Zhangyin and Wang, Haotian and Chen, Qianglong and Peng, Weihua and Feng, Xiaocheng and Qin, Bing and Liu, Ting",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1145/3703155",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "ACM Transactions on Information Systems",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "1--55",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "publisher",
+        "original_correct_value": "",
+        "corrupted_value": "Springer",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "43",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2025",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "ley2002dblp",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Ley, Michael",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1007/3-540-45735-6_1",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "String Processing and Information Retrieval",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "1--10",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "The dblp computer science bibliography: Evolution, research issues, perspectives",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2002",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "plaat2025agentic",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Plaat, Aske and others",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "eprint",
+        "original_correct_value": "",
+        "corrupted_value": "2503.23037",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Agentic Large Language Models: A Survey",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2025",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "kojima2022zeroshot",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Kojima, Takeshi and Gu, Shixiang Shane and Reid, Machel and Matsuo, Yutaka and Iwasawa, Yusuke",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Large Language Models are Zero-Shot Reasoners",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2023",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "du2026memory",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Du, Pengfei",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "arXiv:2603.07670",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "arXiv preprint",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Memory for Autonomous {LLM} Agents: Mechanisms, Evaluation, and Emerging Frontiers",
+        "corruption_type": "title_mutation"
+      }
+    ]
+  },
+  {
+    "entry_id": "johnson2023selfaware",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "boole1948neural",
+    "entry_type": "book",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "chen2099multiagent",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "martinez2087consciousness",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "lovelace1843turing",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "orwell1984neuralnet",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "curie1981radioactive",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  }
+]

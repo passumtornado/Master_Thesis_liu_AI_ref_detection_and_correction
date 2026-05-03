@@ -26,6 +26,7 @@ import os
 import re
 import sys
 from collections import defaultdict
+from collections import Counter
 from enum import Enum
 from pathlib import Path
 
@@ -92,6 +93,157 @@ def _fields_match(corrected: str, expected: str) -> bool:
     overlap = len(c_tokens & e_tokens) / len(e_tokens)
     return overlap >= 0.80
 
+
+def _safe_prf(tp: int, fp: int, fn: int) -> tuple[float | None, float | None, float | None]:
+    precision = tp / (tp + fp) if (tp + fp) > 0 else None
+    recall = tp / (tp + fn) if (tp + fn) > 0 else None
+    if precision is None or recall is None or (precision + recall) <= 0:
+        return precision, recall, None
+    return precision, recall, 2 * precision * recall / (precision + recall)
+
+
+def _compute_validation_classification_metrics(
+    validation_structured: list[dict],
+    gt_map: dict[str, dict],
+) -> dict:
+    """Compute one clear validation metric set (accuracy/precision/recall/f1)."""
+    pred_map: dict[str, str] = {}
+    for item in validation_structured:
+        if not isinstance(item, dict):
+            continue
+        entry_id = item.get("entry_id")
+        status = item.get("status")
+        if isinstance(entry_id, str) and isinstance(status, str):
+            pred_map[entry_id] = status
+
+    common_ids = sorted(set(gt_map.keys()) & set(pred_map.keys()))
+    if not common_ids:
+        return {
+            "support": {
+                "ground_truth_entries": len(gt_map),
+                "predicted_entries": len(pred_map),
+                "matched_entries": 0,
+                "coverage_vs_ground_truth": 0.0,
+            },
+            "overall": {
+                "accuracy": 0.0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "true_positives": 0,
+                "false_positives": 0,
+                "false_negatives": 0,
+            },
+            "per_class": {
+                class_name: {
+                    "count": 0,
+                    "true_positives": 0,
+                    "false_positives": 0,
+                    "false_negatives": 0,
+                    "precision": None,
+                    "recall": None,
+                    "f1": None,
+                }
+                for class_name in ["valid", "partially_valid", "invalid"]
+            },
+            "class_distribution_truth": {},
+            "class_distribution_pred": {},
+        }
+
+    tp = sum(
+        1
+        for entry_id in common_ids
+        if gt_map.get(entry_id, {}).get("expected_status") == pred_map.get(entry_id)
+    )
+    errors = len(common_ids) - tp
+    precision = tp / (tp + errors) if (tp + errors) > 0 else 0.0
+    recall = tp / (tp + errors) if (tp + errors) > 0 else 0.0
+    f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
+    accuracy = tp / len(common_ids) if common_ids else 0.0
+
+    per_class: dict[str, dict] = {}
+    for class_name in ["valid", "partially_valid", "invalid"]:
+        class_tp = sum(
+            1
+            for entry_id in common_ids
+            if gt_map.get(entry_id, {}).get("expected_status") == class_name
+            and pred_map.get(entry_id) == class_name
+        )
+        class_fp = sum(
+            1
+            for entry_id in common_ids
+            if gt_map.get(entry_id, {}).get("expected_status") != class_name
+            and pred_map.get(entry_id) == class_name
+        )
+        class_fn = sum(
+            1
+            for entry_id in common_ids
+            if gt_map.get(entry_id, {}).get("expected_status") == class_name
+            and pred_map.get(entry_id) != class_name
+        )
+        class_count = sum(
+            1
+            for entry_id in common_ids
+            if gt_map.get(entry_id, {}).get("expected_status") == class_name
+        )
+        class_precision, class_recall, class_f1 = _safe_prf(class_tp, class_fp, class_fn)
+        per_class[class_name] = {
+            "count": int(class_count),
+            "true_positives": int(class_tp),
+            "false_positives": int(class_fp),
+            "false_negatives": int(class_fn),
+            "precision": round(class_precision, 3) if class_precision is not None else None,
+            "recall": round(class_recall, 3) if class_recall is not None else None,
+            "f1": round(class_f1, 3) if class_f1 is not None else None,
+        }
+
+    return {
+        "support": {
+            "ground_truth_entries": len(gt_map),
+            "predicted_entries": len(pred_map),
+            "matched_entries": len(common_ids),
+            "coverage_vs_ground_truth": round(len(common_ids) / len(gt_map), 3) if gt_map else 0.0,
+        },
+        "overall": {
+            "accuracy": round(accuracy, 3),
+            "precision": round(precision, 3),
+            "recall": round(recall, 3),
+            "f1": round(f1, 3),
+            "true_positives": int(tp),
+            "false_positives": int(errors),
+            "false_negatives": int(errors),
+        },
+        "per_class": per_class,
+        "class_distribution_truth": dict(Counter(gt_map[eid].get("expected_status", "unknown") for eid in common_ids)),
+        "class_distribution_pred": dict(Counter(pred_map[eid] for eid in common_ids)),
+    }
+
+
+def _compute_entry_type_statistics(raw_map: dict[str, dict], gt_map: dict[str, dict]) -> dict:
+    """Count evaluated entries by BibTeX entry type and validation status."""
+    stats: dict[str, dict[str, int]] = {}
+
+    for entry_id, raw_item in raw_map.items():
+        if entry_id not in gt_map:
+            continue
+
+        entry = raw_item.get("entry", {}) if isinstance(raw_item, dict) else {}
+        entry_type = str(entry.get("type", "unknown") or "unknown").lower()
+        expected_status = str(gt_map.get(entry_id, {}).get("expected_status", "unknown") or "unknown").lower()
+
+        if entry_type not in stats:
+            stats[entry_type] = {
+                "count": 0,
+                "valid": 0,
+                "partially_valid": 0,
+                "invalid": 0,
+            }
+
+        stats[entry_type]["count"] += 1
+        if expected_status in ("valid", "partially_valid", "invalid"):
+            stats[entry_type][expected_status] += 1
+
+    return dict(sorted(stats.items()))
 
 # ─────────────────────────────────────────────────────────────
 # Prompt Strategy
@@ -192,6 +344,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
     "<field_name>": {
       "errors_in_original": <int>,
       "errors_corrected":   <int>,
+        if entry_type not in stats:
       "false_corrections":  <int>,
       "accuracy":           <float 0-1, 3 decimal places>
     }
@@ -201,6 +354,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
 """
 
     def __init__(
+
         self,
         output_dir: str = "evaluation",
         strategy: PromptStrategy = PromptStrategy.RAG,
@@ -219,14 +373,14 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         # )
 
         # Ollama backend — uncomment to switch
-        # self.llm = ChatOllama(
-        #     model="qwen3-coder:480b-cloud",
-        #     base_url="https://ollama.com",
-        #     temperature=0.1,
-        #     client_kwargs={
-        #         "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-        #     },
-        # )
+        self.llm = ChatOllama(
+            model="qwen3-coder:480b-cloud",
+            base_url="https://ollama.com",
+            temperature=0.1,
+            client_kwargs={
+                "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+            },
+        )
         # OpenAI backend (uncomment to switch)
         # self.llm = ChatOpenAI(
         #     model="gpt-5.2",
@@ -234,19 +388,24 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         #     openai_api_key=os.getenv("OPENAI_API_KEY"),
         # )
         
-        self.llm = ChatOpenRouter(
-            # model="anthropic/claude-sonnet-4.6",
-              model="google/gemini-2.5-pro", 
-                # model="x-ai/grok-4.20",
-                temperature=0.1,
-                max_tokens=1024,
-                openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
-        )
+        # self.llm = ChatOpenRouter(
+        #     # model="anthropic/claude-sonnet-4.6",
+        #     #   model="google/gemini-2.5-pro", 
+        #     model ="openai/gpt-5.4",
+        #         # model="x-ai/grok-4.20",
+        #         temperature=0.1,
+        #         openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
+        # )
 
 
     # ── public ────────────────────────────────────────────────
 
-    async def evaluate(self, raw_data: list[dict], corrections: list[dict]) -> dict:
+    async def evaluate(
+        self,
+        raw_data: list[dict],
+        corrections: list[dict],
+        validation_structured: list[dict] | None = None,
+    ) -> dict:
         """
         Main entry point.
 
@@ -262,7 +421,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         print(f"{'='*60}\n")
 
         if self.ground_truth_path:
-            return await self._evaluate_deterministic(raw_data, corrections)
+            return await self._evaluate_deterministic(raw_data, corrections, validation_structured or [])
         else:
             return await self._evaluate_legacy(raw_data, corrections)
 
@@ -271,7 +430,10 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
     # ─────────────────────────────────────────────────────────
 
     async def _evaluate_deterministic(
-        self, raw_data: list[dict], corrections: list[dict]
+        self,
+        raw_data: list[dict],
+        corrections: list[dict],
+        validation_structured: list[dict],
     ) -> dict:
         """
         Compute TP/FP/FN in Python using ground_truth.json.
@@ -298,12 +460,38 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         print(f"  Correction entries   : {len(corr_map)}")
         print(f"  Raw data entries     : {len(raw_map)}")
 
+        validation_metrics = _compute_validation_classification_metrics(
+            validation_structured=validation_structured,
+            gt_map=gt_map,
+        )
+        entry_type_statistics = _compute_entry_type_statistics(raw_map=raw_map, gt_map=gt_map)
+
+        pred_map: dict[str, str] = {}
+        for item in validation_structured:
+            if not isinstance(item, dict):
+                continue
+            entry_id = item.get("entry_id")
+            status = item.get("status")
+            if isinstance(entry_id, str) and isinstance(status, str):
+                pred_map[entry_id] = status
+
+        eligible_partially_valid_ids = {
+            entry_id
+            for entry_id, gt in gt_map.items()
+            if gt.get("expected_status") == "partially_valid"
+            and pred_map.get(entry_id) == "partially_valid"
+        }
+
+        print(f"  Eligible partially_valid entries (correctly classified): {len(eligible_partially_valid_ids)}")
+
         # ── Deterministic metric computation ──────────────────
         TP = FP = FN = 0
         field_counts   = defaultdict(lambda: {"TP": 0, "FP": 0, "FN": 0})
         detailed       = []
 
         for entry_id, gt in gt_map.items():
+            if entry_id not in eligible_partially_valid_ids:
+                continue
             corruption_list = gt.get("corruptions", [])
             correction      = corr_map.get(entry_id, {})
             corrected_fields = correction.get("corrected", {})
@@ -376,6 +564,10 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
             "recall":          round(recall, 3),
             "precision":       round(precision, 3),
             "f1":              round(f1, 3),
+            "scope": {
+                "total_partially_valid_ground_truth": int(sum(1 for g in gt_map.values() if g.get("expected_status") == "partially_valid")),
+                "correctly_identified_partially_valid": int(len(eligible_partially_valid_ids)),
+            },
         }
 
         # ── Build field-level accuracy ────────────────────────
@@ -400,18 +592,29 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
 
         # ── LLM writes the narrative report ───────────────────
         markdown_report = await self._generate_report(
-            overall_metrics, field_accuracy, detailed
+            overall_metrics,
+            field_accuracy,
+            detailed,
+            validation_metrics,
+            entry_type_statistics,
         )
 
         # ── Save everything ───────────────────────────────────
         saved_files = self._save_outputs(
-            overall_metrics, field_accuracy, markdown_report, detailed
+            overall_metrics,
+            field_accuracy,
+            markdown_report,
+            detailed,
+            validation_metrics,
+            entry_type_statistics,
         )
 
         return {
             "strategy":        self.strategy.value,
+            "validation_metrics": validation_metrics,
             "overall_metrics": overall_metrics,
             "field_accuracy":  field_accuracy,
+            "entry_type_statistics": entry_type_statistics,
             "markdown_report": markdown_report,
             "saved_files":     saved_files,
         }
@@ -421,35 +624,98 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         overall_metrics: dict,
         field_accuracy: dict,
         detailed: list[dict],
+        validation_metrics: dict,
+        entry_type_statistics: dict,
     ) -> str:
-        """Ask LLM to write a narrative markdown report from pre-computed numbers."""
-        payload = {
-            "overall_metrics": overall_metrics,
-            "field_accuracy":  field_accuracy,
-            "detailed_results": detailed[:30],  # limit to avoid token overflow
-        }
-
-        messages = [
-            SystemMessage(content=self.REPORT_SYSTEM_PROMPT),
-            HumanMessage(content=(
-                "Here are the pre-computed evaluation results. "
-                "Write the markdown report:\n\n"
-                f"```json\n{json.dumps(payload, indent=2, ensure_ascii=False)}\n```"
-            )),
-        ]
-
-        try:
-            response = await _ainvoke_with_retry(self.llm, messages, attempts=4, base_delay=1.0)
-            return _extract_text(response)
-        except Exception as e:
-            print(f"  ⚠ LLM report generation failed: {e}")
-            return self._fallback_report(overall_metrics, field_accuracy)
+        """Build the markdown report from the computed metrics."""
+        return self._build_report_markdown(
+            validation_metrics=validation_metrics,
+            overall_metrics=overall_metrics,
+            field_accuracy=field_accuracy,
+            entry_type_statistics=entry_type_statistics,
+            detailed=detailed,
+        )
 
     @staticmethod
-    def _fallback_report(overall_metrics: dict, field_accuracy: dict) -> str:
+    def _fallback_report(
+        validation_metrics: dict,
+        overall_metrics: dict,
+        field_accuracy: dict,
+        entry_type_statistics: dict | None = None,
+    ) -> str:
         """Generate a basic markdown report without the LLM."""
-        m   = overall_metrics
-        md  = "# Evaluation Report\n\n"
+        return EvaluationAgent._build_report_markdown(
+            validation_metrics=validation_metrics,
+            overall_metrics=overall_metrics,
+            field_accuracy=field_accuracy,
+            entry_type_statistics=entry_type_statistics or {},
+            detailed=[],
+        )
+
+    @staticmethod
+    def _build_report_markdown(
+        validation_metrics: dict,
+        overall_metrics: dict,
+        field_accuracy: dict,
+        entry_type_statistics: dict,
+        detailed: list[dict],
+    ) -> str:
+        """Render a complete markdown report with validation, correction, and entry-type tables."""
+        v = validation_metrics.get("overall", {}) if isinstance(validation_metrics, dict) else {}
+        support = validation_metrics.get("support", {}) if isinstance(validation_metrics, dict) else {}
+        per_class = validation_metrics.get("per_class", {}) if isinstance(validation_metrics, dict) else {}
+        class_truth = validation_metrics.get("class_distribution_truth", {}) if isinstance(validation_metrics, dict) else {}
+        class_pred = validation_metrics.get("class_distribution_pred", {}) if isinstance(validation_metrics, dict) else {}
+        m = overall_metrics
+
+        md = "# Evaluation Report\n\n"
+        md += "## Validation Metrics\n\n"
+        md += "| Metric | Value |\n|---|---|\n"
+        md += f"| Accuracy | {v.get('accuracy', 0):.3f} |\n"
+        md += f"| Precision | {v.get('precision', 0):.3f} |\n"
+        md += f"| Recall | {v.get('recall', 0):.3f} |\n"
+        md += f"| F1 | {v.get('f1', 0):.3f} |\n"
+        md += f"| Ground-truth entries | {int(support.get('ground_truth_entries', 0))} |\n"
+        md += f"| Predicted entries | {int(support.get('predicted_entries', 0))} |\n"
+        md += f"| Matched entries | {int(support.get('matched_entries', 0))} |\n"
+        md += f"| Coverage vs ground truth | {float(support.get('coverage_vs_ground_truth', 0.0)):.3f} |\n\n"
+
+        if per_class:
+            md += "### Validation Per-Class Metrics\n\n"
+            md += "| Class | Count | Precision | Recall | F1 | TP | FP | FN |\n|---|---:|---:|---:|---:|---:|---:|---:|\n"
+            for class_name in ["valid", "partially_valid", "invalid"]:
+                metrics = per_class.get(class_name, {})
+                precision = metrics.get("precision")
+                recall = metrics.get("recall")
+                f1 = metrics.get("f1")
+                md += (
+                    f"| {class_name} | {int(metrics.get('count', 0))} | "
+                    f"{('N/A' if precision is None else f'{float(precision):.3f}')} | "
+                    f"{('N/A' if recall is None else f'{float(recall):.3f}')} | "
+                    f"{('N/A' if f1 is None else f'{float(f1):.3f}')} | "
+                    f"{int(metrics.get('true_positives', 0))} | {int(metrics.get('false_positives', 0))} | {int(metrics.get('false_negatives', 0))} |\n"
+                )
+            md += "\n"
+
+        if class_truth or class_pred:
+            md += "### Validation Class Distribution\n\n"
+            md += "| Class | Ground Truth | Predicted |\n|---|---:|---:|\n"
+            for class_name in ["valid", "partially_valid", "invalid"]:
+                md += (
+                    f"| {class_name} | {int(class_truth.get(class_name, 0))} | {int(class_pred.get(class_name, 0))} |\n"
+                )
+            md += "\n"
+
+        if entry_type_statistics:
+            md += "## Entry Type Statistics\n\n"
+            md += "| Entry Type | Count | Valid | Partially Valid | Invalid |\n|---|---:|---:|---:|---:|\n"
+            for entry_type, stats in sorted(entry_type_statistics.items()):
+                md += (
+                    f"| @{entry_type} | {int(stats.get('count', 0))} | {int(stats.get('valid', 0))} | "
+                    f"{int(stats.get('partially_valid', 0))} | {int(stats.get('invalid', 0))} |\n"
+                )
+            md += "\n"
+
         md += "## Overall Metrics\n\n"
         md += "| Metric | Value |\n|---|---|\n"
         md += f"| True Positives  | {m.get('true_positives', 0)} |\n"
@@ -463,14 +729,17 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
             md += "## Field-Level Accuracy\n\n"
             md += "| Field | Errors | Corrected | False Corrections | Accuracy |\n"
             md += "|---|---|---|---|---|\n"
-            for field, fa in field_accuracy.items():
+            for field, fa in sorted(field_accuracy.items()):
                 md += (
-                    f"| {field} "
-                    f"| {fa.get('errors_in_original', 0)} "
-                    f"| {fa.get('errors_corrected', 0)} "
-                    f"| {fa.get('false_corrections', 0)} "
-                    f"| {fa.get('accuracy', 0):.3f} |\n"
+                    f"| {field} | {fa.get('errors_in_original', 0)} | {fa.get('errors_corrected', 0)} | "
+                    f"{fa.get('false_corrections', 0)} | {fa.get('accuracy', 0):.3f} |\n"
                 )
+            md += "\n"
+
+        md += "## Key Insights\n\n"
+        md += f"- Evaluated {len(detailed)} correction records.\n"
+        md += f"- Validation performance is balanced at precision {v.get('precision', 0):.3f} and recall {v.get('recall', 0):.3f}.\n"
+        md += f"- Correction F1 is {m.get('f1', 0):.3f}, with field-level strengths and weaknesses shown above.\n"
         return md
 
     # ─────────────────────────────────────────────────────────
@@ -488,6 +757,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
             llm_result.get("field_accuracy", {}),
             llm_result.get("markdown_report", ""),
             payload,
+            {},
         )
 
         m = llm_result.get("overall_metrics", {})
@@ -497,6 +767,7 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
 
         return {
             "strategy":        self.strategy.value,
+            "validation_metrics": {},
             "overall_metrics": m,
             "field_accuracy":  llm_result.get("field_accuracy", {}),
             "markdown_report": llm_result.get("markdown_report", ""),
@@ -573,6 +844,8 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         field_accuracy: dict,
         markdown_report: str,
         detailed: list[dict],
+        validation_metrics: dict,
+        entry_type_statistics: dict | None = None,
     ) -> list[str]:
         saved = []
 
@@ -598,8 +871,10 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
 
         p = self.output_dir / "evaluation_metrics.json"
         p.write_text(json.dumps({
+            "validation_metrics": validation_metrics,
             "overall_metrics": overall_metrics,
             "field_accuracy":  field_accuracy,
+            "entry_type_statistics": entry_type_statistics or {},
         }, indent=2, ensure_ascii=False), encoding="utf-8")
         print(f"  ✓ evaluation_metrics.json  → {p}")
         saved.append(str(p))

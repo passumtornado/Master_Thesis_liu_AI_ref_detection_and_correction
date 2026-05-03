@@ -1,0 +1,889 @@
+[
+  {
+    "entry_id": "DBLP:journals/algorithms/HammadZOG25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/BoiangiuVSTV25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/ei-mlsi/GuoSBGVLAL22",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/KarousosPVV25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/cor/UzunogluGT25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/access/GhoshC25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/access/YeapETY25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/MaSXW25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/icarm/Ji0HCYZWGS24",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/ijmi/BelstiMDMSET23",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/anor/JiangJCC22",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/idt/SivalingamK25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/ZhaoJ25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/gandc/YangTLWGZMX24",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/kes/Mosqueira-ReyAB21",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/nca/YaghoubiYKV24",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/eaai/ChengW25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/WernerHGV22",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/eninf/WangJSDL25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/LiLC25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/comsur/OlowononiRL21",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/PantLR25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/access/TrojovskaDT22",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/biodb/NgHTT17",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/nar/BlakeEKRSBG17",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/jcal/SpikolRDC18",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "wiener1948cybernetics",
+    "entry_type": "book",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "address",
+        "original_correct_value": "",
+        "corrupted_value": "Cambridge, MA",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "publisher",
+        "original_correct_value": "",
+        "corrupted_value": "MIT Press",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Cybernetics: Or Control and Communication in the Animal and the Machine",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1948",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "rosenblatt1957perceptron",
+    "entry_type": "techreport",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "N. Rosenblatt, F.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "institution",
+        "original_correct_value": "",
+        "corrupted_value": "Cornell Aeronautical Laboratory",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "85-460-1",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "The Perceptron: A Perceiving and Recognizing Automaton",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1957",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "mccarthy1956dartmouth",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "McCarthy, John and Minsky, Marvin L. and Rochester, Nathaniel and Shannon, Claude E.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Dartmouth Conference Proposal",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Proposal for the {Dartmouth} Summer Research Project on Artificial Intelligence",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1955",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "vonneumann1958computer",
+    "entry_type": "book",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "address",
+        "original_correct_value": "",
+        "corrupted_value": "London",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "{von Neumann}, John",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "publisher",
+        "original_correct_value": "",
+        "corrupted_value": "Yale University Press",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "The Computer and the Brain",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1958",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "rumelhart1986learning",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1038/323533a0",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Nature",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "533--536",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Learning Representations by Back-Propogating Errors",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "323",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1986",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "bengio1994learning",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Bengio, Yoshua and Simard, Patrice and Frasconi, Paolo",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Proceedings of the International Conference on Machine Learning",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1109/72.279181",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "157--166",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Learning Long-Term Dependencies with Gradient Descent is Difficult",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1994",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "collobert2008unified",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Collobert, Ronan and Weston, Jason",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Proceedings of the 25th International Conference on Machine Learning",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1145/1390156",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2008",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "tibshirani1996regression",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Tibshirani, Robert",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1111/j.2517-6161.1996.tb02080.x",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Journal of the Royal Statistical Society: Series B",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "12",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "267--288",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Regression Shrinkage and Selection via the Lasso",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "58",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1996",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "quinlan1986induction",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Quinlan, J. Ross",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1007/BF00116251",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Machine Learning",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "1",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "81--106",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Induction of Decision Trees",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "9",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1986",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "mnih2008scalable",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Mnih, Andriy and Hinton, Geoffrey E.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.5555 /2981780.2981913",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Advances in Neural Information Processing Systems",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "1081--1088",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Scalable Hierarchical Distributed Language Model",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "21",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2008",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "he2016deep",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "CVPR",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1109/CVPR.2016.90",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Deep Residual Learning for Image Recognition",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2016",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "touvron2023llama",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "archiveprefix",
+        "original_correct_value": "",
+        "corrupted_value": "arXiv",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Touvron, Hugo and Lavril, Thibaut and Izacard, Gautier and Martinet, Xavier and Lachaux, Marie-Anne and Lacroix, Timoth{\\'e}e and Rozi{\\`e}re, Baptiste and Goyal, Naman and Hambro, Eric and Azhar, Faisal and Rodriguez, Aurelien and Joulin, Armand and Grave, Edouard and Lample, Guillaume",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "eprint",
+        "original_correct_value": "",
+        "corrupted_value": "2302.31901",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "primaryclass",
+        "original_correct_value": "",
+        "corrupted_value": "cs.CL",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "{LLaMA}: Open and Efficient Foundation Language Models",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2023",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "agrawal2024hallucination",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Agrawl, Aditya and Suzgun, Mirac and Mackey, Lester and Kalai, Adam Tauman",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Findings of the Association for Computational Linguistics: {EACL} 2024",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.18653/v1/2024.findings-eacl.62",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "912--928",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Do Language Models Know When They're Hallucinating References?",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2024",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "anthropic2024mcp",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "{Anthropic}",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "howpublished",
+        "original_correct_value": "",
+        "corrupted_value": "Anthropic Blog",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Introducing the Model Context Protocol",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2023",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "radford2019gpt2",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Language Models are Unsupervised Multitask Learners",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2019",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "karpukhin2020dense",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "{Karpukhin",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.18653/v1/2020.emnlp-main.550",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "94--107",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Dense Passage Retrieval for Open-Domain Question Answering",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2020",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "yuan2026citeaudit",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "archiveprefix",
+        "original_correct_value": "",
+        "corrupted_value": "arxiv",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Yuan, Zihan and Liu, Yue and Cao, Yanru and Sun, Weiwei and Jia, Hao and Chen, Ran and Li, Zheng and Lin, Baoyi and Yuan, Lin and He, Li",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "eprint",
+        "original_correct_value": "",
+        "corrupted_value": "2602.23452",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "primaryclass",
+        "original_correct_value": "",
+        "corrupted_value": "cs.CL",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "{CiteAudit}: You Cited It, But Did You Read It? A Benchmark for Verifying Scientific References in the {LLM} Era",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2026",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "turing1965bayes",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "li2021knowledge",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "stapel2011social",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "wakefield1998autism",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "hwang2005patient",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "babbage1842bert",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "poe2022hallucination",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "corruptions": []
+  }
+]

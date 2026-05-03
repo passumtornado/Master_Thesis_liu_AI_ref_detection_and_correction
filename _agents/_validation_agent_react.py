@@ -33,6 +33,10 @@ Dependencies:
 import json
 import os
 import sys
+import asyncio
+import time
+import random
+from collections import deque, OrderedDict
 from enum import Enum
 from pathlib import Path
 from typing import Annotated, TypedDict
@@ -40,11 +44,12 @@ from typing import Annotated, TypedDict
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils import _extract_text, parse_validation_results
+from utils import _ainvoke_with_retry, _extract_text, parse_validation_results
 
 load_dotenv('/Users/passum/Documents/SWEDEN/DSI/THESIS/AI_reference_agent_detection_correction/.env')
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.tools import StructuredTool
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_mcp_adapters.client import MultiServerMCPClient
@@ -91,9 +96,14 @@ Assign:
   - suggested_fixes : dict of {field: corrected_value}
 
 Rules:
-  - valid          : all major fields appear correct based on your knowledge
-  - partially_valid: paper likely exists but one or more fields are wrong
-  - invalid        : paper appears fabricated / non-existent
+  - valid          : paper exists AND all major fields appear correct
+  - partially_valid: paper likely EXISTS but 1+ fields are wrong (typo, misspelling, incomplete author list, wrong year, wrong venue, etc.)
+  - invalid        : paper does NOT exist / appears fabricated / cannot be found in any academic database
+  
+CRITICAL DISTINCTION:
+  - Field errors (typos, misspellings, capitalization, incomplete data) → PARTIALLY_VALID if paper exists
+  - Paper non-existent (completely fabricated, anachronistic authors, future dates, wrong author combinations) → INVALID
+  - Do NOT mark as invalid just because a field is wrong; only if paper doesn't actually exist
 
 Produce a complete markdown report grouped by status with a summary
 statistics table and per-entry details.
@@ -134,19 +144,34 @@ You will receive a list of BibTeX entries. For EACH entry:
    - similarity < 0.75   -> call google_scholar_search as fallback.
    - Scholar also fails  -> try DBLP again with a shorter title (3-5 keywords).
    - All searches fail   -> mark as invalid.
+  - If DBLP returns timeout/connection reset/API error/[EXHAUSTED] message:
+    1) call set_dblp_mirror with host="dblp.uni-trier.de", retry the exact same query.
+    2) if it STILL fails or says [EXHAUSTED], call set_dblp_mirror with host="dblp.dagstuhl.de", retry.
+    3) if THAT fails, try a shorter title query (just first 3-5 words) with the new mirror.
+    4) only if all DBLP mirrors fail do you proceed to Scholar fallback.
+    5) if Scholar also fails, mark as invalid.
 
 2. COMPARE — check each field against the best match:
    title, author, year, journal / booktitle / venue.
 
 3. ASSIGN:
-   - valid          : strong match and all major fields are correct
-   - partially_valid: paper exists but 1+ fields are wrong
-   - invalid        : no credible match found anywhere
+   - valid          : strong match AND all major fields are correct
+   - partially_valid: paper EXISTS in database BUT 1+ fields are wrong (typo, misspelling, author name variant, wrong year, wrong venue, incomplete author list, capitalization error, etc.)
+   - invalid        : no credible match found anywhere OR paper provably doesn't exist
+  
+CRITICAL FIELD ERROR HANDLING:
+  - If DBLP/Scholar confirms the paper EXISTS (similarity >= 0.70) but has field errors → PARTIALLY_VALID
+  - Only mark as INVALID if:
+    * No database match found at all (tried all mirrors + Scholar)
+    * OR paper is provably non-existent (e.g., author died before publication year)
+    * OR completely fabricated (impossible author combinations, fictional venues)
 
 EFFICIENCY RULES:
   - Do NOT call Scholar if DBLP similarity is already >= 0.75
-  - One DBLP call per entry is usually enough
+  - One DBLP call per entry is usually enough (but retry with mirrors if it fails)
   - Only retry with a shorter query search with the dblp_search tool if the full-title search returns nothing
+  - Mirror switching retries are for DBLP transport errors ([EXHAUSTED], timeout, connection reset, 503)
+  - If you see [EXHAUSTED] in an error message, it means 4 retries already failed → try mirror immediately
 
 Produce a complete markdown report with summary table and per-entry
 details showing which evidence source was used and what issues were found.
@@ -185,8 +210,13 @@ reason step by step before assigning a verdict:
 
 Step 1 — SEARCH
   Call dblp_fuzzy_title_search with the entry title.
-  If similarity < 0.75, call google_scholar_search as fallback.
-  If all searches fail, the entry is invalid — stop here.
+  - If you see an error like [EXHAUSTED], timeout, connection reset, or 503:
+    1) immediately call set_dblp_mirror with host="dblp.uni-trier.de", then retry the same query
+    2) if that ALSO fails, call set_dblp_mirror with host="dblp.dagstuhl.de", retry again
+    3) if mirrors fail, try a shorter title query (first 3-5 keywords)
+    4) if all DBLP attempts fail, call google_scholar_search as fallback
+  - If similarity < 0.75, call google_scholar_search as fallback.
+  - If all searches fail, the entry is invalid — stop here.
 
 Step 2 — Title check
   Does the title closely match the best hit?
@@ -206,13 +236,19 @@ Step 5 — Venue check
 
 Step 6 — Verdict
   Based on steps 2–5 assign:
-  - valid          : strong match, all fields correct
-  - partially_valid: paper exists, 1+ fields are wrong
-  - invalid        : no credible match found
+  - valid          : strong match AND all fields correct
+  - partially_valid: paper EXISTS in database BUT has field errors (typo, misspelling, author variant, year mismatch, venue error, incomplete author list, etc.)
+  - invalid        : no credible match found in any database (tried all mirrors + Scholar) OR paper provably non-existent
+
+CRITICAL RULE:
+  - If you confirmed the paper EXISTS (similarity >= 0.70) but found field errors → PARTIALLY_VALID
+  - Only INVALID if paper truly doesn't exist or is fabricated
+  - Do NOT confuse "field errors" with "paper doesn't exist"
 
 EFFICIENCY RULES:
   - Do NOT call Scholar if DBLP similarity is already >= 0.75
-  - One DBLP call per entry is usually enough
+  - One DBLP call per entry is usually enough (but use mirrors if initial call fails)
+  - If you see [EXHAUSTED] in error, it means retry already happened 4x → use mirrors immediately
 
 Show your step-by-step reasoning for each entry, then produce a full
 markdown report with summary table and per-entry details.
@@ -303,14 +339,16 @@ class LLMValidationAgent:
         # )
         
         self.llm = ChatOpenRouter(
-            # model="anthropic/claude-sonnet-4.6",
-            model="google/gemini-2.5-pro",
+            # model="anthropic/claude-3-haiku",
+            # model="google/gemini-2.5-pro",
+             model ="openai/gpt-5.4",
             # model="x-ai/grok-4.20",
             temperature=0.1,
+            max_tokens=30000,
             openrouter_api_key=os.getenv("OPENROUTER_API_KEY")
         )
 
-        # Ollama backend — uncomment to switch
+        #Ollama backend — uncomment to switch
         # self.llm = ChatOllama(
         #     model="qwen3-coder:480b-cloud",
         #     # model="deepseek-v3.2:cloud",
@@ -363,7 +401,182 @@ class LLMValidationAgent:
         print(f"  DBLP tools   : {[t.name for t in dblp_tools]}")
         print(f"  Scholar tools: {[t.name for t in scholar_tools]}\n")
 
-        return await self._run_react(entries, dblp_tools, scholar_tools)
+        # --- Rate limiter + retries + cache setup -----------------
+        # DBLP rate limit: default 50 requests / second (API limit)
+        MAX_QPS = int(os.getenv("DBLP_MAX_QPS", "50"))
+        _recent_requests: deque[float] = deque()
+
+        async def _acquire_slot():
+          # simple sliding-window rate limiter
+          while True:
+            now = time.monotonic()
+            # drop timestamps older than 1s
+            while _recent_requests and now - _recent_requests[0] > 1.0:
+              _recent_requests.popleft()
+            if len(_recent_requests) < MAX_QPS:
+              _recent_requests.append(now)
+              return
+            await asyncio.sleep(0.01)
+
+        class SimpleLRU:
+          def __init__(self, maxsize: int = 1024):
+            self.maxsize = maxsize
+            self.data = OrderedDict()
+
+          def get(self, key):
+            try:
+              val = self.data.pop(key)
+              self.data[key] = val
+              return val
+            except KeyError:
+              return None
+
+          def set(self, key, value):
+            if key in self.data:
+              self.data.pop(key)
+            elif len(self.data) >= self.maxsize:
+              self.data.popitem(last=False)
+            self.data[key] = value
+
+        _cache = SimpleLRU(maxsize=2048)
+
+        def _make_cache_key(tool_name, *args, **kwargs):
+          try:
+            args_key = json.dumps(args, sort_keys=True, default=str)
+            kw_key = json.dumps(kwargs, sort_keys=True, default=str)
+          except Exception:
+            args_key = str(args)
+            kw_key = str(kwargs)
+          return (tool_name, args_key, kw_key)
+
+        def _acquire_slot_sync():
+          while True:
+            now = time.monotonic()
+            while _recent_requests and now - _recent_requests[0] > 1.0:
+              _recent_requests.popleft()
+            if len(_recent_requests) < MAX_QPS:
+              _recent_requests.append(now)
+              return
+            time.sleep(0.01)
+
+        def _looks_transient_error(resp, exc: Exception | None = None) -> bool:
+          if exc is not None:
+            msg = str(exc).lower()
+            return (
+              "503" in msg
+              or "service unavailable" in msg
+              or "connection reset" in msg
+              or "timeout" in msg
+              or "temporarily unavailable" in msg
+            )
+          if isinstance(resp, str):
+            txt = resp.lower()
+            return (
+              "503" in txt
+              or "service unavailable" in txt
+              or "connection reset" in txt
+              or txt.startswith("error:")
+            )
+          return False
+
+        def _normalize_tool_input(tool_input=None, **kwargs):
+          if kwargs:
+            # Structured tools typically pass parsed kwargs
+            return kwargs
+          return tool_input
+
+        def _make_wrapped_tool(tool):
+          name = getattr(tool, "name", "tool")
+          description = getattr(tool, "description", None) or f"Wrapped MCP tool: {name}"
+          args_schema = getattr(tool, "args_schema", None)
+          original_invoke = getattr(tool, "invoke", None)
+          original_ainvoke = getattr(tool, "ainvoke", None)
+
+          if not callable(original_invoke):
+            return tool
+
+          def _sync_wrapped(tool_input=None, **kwargs):
+            """Rate-limited and retried sync wrapper around MCP tool invocation."""
+            normalized_input = _normalize_tool_input(tool_input, **kwargs)
+            key = _make_cache_key(name, normalized_input)
+            cached = _cache.get(key)
+            if cached is not None:
+              return cached
+
+            max_attempts = 4
+            base_delay = 0.5
+            last_exc = None
+            for attempt in range(max_attempts):
+              _acquire_slot_sync()
+              try:
+                resp = original_invoke(normalized_input)
+                if _looks_transient_error(resp):
+                  raise RuntimeError(f"Transient tool error: {resp}")
+                _cache.set(key, resp)
+                return resp
+              except Exception as e:
+                last_exc = e
+                if not _looks_transient_error(None, e):
+                  raise
+                delay = base_delay * (2 ** attempt) + random.random() * 0.2
+                error_msg = str(e)[:100]  # truncate long error messages
+                print(f"    [RETRY {attempt+1}/4] {name}: {error_msg} → waiting {delay:.2f}s")
+                time.sleep(delay)
+            
+            # All retries exhausted
+            error_msg = str(last_exc)[:200]
+            print(f"    [EXHAUSTED] {name}: giving up after 4 retries. Last error: {error_msg}")
+            raise last_exc
+
+          async def _async_wrapped(tool_input=None, **kwargs):
+            """Rate-limited and retried async wrapper around MCP tool invocation."""
+            normalized_input = _normalize_tool_input(tool_input, **kwargs)
+            key = _make_cache_key(name, normalized_input)
+            cached = _cache.get(key)
+            if cached is not None:
+              return cached
+
+            max_attempts = 4
+            base_delay = 0.5
+            last_exc = None
+            for attempt in range(max_attempts):
+              await _acquire_slot()
+              try:
+                if callable(original_ainvoke):
+                  resp = await original_ainvoke(normalized_input)
+                else:
+                  resp = original_invoke(normalized_input)
+                if _looks_transient_error(resp):
+                  raise RuntimeError(f"Transient tool error: {resp}")
+                _cache.set(key, resp)
+                return resp
+              except Exception as e:
+                last_exc = e
+                if not _looks_transient_error(None, e):
+                  raise
+                delay = base_delay * (2 ** attempt) + random.random() * 0.2
+                error_msg = str(e)[:100]  # truncate long error messages
+                print(f"    [RETRY {attempt+1}/4] {name}: {error_msg} → waiting {delay:.2f}s")
+                await asyncio.sleep(delay)
+            
+            # All retries exhausted
+            error_msg = str(last_exc)[:200]
+            print(f"    [EXHAUSTED] {name}: giving up after 4 retries. Last error: {error_msg}")
+            raise last_exc
+
+          return StructuredTool.from_function(
+            func=_sync_wrapped,
+            coroutine=_async_wrapped,
+            name=name,
+            description=description,
+            args_schema=args_schema,
+            infer_schema=args_schema is None,
+          )
+
+        instrumented_dblp_tools = [_make_wrapped_tool(t) for t in dblp_tools]
+        instrumented_scholar_tools = [_make_wrapped_tool(t) for t in scholar_tools]
+
+        return await self._run_react(entries, instrumented_dblp_tools, instrumented_scholar_tools)
 
     # ─────────────────────────────────────────────────────────
     # ReAct graph
@@ -410,7 +623,12 @@ class LLMValidationAgent:
 
         # ── Node: LLM reasons and decides next action ─────────
         async def llm_node(state: ReactState) -> dict:
-            response = await llm_with_tools.ainvoke(state["messages"])
+            response = await _ainvoke_with_retry(
+                llm_with_tools,
+                state["messages"],
+                attempts=4,
+                base_delay=1.0,
+            )
             return {"messages": [response]}
 
         # ── Node: execute the tool calls the LLM requested ────

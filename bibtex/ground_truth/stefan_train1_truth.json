@@ -1,0 +1,955 @@
+[
+  {
+    "entry_id": "DBLP:conf/acmrep/ZhengS24",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/iccai/TangZ22",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/iscas/0002YCC25",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/FengL25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/LuqueHernandezAAG25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/eaai/XieTMH25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/IEEEscc/AkterSIHKCV23",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/NassihB25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/SittijukPT25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/ZhabinetsTLNMK25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/sigcse/MikeR21",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/AzizA22",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/ton/WangLS23",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithmica/OprisLS25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/software/RaatikainenSRS25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/cmsc/LehnerL24",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/ires/GaohuiWL25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/tosem/NoeiLZ25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/jamia/SoleyRSXFT25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/algorithms/IfrimO25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:conf/aaaiss/KursuncuGS20",
+    "entry_type": "inproceedings",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/integration/YinLLSDCWLM25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/ijcisys/MaazalahiH25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/idt/LichodeK25",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/biodb/DennisULMLGJ19",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "DBLP:journals/ile/WuHN20",
+    "entry_type": "article",
+    "expected_status": "valid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "shannon1948mathematical",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Shannon, Claude E.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1002/j.1538-7305.1948.tb01338.x",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Bell System Technical Journal",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "3",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "379--423",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Mathematical Theory of Communication",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "41",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1948",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "mcculloch1943logical",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "McCulloch, Warren S. and Pitts, Walter",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Bulletin of Mathematical Biophysics",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "4",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "115--133",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Logical Calculus of the Ideas",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "5",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1943",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "lovelace1843notes",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Lovelace, Ada",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Philosophical Transactions",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Notes on {Menabrea}'s Sketch of the Analytical Engine",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "3",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1843",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "hopfield1982neural",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Hopfield, John J.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1073/pnas.79.8.2554",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Proceedings of the National Academy of Sciences",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "8",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "2554--2558",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Neural Networks and Physical Systems with Emergent Collective Computational Abilities",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "36",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1982",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "lecun1989handwritten",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "LeCun, Yann and Boser, B. and Denker, J. S. and Henderson, D. and Howard, R. E. and Hubbard, W. and Jackel, L. D.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Neural Computation",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "541--",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Backpropagation Applied to Handwritten Zip Code Recognition",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "1",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1989",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "hornik1989multilayer",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Hornick, Kurt and Stinchcombe, Maxwell and White, Halbert",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1016/0893-6080(89)90020-8",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Neural Networks",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "5",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "359--366",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Multilayer Feedforward Networks are Universal Approximators",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "2",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1989",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "cortes1995support",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Haussler, David and Cortes, Corinna",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1007/BF00994018",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Machine Learning",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "3",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "273--297",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Support-Vector Networks",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "20",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1995",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "breiman2001random",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Breiman, Leo",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1023/A:1010933404324",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "Machine Learning",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "number",
+        "original_correct_value": "",
+        "corrupted_value": "1",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "5--32",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Random Forests Algorithem",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "volume",
+        "original_correct_value": "",
+        "corrupted_value": "45",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2001",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "vapnik1999nature",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Vapnik, Vladimir N.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.1109/72.788640",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "{IEEE} Transactions on Neural Networks",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "988--999",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "An Overview of Statistical Learning Theory",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "1999",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "scholkopf2002learning",
+    "entry_type": "book",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "address",
+        "original_correct_value": "",
+        "corrupted_value": "Cambridge, MA",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Scholkopf, Bernhard and Smola, Alexander J.",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "publisher",
+        "original_correct_value": "",
+        "corrupted_value": "MIT Press",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2002",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "pearl2000causality",
+    "entry_type": "book",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "address",
+        "original_correct_value": "",
+        "corrupted_value": "New York",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Pearl, Judea",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "publisher",
+        "original_correct_value": "",
+        "corrupted_value": "Cambridge University Press",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Causality: Models, Reasoning, and Inference",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2000",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "russell2003artificial",
+    "entry_type": "book",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "address",
+        "original_correct_value": "",
+        "corrupted_value": "Upper Saddle River, NJ",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Russell, Stuart and Norvig, Peter",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "edition",
+        "original_correct_value": "",
+        "corrupted_value": "2nd",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "publisher",
+        "original_correct_value": "",
+        "corrupted_value": "MIT Press",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Artificial Intelligence: A Modern Approach",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2003",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "radford2018improving",
+    "entry_type": "article",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Radfort, Alec and Narasimhan, Karthik and Salimans, Tim and Sutskever, Ilya",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "journal",
+        "original_correct_value": "",
+        "corrupted_value": "{OpenAI} Blog",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "Improving Language Understanding by Generative Pre-Training",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2018",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "chen2020simple",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Proceedings of the 37th International Conference on Machine Learning",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "1597--",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Simple Framework for Contrastive Learning of Visual Representations",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2020",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "sahoo2025survey",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "archiveprefix",
+        "original_correct_value": "",
+        "corrupted_value": "arXiv",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Sahoo, P. and Singh, Ayush Kumar and Saha, Sriparna and Jain, Vinija and Mondal, Samrat and Chadha, Aman",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "eprint",
+        "original_correct_value": "",
+        "corrupted_value": "2402.07927",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "primaryclass",
+        "original_correct_value": "",
+        "corrupted_value": "cs.CL",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2025",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "langgraph2024",
+    "entry_type": "misc",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "{LangChain Inc.}",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "howpublished",
+        "original_correct_value": "",
+        "corrupted_value": "GitHub Repository",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "{LangGraph}: Build Resilient Language Agents as Graphs",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2024",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "yao2023react",
+    "entry_type": "inproceedings",
+    "expected_status": "partially_valid",
+    "corruptions": [
+      {
+        "field": "author",
+        "original_correct_value": "",
+        "corrupted_value": "Yao, Shunyu and Zhao, Jeffrey and Yu, Dian and Du, Nan and Shafran, Izhak and Narasimhan, Karthik and Cao, Yuan",
+        "corruption_type": "author_corruption"
+      },
+      {
+        "field": "booktitle",
+        "original_correct_value": "",
+        "corrupted_value": "Proceedings of the 11th International Conference on Learning Representations",
+        "corruption_type": "venue_substitution"
+      },
+      {
+        "field": "doi",
+        "original_correct_value": "",
+        "corrupted_value": "10.48550/arXiv.2210.03629",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "pages",
+        "original_correct_value": "",
+        "corrupted_value": "1, 45",
+        "corruption_type": "field_corruption"
+      },
+      {
+        "field": "title",
+        "original_correct_value": "",
+        "corrupted_value": "{ReAct}: Synergizing Reasoning and Acting in Language Models",
+        "corruption_type": "title_mutation"
+      },
+      {
+        "field": "year",
+        "original_correct_value": "",
+        "corrupted_value": "2023",
+        "corruption_type": "year_shift"
+      }
+    ]
+  },
+  {
+    "entry_id": "eckert1952logic",
+    "entry_type": "book",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "darwin2019deepevolution",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "kim1987distributed",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "vonneumann1945pytorch",
+    "entry_type": "techreport",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "minsky1975gpt",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "feigenbaum2023llm",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "newton2022gradients",
+    "entry_type": "article",
+    "expected_status": "invalid",
+    "corruptions": []
+  },
+  {
+    "entry_id": "anonymous2150agi",
+    "entry_type": "inproceedings",
+    "expected_status": "invalid",
+    "corruptions": []
+  }
+]

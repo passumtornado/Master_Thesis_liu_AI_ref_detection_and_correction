@@ -30,10 +30,8 @@ This file consolidates all model outputs found in [results](results).
 | ------------- | --------: | -----: | ----: | --: | --: | --: |
 | Claude Sonnet |     0.556 |  0.500 | 0.526 |   5 |   4 |   5 |
 | Gemini Pro    |     0.474 |  0.900 | 0.621 |   9 |  10 |   1 |
-| GPT-5 mini    |     0.600 |  0.900 | 0.720 |   9 |   6 |   1 |
-| GPT-5         |        NR |     NR |    NR |  NR |  NR |  NR |
+| GPT-5.4 mini    |     0.600 |  0.900 | 0.720 |   9 |   6 |   1 |
 | Grok-4.20     |     0.294 |  0.500 | 0.370 |   5 |  12 |   5 |
-| Qwen480B      |     0.857 |  0.600 | 0.706 |   6 |   1 |   4 |
 
 ### Class: partially_valid
 
@@ -41,10 +39,9 @@ This file consolidates all model outputs found in [results](results).
 | ------------- | --------: | -----: | ----: | --: | --: | --: |
 | Claude Sonnet |     0.800 |  0.800 | 0.800 |  20 |   5 |   5 |
 | Gemini Pro    |     0.933 |  0.560 | 0.700 |  14 |   1 |  11 |
-| GPT-5 mini    |     0.923 |  0.480 | 0.632 |  12 |   1 |  13 |
-| GPT-5         |        NR |     NR |    NR |  NR |  NR |  NR |
+| GPT-5.4 mini    |     0.923 |  0.480 | 0.632 |  12 |   1 |  13 |
 | Grok-4.20     |     0.722 |  0.520 | 0.605 |  13 |   5 |  12 |
-| Qwen480B      |     0.857 |  0.960 | 0.906 |  24 |   4 |   1 |
+
 
 ### Class: invalid
 
@@ -52,10 +49,9 @@ This file consolidates all model outputs found in [results](results).
 | ------------- | --------: | -----: | ----: | --: | --: | --: |
 | Claude Sonnet |     0.938 |  1.000 | 0.968 |  15 |   1 |   0 |
 | Gemini Pro    |     0.938 |  1.000 | 0.968 |  15 |   1 |   0 |
-| GPT-5 mini    |     0.682 |  1.000 | 0.811 |  15 |   7 |   0 |
-| GPT-5         |        NR |     NR |    NR |  NR |  NR |  NR |
+| GPT-5.4 mini    |     0.682 |  1.000 | 0.811 |  15 |   7 |   0 |
 | Grok-4.20     |     1.000 |  1.000 | 1.000 |  15 |   0 |   0 |
-| Qwen480B      |     1.000 |  1.000 | 1.000 |  15 |   0 |   0 |
+
 
 ## Overall Comparison (Correction Stage)
 
@@ -69,10 +65,10 @@ $$
 | ------------- | --------: | -----: | ----: | ---------: |
 | Claude Sonnet |     1.000 |  0.129 | 0.229 |      0.129 |
 | Gemini Pro    |     0.923 |  0.387 | 0.545 |      0.375 |
-| GPT-5 mini    |     1.000 |  0.129 | 0.229 |      0.129 |
-| GPT-5         |     0.957 |  0.629 | 0.759 |      0.611 |
+| GPT-5.4 mini    |     1.000 |  0.129 | 0.229 |      0.129 |
+| GPT-5.4         |     0.957 |  0.629 | 0.759 |      0.611 |
 | Grok-4.20     |     0.941 |  0.516 | 0.667 |      0.500 |
-| Qwen480B      |     0.931 |  0.871 | 0.900 |      0.818 |
+
 
 ## Field-Level Accuracy Comparison (Raw Reported)
 

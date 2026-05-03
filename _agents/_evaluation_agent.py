@@ -76,9 +76,10 @@ You will receive correction records. Each record contains:
   - original     : original BibTeX fields before correction
   - corrected    : fields after the correction agent ran
   - ground_truth : best DBLP match (the authoritative reference)
+  - validation_status : valid | partially_valid | invalid (from validation agent)
   - changes      : list of changes the correction agent made
 
-Your task — compute these metrics by comparing original → corrected → ground_truth
+Your task — compute metrics by comparing original → corrected → ground_truth
 for each of these fields: title, author, year, journal, booktitle, venue.
 
 Definitions:
@@ -87,9 +88,14 @@ Definitions:
   false_negative (FN) : field was WRONG in original AND was NOT fixed
 
 Formulas:
-  recall    = TP / (TP + FN)                          how many errors were caught
-  precision = TP / (TP + FP)                          how many corrections were right
+  recall    = TP / (TP + FN)
+  precision = TP / (TP + FP)
   f1        = 2 * precision * recall / (precision + recall)
+
+ALSO COMPUTE:
+1. Per-class metrics grouped by validation_status (valid, partially_valid, invalid)
+2. Field accuracy both overall and per-class
+3. Detailed markdown report with tables for overall, per-class, and field-level metrics
 
 You MUST respond with valid JSON in EXACTLY this structure — no extra text, no fences:
 {
@@ -97,19 +103,56 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
     "true_positives":  <int>,
     "false_positives": <int>,
     "false_negatives": <int>,
-    "recall":          <float 0-1, 3 decimal places>,
-    "precision":       <float 0-1, 3 decimal places>,
-    "f1":              <float 0-1, 3 decimal places>
+    "recall":          <float 0-1>,
+    "precision":       <float 0-1>,
+    "f1":              <float 0-1>
+  },
+  "per_class_metrics": {
+    "valid": {
+      "count": <int>,
+      "true_positives": <int>,
+      "false_positives": <int>,
+      "false_negatives": <int>,
+      "recall": <float 0-1 or null>,
+      "precision": <float 0-1 or null>,
+      "f1": <float 0-1 or null>,
+      "field_accuracy": <float 0-1>
+    },
+    "partially_valid": {
+      "count": <int>,
+      "true_positives": <int>,
+      "false_positives": <int>,
+      "false_negatives": <int>,
+      "recall": <float 0-1 or null>,
+      "precision": <float 0-1 or null>,
+      "f1": <float 0-1 or null>,
+      "field_accuracy": <float 0-1>
+    },
+    "invalid": {
+      "count": <int>,
+      "true_positives": <int>,
+      "false_positives": <int>,
+      "false_negatives": <int>,
+      "recall": <float 0-1 or null>,
+      "precision": <float 0-1 or null>,
+      "f1": <float 0-1 or null>,
+      "field_accuracy": <float 0-1>
+    }
   },
   "field_accuracy": {
     "<field_name>": {
+      "overall_accuracy": <float 0-1>,
       "errors_in_original": <int>,
       "errors_corrected":   <int>,
       "false_corrections":  <int>,
-      "accuracy":           <float 0-1, 3 decimal places>
+      "per_class": {
+        "valid": <float 0-1>,
+        "partially_valid": <float 0-1>,
+        "invalid": <float 0-1>
+      }
     }
   },
-  "markdown_report": "<complete markdown string with summary table and per-entry details>"
+  "markdown_report": "<complete markdown string with overall table, per-class table, field accuracy table, and insights>"
 }
 """
 
@@ -141,9 +184,10 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         # )
         self.llm = ChatOpenRouter(
             # model="anthropic/claude-sonnet-4.6",
-                model="google/gemini-2.5-pro",
+                # model="google/gemini-2.5-pro",
+                 model ="openai/gpt-5.4",
                 temperature=0.1,
-                max_tokens=1024,
+                max_tokens=30000,
                 openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
         )
         
@@ -167,13 +211,18 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
 
     # ── public ────────────────────────────────────────────────
 
-    async def evaluate(self, raw_data: list[dict], corrections: list[dict]) -> dict:
+    async def evaluate(
+        self,
+        raw_data: list[dict],
+        corrections: list[dict],
+        validation_structured: list[dict] | None = None,
+    ) -> dict:
         """Run LLM evaluation and persist outputs."""
         print(f"\n{'='*60}")
         print(f"EVALUATION AGENT [{self.strategy.value.upper()}]")
         print(f"{'='*60}\n")
 
-        evaluation_payload = self._build_payload(raw_data, corrections)
+        evaluation_payload = self._build_payload(raw_data, corrections, validation_structured or [])
         print(f"  Evaluating {len(evaluation_payload)} entries …")
 
         llm_result  = await self._call_llm(evaluation_payload)
@@ -183,21 +232,37 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         print(f"  ✓ Recall:    {_to_float(m.get('recall', 0)):.3f}")
         print(f"  ✓ Precision: {_to_float(m.get('precision', 0)):.3f}")
         print(f"  ✓ F1:        {_to_float(m.get('f1', 0)):.3f}")
+        
+        # Print per-class metrics if available
+        if "per_class_metrics" in llm_result:
+            print(f"\n  Per-Class Metrics:")
+            for class_name, metrics in llm_result["per_class_metrics"].items():
+                count = metrics.get("count", 0)
+                recall = metrics.get("recall")
+                precision = metrics.get("precision")
+                f1 = metrics.get("f1")
+                acc = metrics.get("field_accuracy", 0)
+                
+                if recall is not None:
+                    print(f"    {class_name:20s}: {count:3d} entries | R:{recall:.1%} P:{precision:.1%} F1:{f1:.3f} | Acc:{acc:.1%}")
+                else:
+                    print(f"    {class_name:20s}: {count:3d} entries | (N/A - no ground truth)")
 
         return {
-            "strategy":        self.strategy.value,
-            "overall_metrics": llm_result.get("overall_metrics", {}),
-            "field_accuracy":  llm_result.get("field_accuracy", {}),
-            "markdown_report": llm_result.get("markdown_report", ""),
-            "saved_files":     saved_files,
+            "strategy":            self.strategy.value,
+            "overall_metrics":     llm_result.get("overall_metrics", {}),
+            "per_class_metrics":   llm_result.get("per_class_metrics", {}),
+            "field_accuracy":      llm_result.get("field_accuracy", {}),
+            "markdown_report":     llm_result.get("markdown_report", ""),
+            "saved_files":         saved_files,
         }
 
     # ── private: payload building ─────────────────────────────
 
     def _build_payload(
-        self, raw_data: list[dict], corrections: list[dict]
+        self, raw_data: list[dict], corrections: list[dict], validation_structured: list[dict]
     ) -> list[dict]:
-        """Merge raw validation evidence with correction outputs."""
+        """Merge raw validation evidence with correction outputs and validation status."""
         raw_map = {}
         for item in raw_data:
             if not isinstance(item, dict):
@@ -215,6 +280,15 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
             if entry_id:
                 corr_map[entry_id] = c
 
+        val_map = {}
+        for v in validation_structured:
+            if not isinstance(v, dict):
+                continue
+            entry_id = v.get("entry_id")
+            status = v.get("status", "unknown")
+            if entry_id:
+                val_map[entry_id] = status
+
         payload = []
         for entry_id, raw_item in raw_map.items():
             dblp_hits    = raw_item.get("dblp_hits", [])
@@ -231,17 +305,21 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
             if not isinstance(changes, list):
                 changes = []
 
+            validation_status = val_map.get(entry_id, "unknown")
+
             payload.append({
                 "entry_id":     entry_id,
                 "original":     raw_item["entry"],
                 "corrected":    corrected_entry,
                 "ground_truth": ground_truth,
                 "changes":      changes,
+                "validation_status": validation_status,
             })
 
         print(f"\n  [DEBUG EVAL] Payload built:")
         print(f"    - raw_data entries:    {len(raw_data)}")
         print(f"    - corrections entries: {len(corr_map)}")
+        print(f"    - validation entries:  {len(val_map)}")
         print(f"    - payload entries:     {len(payload)}")
         return payload
 
@@ -308,11 +386,14 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
             llm_result = {}
 
         overall_metrics = llm_result.get("overall_metrics", {})
+        per_class_metrics = llm_result.get("per_class_metrics", {})
         field_accuracy  = llm_result.get("field_accuracy", {})
         markdown_report = llm_result.get("markdown_report", "")
 
         if not isinstance(overall_metrics, dict):
             overall_metrics = {}
+        if not isinstance(per_class_metrics, dict):
+            per_class_metrics = {}
         if not isinstance(field_accuracy, dict):
             field_accuracy = {}
         if not isinstance(markdown_report, str):
@@ -328,22 +409,49 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
             "f1":              _to_float(overall_metrics.get("f1", 0.0)),
         }
 
+        # Normalize per-class metrics
+        normalized_per_class = {}
+        for class_name in ["valid", "partially_valid", "invalid"]:
+            class_data = per_class_metrics.get(class_name, {})
+            if isinstance(class_data, dict):
+                normalized_per_class[class_name] = {
+                    "count": _to_int(class_data.get("count", 0)),
+                    "true_positives": _to_int(class_data.get("true_positives", 0)),
+                    "false_positives": _to_int(class_data.get("false_positives", 0)),
+                    "false_negatives": _to_int(class_data.get("false_negatives", 0)),
+                    "recall": _to_float(class_data.get("recall")) if class_data.get("recall") is not None else None,
+                    "precision": _to_float(class_data.get("precision")) if class_data.get("precision") is not None else None,
+                    "f1": _to_float(class_data.get("f1")) if class_data.get("f1") is not None else None,
+                    "field_accuracy": _to_float(class_data.get("field_accuracy", 0.0)),
+                }
+        per_class_metrics = normalized_per_class
+
         normalized_field_accuracy = {}
         for field, values in field_accuracy.items():
             if not isinstance(values, dict):
                 continue
+            per_class = values.get("per_class", {})
             normalized_field_accuracy[field] = {
+                "overall_accuracy":   _to_float(values.get("overall_accuracy", 0.0)),
                 "errors_in_original": _to_int(values.get("errors_in_original", 0)),
                 "errors_corrected":   _to_int(values.get("errors_corrected", 0)),
                 "false_corrections":  _to_int(values.get("false_corrections", 0)),
-                "accuracy":           _to_float(values.get("accuracy", 0.0)),
+                "per_class": {
+                    "valid": _to_float(per_class.get("valid", 0.0)),
+                    "partially_valid": _to_float(per_class.get("partially_valid", 0.0)),
+                    "invalid": _to_float(per_class.get("invalid", 0.0)),
+                }
             }
         field_accuracy = normalized_field_accuracy
 
         metrics_path = self.output_dir / "evaluation_metrics.json"
         metrics_path.write_text(
             json.dumps(
-                {"overall_metrics": overall_metrics, "field_accuracy": field_accuracy},
+                {
+                    "overall_metrics": overall_metrics,
+                    "per_class_metrics": per_class_metrics,
+                    "field_accuracy": field_accuracy
+                },
                 indent=2, ensure_ascii=False,
             ),
             encoding="utf-8",

@@ -87,6 +87,7 @@ class PipelineState(TypedDict):
     ground_truth_path: str
     evaluation_metrics:        dict
     evaluation_field_accuracy: dict
+    evaluation_entry_type_statistics: dict
     evaluation_error:          str
 
     # ── pipeline ──────────────────────────────────────────────
@@ -102,7 +103,7 @@ def _compute_validation_metrics(
     validation_structured: list[dict],
     ground_truth_path: str,
 ) -> tuple[dict, str]:
-    """Evaluate validation/classification quality against expected_status ground truth."""
+    """Evaluate validation classification with one clear overall metric set."""
     try:
         gt_data = json.loads(Path(ground_truth_path).read_text(encoding="utf-8"))
     except Exception as e:
@@ -116,7 +117,6 @@ def _compute_validation_metrics(
             if isinstance(entry_id, str) and isinstance(status, str):
                 gt_map[entry_id] = status
 
-    classes = ["valid", "partially_valid", "invalid"]
     pred_map: dict[str, str] = {}
     for item in validation_structured:
         if not isinstance(item, dict):
@@ -130,55 +130,13 @@ def _compute_validation_metrics(
     if not common_ids:
         return {}, "Validation evaluation skipped: no overlapping entry_id between predictions and ground truth"
 
-    per_class = {}
-    macro_p = macro_r = macro_f1 = 0.0
-
-    tp_micro = fp_micro = fn_micro = 0
-    confusion: dict[str, dict[str, int]] = {
-        c: {c2: 0 for c2 in classes} for c in classes
-    }
-
-    for c in classes:
-        tp = fp = fn = 0
-        for entry_id in common_ids:
-            truth = gt_map.get(entry_id)
-            pred = pred_map.get(entry_id)
-            if truth in classes and pred in classes:
-                confusion[truth][pred] += 1
-            if pred == c and truth == c:
-                tp += 1
-            elif pred == c and truth != c:
-                fp += 1
-            elif pred != c and truth == c:
-                fn += 1
-
-        precision = _safe_div(tp, tp + fp)
-        recall = _safe_div(tp, tp + fn)
-        f1 = _safe_div(2 * precision * recall, precision + recall)
-
-        per_class[c] = {
-            "tp": tp,
-            "fp": fp,
-            "fn": fn,
-            "precision": round(precision, 3),
-            "recall": round(recall, 3),
-            "f1": round(f1, 3),
-        }
-
-        tp_micro += tp
-        fp_micro += fp
-        fn_micro += fn
-        macro_p += precision
-        macro_r += recall
-        macro_f1 += f1
-
-    micro_precision = _safe_div(tp_micro, tp_micro + fp_micro)
-    micro_recall = _safe_div(tp_micro, tp_micro + fn_micro)
-    micro_f1 = _safe_div(2 * micro_precision * micro_recall, micro_precision + micro_recall)
-
     matched = len(common_ids)
-    correct = sum(1 for entry_id in common_ids if gt_map[entry_id] == pred_map[entry_id])
-    accuracy = _safe_div(correct, matched)
+    tp = sum(1 for entry_id in common_ids if gt_map[entry_id] == pred_map[entry_id])
+    errors = matched - tp
+    accuracy = _safe_div(tp, matched)
+    precision = _safe_div(tp, tp + errors)
+    recall = _safe_div(tp, tp + errors)
+    f1 = _safe_div(2 * precision * recall, precision + recall)
 
     gt_counter = Counter(gt_map[eid] for eid in common_ids)
     pred_counter = Counter(pred_map[eid] for eid in common_ids)
@@ -194,15 +152,13 @@ def _compute_validation_metrics(
         },
         "overall": {
             "accuracy": round(accuracy, 3),
-            "precision_micro": round(micro_precision, 3),
-            "recall_micro": round(micro_recall, 3),
-            "f1_micro": round(micro_f1, 3),
-            "precision_macro": round(macro_p / len(classes), 3),
-            "recall_macro": round(macro_r / len(classes), 3),
-            "f1_macro": round(macro_f1 / len(classes), 3),
+            "precision": round(precision, 3),
+            "recall": round(recall, 3),
+            "f1": round(f1, 3),
+            "true_positives": int(tp),
+            "false_positives": int(errors),
+            "false_negatives": int(errors),
         },
-        "per_class": per_class,
-        "confusion_matrix": confusion,
     }
     return metrics, ""
 
@@ -211,6 +167,8 @@ def _build_combined_markdown(state: PipelineState) -> str:
     """Create one markdown report that includes validation + correction performance."""
     v = state.get("validation_metrics", {}) or {}
     e = state.get("evaluation_metrics", {}) or {}
+    fa = state.get("evaluation_field_accuracy", {}) or {}
+    entry_types = state.get("evaluation_entry_type_statistics", {}) or {}
 
     lines = [
         "# End-to-End Performance Summary",
@@ -221,33 +179,59 @@ def _build_combined_markdown(state: PipelineState) -> str:
 
     if v.get("overall"):
         vo = v["overall"]
+        vs = v.get("support", {})
         lines.extend([
             "| Metric | Value |",
             "|---|---|",
             f"| Accuracy | {vo.get('accuracy', 0):.3f} |",
-            f"| Precision (micro) | {vo.get('precision_micro', 0):.3f} |",
-            f"| Recall (micro) | {vo.get('recall_micro', 0):.3f} |",
-            f"| F1 (micro) | {vo.get('f1_micro', 0):.3f} |",
-            f"| Precision (macro) | {vo.get('precision_macro', 0):.3f} |",
-            f"| Recall (macro) | {vo.get('recall_macro', 0):.3f} |",
-            f"| F1 (macro) | {vo.get('f1_macro', 0):.3f} |",
+            f"| Precision | {vo.get('precision', 0):.3f} |",
+            f"| Recall | {vo.get('recall', 0):.3f} |",
+            f"| F1 | {vo.get('f1', 0):.3f} |",
+            f"| True Positives (correctly classified) | {int(vo.get('true_positives', 0))} |",
+            f"| False Positives | {int(vo.get('false_positives', 0))} |",
+            f"| False Negatives | {int(vo.get('false_negatives', 0))} |",
+            f"| Ground-truth entries | {int(vs.get('ground_truth_entries', 0))} |",
+            f"| Predicted entries | {int(vs.get('predicted_entries', 0))} |",
+            f"| Matched entries | {int(vs.get('matched_entries', 0))} |",
+            f"| Coverage vs ground truth | {float(vs.get('coverage_vs_ground_truth', 0.0)):.3f} |",
             "",
         ])
     else:
         lines.append("Validation metrics unavailable.")
         lines.append("")
 
-    if v.get("per_class"):
+    per_class = v.get("per_class", {}) if isinstance(v, dict) else {}
+    if per_class:
         lines.extend([
-            "### Per-Class Metrics",
+            "### Validation Per-Class Metrics",
             "",
-            "| Class | Precision | Recall | F1 | TP | FP | FN |",
-            "|---|---|---|---|---|---|---|",
+            "| Class | Count | Precision | Recall | F1 | TP | FP | FN |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|",
         ])
-        for cls in ["valid", "partially_valid", "invalid"]:
-            m = v["per_class"].get(cls, {})
+        for class_name in ["valid", "partially_valid", "invalid"]:
+            metrics = per_class.get(class_name, {}) if isinstance(per_class, dict) else {}
+            precision = metrics.get("precision")
+            recall = metrics.get("recall")
+            f1 = metrics.get("f1")
             lines.append(
-                f"| {cls} | {m.get('precision', 0):.3f} | {m.get('recall', 0):.3f} | {m.get('f1', 0):.3f} | {m.get('tp', 0)} | {m.get('fp', 0)} | {m.get('fn', 0)} |"
+                f"| {class_name} | {int(metrics.get('count', 0))} | "
+                f"{('N/A' if precision is None else f'{float(precision):.3f}')} | "
+                f"{('N/A' if recall is None else f'{float(recall):.3f}')} | "
+                f"{('N/A' if f1 is None else f'{float(f1):.3f}')} | "
+                f"{int(metrics.get('true_positives', 0))} | {int(metrics.get('false_positives', 0))} | {int(metrics.get('false_negatives', 0))} |"
+            )
+        lines.append("")
+
+    if entry_types:
+        lines.extend([
+            "### BibTeX Entry Type Statistics",
+            "",
+            "| Entry Type | Count | Valid | Partially Valid | Invalid |",
+            "|---|---:|---:|---:|---:|",
+        ])
+        for entry_type, stats in sorted(entry_types.items()):
+            lines.append(
+                f"| @{entry_type} | {int(stats.get('count', 0))} | {int(stats.get('valid', 0))} | {int(stats.get('partially_valid', 0))} | {int(stats.get('invalid', 0))} |"
             )
         lines.append("")
 
@@ -256,6 +240,7 @@ def _build_combined_markdown(state: PipelineState) -> str:
         "",
     ])
     if e:
+        scope = e.get("scope", {}) if isinstance(e, dict) else {}
         lines.extend([
             "| Metric | Value |",
             "|---|---|",
@@ -265,10 +250,26 @@ def _build_combined_markdown(state: PipelineState) -> str:
             f"| Precision | {float(e.get('precision', 0.0)):.3f} |",
             f"| Recall | {float(e.get('recall', 0.0)):.3f} |",
             f"| F1 | {float(e.get('f1', 0.0)):.3f} |",
+            f"| Partially-valid in ground truth | {int(scope.get('total_partially_valid_ground_truth', 0))} |",
+            f"| Correctly identified partially-valid | {int(scope.get('correctly_identified_partially_valid', 0))} |",
             "",
         ])
     else:
         lines.append("Correction metrics unavailable.")
+        lines.append("")
+
+    if fa:
+        lines.extend([
+            "### Field-Level Metrics (Partially Valid, Correctly Identified)",
+            "",
+            "| Field | Errors in Original | Errors Corrected | False Corrections | Accuracy |",
+            "|---|---|---|---|---|",
+        ])
+        for field in sorted(fa.keys()):
+            m = fa.get(field, {}) if isinstance(fa, dict) else {}
+            lines.append(
+                f"| {field} | {int(m.get('errors_in_original', 0))} | {int(m.get('errors_corrected', 0))} | {int(m.get('false_corrections', 0))} | {float(m.get('accuracy', 0.0)):.3f} |"
+            )
         lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
@@ -348,7 +349,29 @@ async def validate_node(state: PipelineState) -> dict:
                 f"({len(batch_entries)} entries)"
             )
 
-            report = await agent.validate_entries(batch_entries)
+            report = None
+            last_err = None
+            max_attempts = 3
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    report = await agent.validate_entries(batch_entries)
+                    break
+                except Exception as e:
+                    last_err = e
+                    print(
+                        f"  [PIPELINE] Validation batch {batch_index} attempt {attempt}/{max_attempts} failed: {e}"
+                    )
+                    if attempt < max_attempts:
+                        await asyncio.sleep(min(2 * attempt, 6))
+
+            if report is None:
+                return {
+                    "error": (
+                        f"Validation failed for batch {batch_index}/{total_batches} "
+                        f"after {max_attempts} attempts: {last_err}"
+                    )
+                }
+
             all_raw_data.extend(report.get("raw_data", []))
             all_structured.extend(report.get("structured", []))
 
@@ -401,7 +424,7 @@ async def validate_node(state: PipelineState) -> dict:
 
         validation_metrics, validation_error = _compute_validation_metrics(
             validation_structured=all_structured,
-            ground_truth_path=state.get("ground_truth_path", "bibtex/ground_truth/test_truth.json"),
+            ground_truth_path=state.get("ground_truth_path", "bibtex/ground_truth/stefan_train2_truth.json"),
         )
 
         validation_metrics_path = validation_dir / "validation_metrics.json"
@@ -494,18 +517,25 @@ async def evaluation_node(state: PipelineState) -> dict:
     try:
         strategy   = EPromptStrategy(state.get("strategy", "rag"))
         output_dir = Path(state["output_dir"]) / "evaluation"
-        agent      = EvaluationAgent(str(output_dir), strategy=strategy, ground_truth_path=state.get("ground_truth_path", "bibtex/ground_truth/test_truth.json"))
+        agent      = EvaluationAgent(str(output_dir), strategy=strategy, ground_truth_path=state.get("ground_truth_path", "bibtex/ground_truth/stefan_train2_truth.json"))
 
-        result = await agent.evaluate(raw_data=raw_data, corrections=corrections)
+        result = await agent.evaluate(
+            raw_data=raw_data,
+            corrections=corrections,
+            validation_structured=state.get("validation_structured", []),
+        )
         return {
+            "validation_metrics": result.get("validation_metrics", state.get("validation_metrics", {})),
             "evaluation_metrics":        result.get("overall_metrics", {}),
             "evaluation_field_accuracy": result.get("field_accuracy", {}),
+            "evaluation_entry_type_statistics": result.get("entry_type_statistics", {}),
             "evaluation_error":          "",
         }
     except Exception as e:
         return {
             "evaluation_metrics":        {},
             "evaluation_field_accuracy": {},
+            "evaluation_entry_type_statistics": {},
             "evaluation_error":          f"Evaluation failed: {e}",
         }
 
@@ -555,6 +585,7 @@ async def save_outputs_node(state: PipelineState) -> dict:
         "correction": {
             "overall_metrics": state.get("evaluation_metrics", {}),
             "field_accuracy": state.get("evaluation_field_accuracy", {}),
+            "entry_type_statistics": state.get("evaluation_entry_type_statistics", {}),
             "error": state.get("evaluation_error", ""),
         },
     }
@@ -633,7 +664,7 @@ async def run_pipeline(
     mcp_config_path: str | None = None,
     output_dir:      str | None = None,
     strategy:        str = "rag",
-    ground_truth_path: str = "bibtex/ground_truth/test_truth.json",
+    ground_truth_path: str = "bibtex/ground_truth/stefan_train1_truth.json",
     batch_size: int = 25,
 ) -> PipelineState:
     """Run the full pipeline with a single prompting strategy."""
@@ -692,7 +723,7 @@ async def run_experiment(
     source_type:     str = "file",
     mcp_config_path: str | None = None,
     output_dir:      str | None = None,
-    ground_truth_path: str = "bibtex/ground_truth/ground_truth.json",
+    ground_truth_path: str = "bibtex/ground_truth/stefan_train1_truth.json",
     batch_size: int = 25,
 ) -> dict:
     """
@@ -792,6 +823,11 @@ Examples:
     parser.add_argument("--mcp-config",  help="Path to mcp.json config")
     parser.add_argument("--output-dir",  help="Root output directory for reports")
     parser.add_argument(
+        "--ground-truth",
+        default="bibtex/ground_truth/stefan_train1_truth.json",
+        help="Path to ground-truth JSON file used for evaluation",
+    )
+    parser.add_argument(
         "--strategy",
         choices=["zero_shot", "rag", "cot"],
         default="rag",
@@ -827,6 +863,7 @@ Examples:
             source_type=stype,
             mcp_config_path=args.mcp_config,
             output_dir=args.output_dir,
+            ground_truth_path=args.ground_truth,
             batch_size=args.batch_size,
         ))
     else:
@@ -836,7 +873,7 @@ Examples:
             mcp_config_path=args.mcp_config,
             output_dir=args.output_dir,
             strategy=args.strategy,
-            ground_truth_path="bibtex/ground_truth/ground_truth.json",
+            ground_truth_path=args.ground_truth,
             batch_size=args.batch_size,
         ))
 

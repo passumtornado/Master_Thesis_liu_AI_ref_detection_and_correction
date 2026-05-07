@@ -1,768 +1,748 @@
 [
   {
-    "key": "DBLP:journals/algorithms/Dronyuk25",
+    "key": "DBLP:journals/algorithms/HammadZOG25",
     "entry_type": "article",
     "fields": {
-      "author": "Ivanna Dronyuk",
-      "title": "Algorithms for Calculating Generalized Trigonometric Functions",
-      "journal": "Algorithms",
-      "volume": "18",
-      "number": "2",
-      "pages": "60",
-      "year": "2025",
-      "url": "https://doi.org/10.3390/a18020060",
-      "doi": "10.3390/A18020060",
-      "timestamp": "Tue, 30 Sep 2025 08:54:39 +0200",
-      "biburl": "https://dblp.org/rec/journals/algorithms/Dronyuk25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/algorithms/DabekMMVC25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Aleksander Dabek and\n                  Lorenzo Mantovani and\n                  Susanna Mirabella and\n                  Michele Vignati and\n                  Simone Cinquemani",
-      "title": "Advancements in Non-Destructive Detection of Biochemical Traits in\n                  Plants Through Spectral Imaging-Based Algorithms: {A} Systematic Review",
-      "journal": "Algorithms",
-      "volume": "18",
-      "number": "5",
-      "pages": "255",
-      "year": "2025",
-      "url": "https://doi.org/10.3390/a18050255",
-      "doi": "10.3390/A18050255",
-      "timestamp": "Tue, 30 Sep 2025 08:54:42 +0200",
-      "biburl": "https://dblp.org/rec/journals/algorithms/DabekMMVC25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/assets/DuvalVSLW23",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Jared Duval and\n                  Laia Turmo Vidal and\n                  Elena M{\\'{a}}rquez Segura and\n                  Yinchu Li and\n                  Annika Waern",
-      "title": "Reimagining Machine Learning's Role in Assistive Technology by Co-Designing\n                  Exergames with Children Using a Participatory Machine Learning Design\n                  Probe",
-      "booktitle": "Proceedings of the 25th International {ACM} {SIGACCESS} Conference\n                  on Computers and Accessibility, {ASSETS} 2023, New York, NY, USA,\n                  October 22-25, 2023",
-      "pages": "33:1--33:16",
-      "publisher": "{ACM}",
-      "year": "2023",
-      "url": "https://doi.org/10.1145/3597638.3608421",
-      "doi": "10.1145/3597638.3608421",
-      "timestamp": "Sun, 19 Jan 2025 13:31:46 +0100",
-      "biburl": "https://dblp.org/rec/conf/assets/DuvalVSLW23.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/aaaiss/NirenburgKM23",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Sergei Nirenburg and\n                  Nikhil Krishnaswamy and\n                  Marjorie McShane",
-      "editor": "Andreas Martin and\n                  Hans{-}Georg Fill and\n                  Aurona Gerber and\n                  Knut Hinkelmann and\n                  Doug Lenat and\n                  Reinhard Stolle and\n                  Frank van Harmelen",
-      "title": "Hybrid Machine Learning/Knowledge Base Systems Learning through Natural\n                  Language Dialogue with Deep Learning Models",
-      "booktitle": "Proceedings of the {AAAI} 2023 Spring Symposium on Challenges Requiring\n                  the Combination of Machine Learning and Knowledge Engineering {(AAAI-MAKE}\n                  2023), Hyatt Regency, San Francisco Airport, California, USA, March\n                  27-29, 2023",
-      "series": "{CEUR} Workshop Proceedings",
-      "volume": "3433",
-      "publisher": "CEUR-WS.org",
-      "year": "2023",
-      "url": "https://ceur-ws.org/Vol-3433/paper3.pdf",
-      "timestamp": "Wed, 02 Aug 2023 16:52:45 +0200",
-      "biburl": "https://dblp.org/rec/conf/aaaiss/NirenburgKM23.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/isj/GhasemaghaeiK25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Maryam Ghasemaghaei and\n                  Nima Kordzadeh",
-      "title": "Ethics in the Age of Algorithms: Unravelling the Impact of Algorithmic\n                  Unfairness on Data Analytics Recommendation Acceptance",
-      "journal": "Inf. Syst. J.",
-      "volume": "35",
-      "number": "4",
-      "pages": "1166--1197",
-      "year": "2025",
-      "url": "https://doi.org/10.1111/isj.12572",
-      "doi": "10.1111/ISJ.12572",
-      "timestamp": "Thu, 11 Sep 2025 20:24:09 +0200",
-      "biburl": "https://dblp.org/rec/journals/isj/GhasemaghaeiK25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/icmlt/JonesRM22",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Mason Jones and\n                  Francesco Romano and\n                  Abidalrahman Mohd",
-      "title": "Machine Learning in Textual Criticism: An examination of the performance\n                  of supervised machine learning algorithms in reconstructing the text\n                  of the Greek New Testament",
-      "booktitle": "{ICMLT} 2022: 7th International Conference on Machine Learning Technologies,\n                  Rome, Italy, March 11 - 13, 2022",
-      "pages": "1--5",
-      "publisher": "{ACM}",
-      "year": "2022",
-      "url": "https://doi.org/10.1145/3529399.3529400",
-      "doi": "10.1145/3529399.3529400",
-      "timestamp": "Sun, 19 Jan 2025 13:35:32 +0100",
-      "biburl": "https://dblp.org/rec/conf/icmlt/JonesRM22.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/almob/CicherskiLD25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Adam Cicherski and\n                  Anna Lisiecka and\n                  Norbert Dojer",
-      "title": "AlfaPang: alignment free algorithm for pangenome graph construction",
-      "journal": "Algorithms Mol. Biol.",
-      "volume": "20",
-      "number": "1",
-      "pages": "7",
-      "year": "2025",
-      "url": "https://doi.org/10.1186/s13015-025-00277-7",
-      "doi": "10.1186/S13015-025-00277-7",
-      "timestamp": "Fri, 30 May 2025 13:34:25 +0200",
-      "biburl": "https://dblp.org/rec/journals/almob/CicherskiLD25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/algorithms/IslamRB25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Md Saiful Islam and\n                  Tushar Kanti Roy and\n                  Israt Jahan Bushra",
-      "title": "Marine Predators Algorithm-Based Robust Composite Controller for Enhanced\n                  Power Sharing and Real-Time Voltage Stability in {DC-AC} Microgrids",
-      "journal": "Algorithms",
-      "volume": "18",
-      "number": "8",
-      "pages": "531",
-      "year": "2025",
-      "url": "https://doi.org/10.3390/a18080531",
-      "doi": "10.3390/A18080531",
-      "timestamp": "Tue, 30 Sep 2025 08:54:45 +0200",
-      "biburl": "https://dblp.org/rec/journals/algorithms/IslamRB25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/algorithms/ZhangFFSH25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Yue Zhang and\n                  Nobuo Funabiki and\n                  Erita Cicilia Febrianti and\n                  Amang Sudarsono and\n                  Chen{-}Chien Hsu",
-      "title": "A Hair Drawing Evaluation Algorithm for Exactness Assessment Method\n                  in Portrait Drawing Learning Assistant System",
-      "journal": "Algorithms",
-      "volume": "18",
-      "number": "3",
-      "pages": "143",
-      "year": "2025",
-      "url": "https://doi.org/10.3390/a18030143",
-      "doi": "10.3390/A18030143",
-      "timestamp": "Tue, 30 Sep 2025 08:54:40 +0200",
-      "biburl": "https://dblp.org/rec/journals/algorithms/ZhangFFSH25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/ukci/NaikN23a",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Dishita Naik and\n                  Nitin Naik",
-      "editor": "Nitin Naik and\n                  Paul Jenkins and\n                  Paul Grace and\n                  Longzhi Yang and\n                  Shaligram Prajapat",
-      "title": "The Changing Landscape of Machine Learning: {A} Comparative Analysis\n                  of Centralized Machine Learning, Distributed Machine Learning and\n                  Federated Machine Learning",
-      "booktitle": "Advances in Computational Intelligence Systems - Contributions Presented\n                  at the 22nd {UK} Workshop on Computational Intelligence {(UKCI} 2023),\n                  September 6-8, 2023, Birmingham, {UK}",
-      "series": "Advances in Intelligent Systems and Computing",
-      "volume": "1453",
-      "pages": "18--28",
-      "publisher": "Springer",
-      "year": "2023",
-      "url": "https://doi.org/10.1007/978-3-031-47508-5\\_2",
-      "doi": "10.1007/978-3-031-47508-5\\_2",
-      "timestamp": "Sun, 04 Aug 2024 19:40:03 +0200",
-      "biburl": "https://dblp.org/rec/conf/ukci/NaikN23a.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/algorithms/ShaoZLFJ25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Yuxiang Shao and\n                  Longyang Zhou and\n                  Xiang Li and\n                  Chunsheng Feng and\n                  Xinyu Jin",
-      "title": "SA-Net: Leveraging Spatial Correlations Spatial-Aware Net for Multi-Perspective\n                  Robust Estimation Algorithm",
-      "journal": "Algorithms",
-      "volume": "18",
-      "number": "2",
-      "pages": "65",
-      "year": "2025",
-      "url": "https://doi.org/10.3390/a18020065",
-      "doi": "10.3390/A18020065",
-      "timestamp": "Tue, 30 Sep 2025 08:54:39 +0200",
-      "biburl": "https://dblp.org/rec/journals/algorithms/ShaoZLFJ25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/algorithms/CarcangiuM25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Sara Carcangiu and\n                  Augusto Montisci",
-      "title": "A Training Algorithm for Locally Recurrent Neural Networks Based on\n                  the Explicit Gradient of the Loss Function",
-      "journal": "Algorithms",
-      "volume": "18",
-      "number": "2",
-      "pages": "104",
-      "year": "2025",
-      "url": "https://doi.org/10.3390/a18020104",
-      "doi": "10.3390/A18020104",
-      "timestamp": "Tue, 30 Sep 2025 08:54:40 +0200",
-      "biburl": "https://dblp.org/rec/journals/algorithms/CarcangiuM25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/isdfs/OzpolatK23",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Zeynep Ozpolat and\n                  Murat Karabatak",
-      "title": "Exploring the Potential of Quantum-Based Machine Learning: {A} Comparative\n                  Study of {QSVM} and Classical Machine Learning Algorithms",
-      "booktitle": "11th International Symposium on Digital Forensics and Security, {ISDFS}\n                  2023, Chattanooga, TN, USA, May 11-12, 2023",
-      "pages": "1--5",
-      "publisher": "{IEEE}",
-      "year": "2023",
-      "url": "https://doi.org/10.1109/ISDFS58141.2023.10131821",
-      "doi": "10.1109/ISDFS58141.2023.10131821",
-      "timestamp": "Sun, 04 Jun 2023 12:05:03 +0200",
-      "biburl": "https://dblp.org/rec/conf/isdfs/OzpolatK23.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/iui/ChiangY22",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Chun{-}Wei Chiang and\n                  Ming Yin",
-      "editor": "Giulio Jacucci and\n                  Samuel Kaski and\n                  Cristina Conati and\n                  Simone Stumpf and\n                  Tuukka Ruotsalo and\n                  Krzysztof Gajos",
-      "title": "Exploring the Effects of Machine Learning Literacy Interventions on\n                  Laypeople's Reliance on Machine Learning Models",
-      "booktitle": "{IUI} 2022: 27th International Conference on Intelligent User Interfaces,\n                  Helsinki, Finland, March 22 - 25, 2022",
-      "pages": "148--161",
-      "publisher": "{ACM}",
-      "year": "2022",
-      "url": "https://doi.org/10.1145/3490099.3511121",
-      "doi": "10.1145/3490099.3511121",
-      "timestamp": "Sun, 19 Jan 2025 13:25:32 +0100",
-      "biburl": "https://dblp.org/rec/conf/iui/ChiangY22.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/algorithms/HamdiKMB25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Abdelouahed Hamdi and\n                  Arezou Karimi and\n                  Farshid Mehrdoust and\n                  Samir Brahim Belhaouari",
-      "title": "Comparative Analysis of Artificial Neural Networks and Evolutionary\n                  Algorithms in DEA-{\\(\\beta\\)}-MSV Portfolio Optimization",
+      "author": "Ma'mon Abu Hammad and\n                  Imane Zouak and\n                  Adel Ouannas and\n                  Giuseppe Grassi",
+      "title": "Fractional Discrete Computer Virus System: Chaos and Complexity Algorithms",
       "journal": "Algorithms",
       "volume": "18",
       "number": "7",
-      "pages": "384",
+      "pages": "444",
       "year": "2025",
-      "url": "https://doi.org/10.3390/a18070384",
-      "doi": "10.3390/A18070384",
-      "timestamp": "Tue, 30 Sep 2025 08:54:43 +0200",
-      "biburl": "https://dblp.org/rec/journals/algorithms/HamdiKMB25.bib",
+      "url": "https://doi.org/10.3390/a18070444",
+      "doi": "10.3390/A18070444",
+      "timestamp": "Tue, 30 Sep 2025 08:54:44 +0200",
+      "biburl": "https://dblp.org/rec/journals/algorithms/HammadZOG25.bib",
       "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "DBLP:journals/aghcs/RajasekarKSPZZ22",
+    "key": "DBLP:journals/algorithms/BoiangiuVSTV25",
     "entry_type": "article",
     "fields": {
-      "author": "Vani Rajasekar and\n                  Sathya Krishnamoorthi and\n                  Muzafer Saracevic and\n                  Dzenis Pepic and\n                  Mahir Zajmovic and\n                  Haris Zogic",
-      "title": "Ensemble Machine Learning Methods to Predict the Balancing of Ayurvedic\n                  Constituents in the Human Body Ensemble Machine Learning Methods to\n                  Predict",
-      "journal": "Comput. Sci.",
+      "author": "Costin{-}Anton Boiangiu and\n                  Giorgiana Violeta Vlasceanu and\n                  Constantin{-}Eduard Staniloiu and\n                  Nicolae Tarba and\n                  Mihai{-}Lucian Voncila",
+      "title": "A Novel Connected-Components Algorithm for 2D Binarized Images",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "6",
+      "pages": "344",
+      "year": "2025",
+      "url": "https://doi.org/10.3390/a18060344",
+      "doi": "10.3390/A18060344",
+      "timestamp": "Tue, 30 Sep 2025 08:54:43 +0200",
+      "biburl": "https://dblp.org/rec/journals/algorithms/BoiangiuVSTV25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:conf/ei-mlsi/GuoSBGVLAL22",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Zhen Guo and\n                  Jung Ki Song and\n                  George Barbastathis and\n                  Michael E. Glinsky and\n                  Courtenay T. Vaughan and\n                  Kurt W. Larson and\n                  Bradley K. Alpert and\n                  Zachary H. Levine",
+      "editor": "Marc Louis Klasky and\n                  Jong Chul Ye",
+      "title": "Advantage of Machine Learning over Maximum Likelihood in Limited-Angle\n                  Low-Photon X-Ray Tomography",
+      "booktitle": "Machine Learning for Scientific Imaging 2022, online, January 15-26,\n                  2022",
+      "pages": "1--6",
+      "publisher": "Society for Imaging Science and Technology",
+      "year": "2022",
+      "url": "https://doi.org/10.2352/EI.2022.34.5.MLSI-202",
+      "doi": "10.2352/EI.2022.34.5.MLSI-202",
+      "timestamp": "Mon, 28 Aug 2023 21:17:52 +0200",
+      "biburl": "https://dblp.org/rec/conf/ei-mlsi/GuoSBGVLAL22.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/algorithms/KarousosPVV25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Nikos Karousos and\n                  Despoina Pantazi and\n                  George Vorvilas and\n                  Vassilios S. Verykios",
+      "title": "Assigning Candidate Tutors to Modules: {A} Preference Adjustment Matching\n                  Algorithm {(PAMA)}",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "5",
+      "pages": "250",
+      "year": "2025",
+      "url": "https://doi.org/10.3390/a18050250",
+      "doi": "10.3390/A18050250",
+      "timestamp": "Tue, 30 Sep 2025 08:54:41 +0200",
+      "biburl": "https://dblp.org/rec/journals/algorithms/KarousosPVV25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/cor/UzunogluGT25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Aykut Uzunoglu and\n                  Christian Gahm and\n                  Axel Tuma",
+      "title": "Machine Learning based Algorithm Selection and Genetic Algorithms\n                  for serial-batch scheduling",
+      "journal": "Comput. Oper. Res.",
+      "volume": "173",
+      "pages": "106827",
+      "year": "2025",
+      "url": "https://doi.org/10.1016/j.cor.2024.106827",
+      "doi": "10.1016/J.COR.2024.106827",
+      "timestamp": "Mon, 09 Dec 2024 22:47:01 +0100",
+      "biburl": "https://dblp.org/rec/journals/cor/UzunogluGT25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/access/GhoshC25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Ananya Ghosh and\n                  Jyotismita Chaki",
+      "title": "Fuzzy Enhanced Kidney Tumor Detection: Integrating Machine Learning\n                  Operations for a Fusion of Twin Transferable Network and Weighted\n                  Ensemble Machine Learning Classifier",
+      "journal": "{IEEE} Access",
+      "volume": "13",
+      "pages": "7135--7159",
+      "year": "2025",
+      "url": "https://doi.org/10.1109/ACCESS.2025.3526272",
+      "doi": "10.1109/ACCESS.2025.3526272",
+      "timestamp": "Sat, 25 Jan 2025 23:23:12 +0100",
+      "biburl": "https://dblp.org/rec/journals/access/GhoshC25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/access/YeapETY25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Herrick Han Lin Yeap and\n                  Kok Seng Eu and\n                  Tee Hean Tan and\n                  Kian Meng Yap",
+      "title": "Neighboring Predictive Gradient Spatio-Temporal Sequencing Algorithm:\n                  An Object Sequencing Algorithm for Logical Ordering of Sparse Object\n                  Detections",
+      "journal": "{IEEE} Access",
+      "volume": "13",
+      "pages": "160034--160047",
+      "year": "2025",
+      "url": "https://doi.org/10.1109/ACCESS.2025.3604022",
+      "doi": "10.1109/ACCESS.2025.3604022",
+      "timestamp": "Tue, 14 Oct 2025 19:40:23 +0200",
+      "biburl": "https://dblp.org/rec/journals/access/YeapETY25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/algorithms/MaSXW25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Junxia Ma and\n                  Yongxuan Sang and\n                  Yaoli Xu and\n                  Bo Wang",
+      "title": "A Linear Regression Prediction-Based Dynamic Multi-Objective Evolutionary\n                  Algorithm with Correlations of Pareto Front Points",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "6",
+      "pages": "372",
+      "year": "2025",
+      "url": "https://doi.org/10.3390/a18060372",
+      "doi": "10.3390/A18060372",
+      "timestamp": "Tue, 30 Sep 2025 08:54:43 +0200",
+      "biburl": "https://dblp.org/rec/journals/algorithms/MaSXW25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:conf/icarm/Ji0HCYZWGS24",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Guanfeng Ji and\n                  Zhuo Zhang and\n                  Guan Huang and\n                  Rongxin Cui and\n                  Weisheng Yan and\n                  Shouxu Zhang and\n                  Yintao Wang and\n                  Xinxin Guo and\n                  Qi Sun",
+      "title": "Hybrid Algorithm Research Based on Improved Genetic Algorithm and\n                  Auction Algorithm for AUVs Task Allocation",
+      "booktitle": "International Conference on Advanced Robotics and Mechatronics, {ICARM}\n                  2024, Tokyo, Japan, July 8-10, 2024",
+      "pages": "88--93",
+      "publisher": "{IEEE}",
+      "year": "2024",
+      "url": "https://doi.org/10.1109/ICARM62033.2024.10715788",
+      "doi": "10.1109/ICARM62033.2024.10715788",
+      "timestamp": "Tue, 14 Oct 2025 19:35:57 +0200",
+      "biburl": "https://dblp.org/rec/conf/icarm/Ji0HCYZWGS24.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/ijmi/BelstiMDMSET23",
+    "entry_type": "article",
+    "fields": {
+      "author": "Yitayeh Belsti and\n                  Lisa Moran and\n                  Lan Du and\n                  Aya Mousa and\n                  Kushan De Silva and\n                  Joanne Enticott and\n                  Helena Teede",
+      "title": "Comparison of machine learning and conventional logistic regression-based\n                  prediction models for gestational diabetes in an ethnically diverse\n                  population; the Monash {GDM} Machine learning model",
+      "journal": "Int. J. Medical Informatics",
+      "volume": "179",
+      "pages": "105228",
+      "year": "2023",
+      "url": "https://doi.org/10.1016/j.ijmedinf.2023.105228",
+      "doi": "10.1016/J.IJMEDINF.2023.105228",
+      "timestamp": "Sun, 06 Oct 2024 21:30:10 +0200",
+      "biburl": "https://dblp.org/rec/journals/ijmi/BelstiMDMSET23.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/anor/JiangJCC22",
+    "entry_type": "article",
+    "fields": {
+      "author": "Manrui Jiang and\n                  Lifen Jia and\n                  Zhensong Chen and\n                  Wei Chen",
+      "title": "The two-stage machine learning ensemble models for stock price prediction\n                  by combining mode decomposition, extreme learning machine and improved\n                  harmony search algorithm",
+      "journal": "Ann. Oper. Res.",
+      "volume": "309",
+      "number": "2",
+      "pages": "553--585",
+      "year": "2022",
+      "url": "https://doi.org/10.1007/s10479-020-03690-w",
+      "doi": "10.1007/S10479-020-03690-W",
+      "timestamp": "Tue, 08 Feb 2022 10:41:06 +0100",
+      "biburl": "https://dblp.org/rec/journals/anor/JiangJCC22.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/idt/SivalingamK25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Saravanan Madderi Sivalingam and\n                  P. Pavan Kumar",
+      "title": "Pufferfish: Cost-aware based task scheduling algorithm using pufferfish\n                  optimization algorithm in cloud computing",
+      "journal": "Intell. Decis. Technol.",
+      "volume": "19",
+      "number": "4",
+      "pages": "2788--2798",
+      "year": "2025",
+      "url": "https://doi.org/10.1177/18724981251319611",
+      "doi": "10.1177/18724981251319611",
+      "timestamp": "Thu, 11 Sep 2025 20:25:15 +0200",
+      "biburl": "https://dblp.org/rec/journals/idt/SivalingamK25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/algorithms/ZhaoJ25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Yiying Zhao and\n                  Baohua Jin",
+      "title": "{HIPACO:} An {RSSI} Indoor Positioning Algorithm Based on Improved\n                  Ant Colony Optimization Algorithm",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "10",
+      "pages": "654",
+      "year": "2025",
+      "url": "https://doi.org/10.3390/a18100654",
+      "doi": "10.3390/A18100654",
+      "timestamp": "Fri, 31 Oct 2025 14:41:59 +0100",
+      "biburl": "https://dblp.org/rec/journals/algorithms/ZhaoJ25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/gandc/YangTLWGZMX24",
+    "entry_type": "article",
+    "fields": {
+      "author": "Shilong Yang and\n                  Jiayao Tan and\n                  Danyuan Luo and\n                  Yuzhou Wang and\n                  Xu Guo and\n                  Qiuyu Zhu and\n                  Chuanming Ma and\n                  Hanxiang Xiong",
+      "title": "Sample size effects on landslide susceptibility models: {A} comparative\n                  study of heuristic, statistical, machine learning, deep learning and\n                  ensemble learning models with {SHAP} analysis",
+      "journal": "Comput. Geosci.",
+      "volume": "193",
+      "pages": "105723",
+      "year": "2024",
+      "url": "https://doi.org/10.1016/j.cageo.2024.105723",
+      "doi": "10.1016/J.CAGEO.2024.105723",
+      "timestamp": "Mon, 03 Mar 2025 21:39:22 +0100",
+      "biburl": "https://dblp.org/rec/journals/gandc/YangTLWGZMX24.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:conf/kes/Mosqueira-ReyAB21",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Eduardo Mosqueira{-}Rey and\n                  David Alonso{-}R{\\'{\\i}}os and\n                  Andr{\\'{e}}s Baamonde{-}Lozano",
+      "editor": "Jaroslaw Watr{\\'{o}}bski and\n                  Wojciech Salabun and\n                  Carlos Toro and\n                  Cecilia Zanni{-}Merk and\n                  Robert J. Howlett and\n                  Lakhmi C. Jain",
+      "title": "Integrating Iterative Machine Teaching and Active Learning into the\n                  Machine Learning Loop",
+      "booktitle": "Knowledge-Based and Intelligent Information {\\&} Engineering Systems:\n                  Proceedings of the 25th International Conference KES-2021, Virtual\n                  Event / Szczecin, Poland, 8-10 September 2021",
+      "series": "Procedia Computer Science",
+      "volume": "192",
+      "pages": "553--562",
+      "publisher": "Elsevier",
+      "year": "2021",
+      "url": "https://doi.org/10.1016/j.procs.2021.08.057",
+      "doi": "10.1016/J.PROCS.2021.08.057",
+      "timestamp": "Mon, 24 Oct 2022 20:50:58 +0200",
+      "biburl": "https://dblp.org/rec/conf/kes/Mosqueira-ReyAB21.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/nca/YaghoubiYKV24",
+    "entry_type": "article",
+    "fields": {
+      "author": "Elaheh Yaghoubi and\n                  Elnaz Yaghoubi and\n                  Ahmed Khamees and\n                  Amir Hossein Vakili",
+      "title": "A systematic review and meta-analysis of artificial neural network,\n                  machine learning, deep learning, and ensemble learning approaches\n                  in field of geotechnical engineering",
+      "journal": "Neural Comput. Appl.",
+      "volume": "36",
+      "number": "21",
+      "pages": "12655--12699",
+      "year": "2024",
+      "url": "https://doi.org/10.1007/s00521-024-09893-7",
+      "doi": "10.1007/S00521-024-09893-7",
+      "timestamp": "Sun, 06 Oct 2024 21:35:46 +0200",
+      "biburl": "https://dblp.org/rec/journals/nca/YaghoubiYKV24.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/eaai/ChengW25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Jun Cheng and\n                  Wim De Waele",
+      "title": "Multi-objective weighted average algorithm: a novel algorithm for\n                  multi-objective optimization problems and its application in engineering\n                  problems",
+      "journal": "Eng. Appl. Artif. Intell.",
+      "volume": "159",
+      "pages": "111569",
+      "year": "2025",
+      "url": "https://doi.org/10.1016/j.engappai.2025.111569",
+      "doi": "10.1016/J.ENGAPPAI.2025.111569",
+      "timestamp": "Sat, 09 Aug 2025 12:16:28 +0200",
+      "biburl": "https://dblp.org/rec/journals/eaai/ChengW25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/algorithms/WernerHGV22",
+    "entry_type": "article",
+    "fields": {
+      "author": "Yannis Werner and\n                  Tim van Hout and\n                  Vijey Subramani Raja Gopalan and\n                  Thomas Vietor",
+      "title": "Test and Validation of the Surrogate-Based, Multi-Objective {GOMORS}\n                  Algorithm against the {NSGA-II} Algorithm in Structural Shape Optimization",
+      "journal": "Algorithms",
+      "volume": "15",
+      "number": "2",
+      "pages": "46",
+      "year": "2022",
+      "url": "https://doi.org/10.3390/a15020046",
+      "doi": "10.3390/A15020046",
+      "timestamp": "Thu, 24 Mar 2022 15:55:47 +0100",
+      "biburl": "https://dblp.org/rec/journals/algorithms/WernerHGV22.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/eninf/WangJSDL25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Xinhua Wang and\n                  Yujie Jia and\n                  Hao Su and\n                  Hua Dang and\n                  Songfu Lu",
+      "title": "Optimal scheduling of clean energy storage and charging integrated\n                  system by fusing {DE} algorithm and kernel search algorithm",
+      "journal": "Energy Inform.",
+      "volume": "8",
+      "number": "1",
+      "pages": "33",
+      "year": "2025",
+      "url": "https://doi.org/10.1186/s42162-025-00494-9",
+      "doi": "10.1186/S42162-025-00494-9",
+      "timestamp": "Mon, 31 Mar 2025 15:49:37 +0200",
+      "biburl": "https://dblp.org/rec/journals/eninf/WangJSDL25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/algorithms/LiLC25",
+    "entry_type": "article",
+    "fields": {
+      "author": "Guangpeng Li and\n                  Li Li and\n                  Guoyong Cai",
+      "title": "A GIN-Guided Multiobjective Evolutionary Algorithm for Robustness\n                  Optimization of Complex Networks",
+      "journal": "Algorithms",
+      "volume": "18",
+      "number": "10",
+      "pages": "666",
+      "year": "2025",
+      "url": "https://doi.org/10.3390/a18100666",
+      "doi": "10.3390/A18100666",
+      "timestamp": "Fri, 31 Oct 2025 14:42:00 +0100",
+      "biburl": "https://dblp.org/rec/journals/algorithms/LiLC25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "DBLP:journals/comsur/OlowononiRL21",
+    "entry_type": "article",
+    "fields": {
+      "author": "Felix O. Olowononi and\n                  Danda B. Rawat and\n                  Chunmei Liu",
+      "title": "Resilient Machine Learning for Networked Cyber Physical Systems: {A}\n                  Survey for Machine Learning Security to Securing Machine Learning\n                  for {CPS}",
+      "journal": "{IEEE} Commun. Surv. Tutorials",
       "volume": "23",
       "number": "1",
-      "year": "2022",
-      "url": "https://doi.org/10.7494/csci.2022.23.1.4315",
-      "doi": "10.7494/CSCI.2022.23.1.4315",
-      "timestamp": "Sun, 04 Aug 2024 19:52:21 +0200",
-      "biburl": "https://dblp.org/rec/journals/aghcs/RajasekarKSPZZ22.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/jcc/RovenchakD24",
-    "entry_type": "article",
-    "fields": {
-      "author": "Andrij A. Rovenchak and\n                  Maksym Druchok",
-      "title": "Machine learning-assisted search for novel coagulants: When machine\n                  learning can be efficient even if data availability is low",
-      "journal": "J. Comput. Chem.",
-      "volume": "45",
-      "number": "13",
-      "pages": "937--952",
-      "year": "2024",
-      "url": "https://doi.org/10.1002/jcc.27292",
-      "doi": "10.1002/JCC.27292",
-      "timestamp": "Fri, 17 May 2024 21:40:36 +0200",
-      "biburl": "https://dblp.org/rec/journals/jcc/RovenchakD24.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/educon/AlatawiBKC25",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Areej Alatawi and\n                  Ebru Burcu and\n                  Dimitris Kalogiros and\n                  Jes{\\'{u}}s Requena Carri{\\'{o}}n",
-      "title": "Interactive Visual Learning in Machine Learning: {A} Cognitive Learning\n                  Theories-Driven Approach",
-      "booktitle": "{IEEE} Global Engineering Education Conference, {EDUCON} 2025, London,\n                  United Kingdom, April 22-25, 2025",
-      "pages": "1--10",
-      "publisher": "{IEEE}",
-      "year": "2025",
-      "url": "https://doi.org/10.1109/EDUCON62633.2025.11016355",
-      "doi": "10.1109/EDUCON62633.2025.11016355",
-      "timestamp": "Fri, 13 Jun 2025 13:36:36 +0200",
-      "biburl": "https://dblp.org/rec/conf/educon/AlatawiBKC25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/tmlr/KilianYK23",
-    "entry_type": "article",
-    "fields": {
-      "author": "Pascal Kilian and\n                  Sangbeak Ye and\n                  Augustin Kelava",
-      "title": "Mixed effects in machine learning - {A} flexible mixedML framework\n                  to add random effects to supervised machine learning regression",
-      "journal": "Trans. Mach. Learn. Res.",
-      "volume": "2023",
-      "year": "2023",
-      "url": "https://openreview.net/forum?id=MKZyHtmfwH",
-      "timestamp": "Thu, 18 May 2023 14:15:43 +0200",
-      "biburl": "https://dblp.org/rec/journals/tmlr/KilianYK23.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/algorithms/PanZXPGLLMZL25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Yuede Pan and\n                  Kaifeng Zhong and\n                  Yubao Xie and\n                  Mingzhang Pan and\n                  Wei Guan and\n                  Li Li and\n                  Changye Liu and\n                  Xingjia Man and\n                  Zhiqing Zhang and\n                  Mantian Li",
-      "title": "A Review of Hybrid Vehicles Classification and Their Energy Management\n                  Strategies: An Exploration of the Advantages of Genetic Algorithms",
-      "journal": "Algorithms",
-      "volume": "18",
-      "number": "6",
-      "pages": "354",
-      "year": "2025",
-      "url": "https://doi.org/10.3390/a18060354",
-      "doi": "10.3390/A18060354",
-      "timestamp": "Tue, 14 Oct 2025 19:40:35 +0200",
-      "biburl": "https://dblp.org/rec/journals/algorithms/PanZXPGLLMZL25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/mta/SakshiK24",
-    "entry_type": "article",
-    "fields": {
-      "author": "Sakshi and\n                  Vinay Kukreja",
-      "title": "Machine learning and non-machine learning methods in mathematical\n                  recognition systems: Two decades' systematic literature review",
-      "journal": "Multim. Tools Appl.",
-      "volume": "83",
-      "number": "9",
-      "pages": "27831--27900",
-      "year": "2024",
-      "url": "https://doi.org/10.1007/s11042-023-16356-z",
-      "doi": "10.1007/S11042-023-16356-Z",
-      "timestamp": "Sat, 16 Mar 2024 15:10:40 +0100",
-      "biburl": "https://dblp.org/rec/journals/mta/SakshiK24.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/computing/GhasemiT25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Arezoo Ghasemi and\n                  Ghanshyam G. Tejani",
-      "title": "A new optimization algorithm based on the integration of reinforcement\n                  learning and {HHO} algorithm for virtual machine placement in cloud\n                  data centers",
-      "journal": "Computing",
-      "volume": "107",
-      "number": "6",
-      "pages": "145",
-      "year": "2025",
-      "url": "https://doi.org/10.1007/s00607-025-01493-0",
-      "doi": "10.1007/S00607-025-01493-0",
-      "timestamp": "Thu, 26 Jun 2025 22:11:45 +0200",
-      "biburl": "https://dblp.org/rec/journals/computing/GhasemiT25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/algorithms/BoschIVS25",
-    "entry_type": "article",
-    "fields": {
-      "author": "Paul Bosch and\n                  Ernesto Parra Inza and\n                  Ismael R{\\'{\\i}}os Villamar and\n                  Jos{\\'{e}} Luis S{\\'{a}}nchez{-}Santiesteban",
-      "title": "Total Outer-Independent Domination Number: Bounds and Algorithms",
-      "journal": "Algorithms",
-      "volume": "18",
-      "number": "3",
-      "pages": "159",
-      "year": "2025",
-      "url": "https://doi.org/10.3390/a18030159",
-      "doi": "10.3390/A18030159",
-      "timestamp": "Tue, 11 Nov 2025 16:59:40 +0100",
-      "biburl": "https://dblp.org/rec/journals/algorithms/BoschIVS25.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/igarss/GuigalBCVBMM24",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Baptiste Guigal and\n                  Laurent Barthes and\n                  Aymeric Chazottes and\n                  Nicolas Viltard and\n                  Erwan Le Bouar and\n                  Emmanuel Moreau and\n                  C{\\'{e}}cile Mallet",
-      "title": "Meta-Analysis of Rain Nowcasting Using Machine Learning and Non-Machine\n                  Learning Models",
-      "booktitle": "{IGARSS} 2024 - 2024 {IEEE} International Geoscience and Remote Sensing\n                  Symposium, Athens, Greece, July 7-12, 2024",
-      "pages": "5534--5538",
-      "publisher": "{IEEE}",
-      "year": "2024",
-      "url": "https://doi.org/10.1109/IGARSS53475.2024.10642675",
-      "doi": "10.1109/IGARSS53475.2024.10642675",
-      "timestamp": "Thu, 26 Sep 2024 12:36:11 +0200",
-      "biburl": "https://dblp.org/rec/conf/igarss/GuigalBCVBMM24.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:journals/biodb/MaoCCJSWKQYZCF19",
-    "entry_type": "article",
-    "fields": {
-      "author": "Lingfeng Mao and\n                  Meihong Chen and\n                  Qinjie Chu and\n                  Lei Jia and\n                  Most Humaira Sultana and\n                  Dongya Wu and\n                  Xiangdong Kong and\n                  Jie Qiu and\n                  Chu{-}Yu Ye and\n                  Qian{-}Hao Zhu and\n                  Xi Chen and\n                  Longjiang Fan",
-      "title": "RiceRelativesGD: a genomic database of rice relatives for rice research",
-      "journal": "Database J. Biol. Databases Curation",
-      "volume": "2019",
-      "pages": "baz110",
-      "year": "2019",
-      "url": "https://doi.org/10.1093/database/baz110",
-      "doi": "10.1093/DATABASE/BAZ110",
-      "timestamp": "Sat, 30 Sep 2023 10:02:47 +0200",
-      "biburl": "https://dblp.org/rec/journals/biodb/MaoCCJSWKQYZCF19.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "DBLP:conf/aaai/HoagD18",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Ellis Hoag and\n                  Janardhan Rao Doppa",
-      "editor": "Sheila A. McIlraith and\n                  Kilian Q. Weinberger",
-      "title": "Bayesian Optimization Meets Search Based Optimization: {A} Hybrid\n                  Approach for Multi-Fidelity Optimization",
-      "booktitle": "Proceedings of the Thirty-Second {AAAI} Conference on Artificial Intelligence,\n                  (AAAI-18), the 30th innovative Applications of Artificial Intelligence\n                  (IAAI-18), and the 8th {AAAI} Symposium on Educational Advances in\n                  Artificial Intelligence (EAAI-18), New Orleans, Louisiana, USA, February\n                  2-7, 2018",
-      "pages": "8085--8086",
-      "publisher": "{AAAI} Press",
-      "year": "2018",
-      "url": "https://doi.org/10.1609/aaai.v32i1.12184",
-      "doi": "10.1609/AAAI.V32I1.12184",
-      "timestamp": "Sat, 30 Sep 2023 09:33:09 +0200",
-      "biburl": "https://dblp.org/rec/conf/aaai/HoagD18.bib",
-      "bibsource": "dblp computer science bibliography, https://dblp.org"
-    }
-  },
-  {
-    "key": "turing1950computing",
-    "entry_type": "article",
-    "fields": {
-      "author": "Turring, Alan M.",
-      "title": "Computing Machinery and Intelligence",
-      "journal": "Mind",
-      "volume": "59",
-      "number": "236",
-      "pages": "433--460",
-      "year": "1950",
-      "publisher": "Oxford University Press"
-    }
-  },
-  {
-    "key": "blei2003latent",
-    "entry_type": "article",
-    "fields": {
-      "author": "Blei, David M. and Ng, Andrew Y. and Jordan, Michael I.",
-      "title": "Latent {Dirichlet} Allocation",
-      "journal": "Journal of Machine Learning Research",
-      "volume": "3",
-      "pages": "993--1022",
-      "year": "2003",
-      "doi": "jmlr.org/papers/v3/blei03a"
-    }
-  },
-  {
-    "key": "viola2001rapid",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Viola, Paul and Jones, Michael",
-      "title": "Rapid Object Detection using a Boosted Cascade of Simple Features",
-      "booktitle": "Proceedings of the {IEEE} Conference on Computer Vision and Pattern Recognition ({CVPR})",
-      "year": "2001",
-      "pages": "511--518"
-    }
-  },
-  {
-    "key": "hinton2006reducing",
-    "entry_type": "article",
-    "fields": {
-      "author": "Hinton, Geoffrey E. and Salakhutdinov, Ruslan R.",
-      "title": "Reducing the Dimensionality of Data with Neural Networks",
-      "journal": "Science",
-      "volume": "313",
-      "number": "5786",
-      "pages": "504--507",
-      "year": "2007",
-      "doi": "10.1126/science.1127647"
-    }
-  },
-  {
-    "key": "friedman2001greedy",
-    "entry_type": "article",
-    "fields": {
-      "author": "Friedman, Jerome H.",
-      "title": "Greedy Function Approximation: A Gradient Boosting Machine",
-      "journal": "Biometrics",
-      "volume": "29",
-      "number": "5",
-      "pages": "1189--1232",
-      "year": "2001",
-      "doi": "10.1214/aos/1013203451"
-    }
-  },
-  {
-    "key": "krizhevsky2012imagenet",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Krizhevsky, Alex and Sutskever, Ilya and Hintan, Geoffrey E.",
-      "title": "{ImageNet} Classification with Deep Convolutional Neural Networks",
-      "booktitle": "Advances in Neural Information Processing Systems",
-      "volume": "25",
-      "year": "2012",
-      "pages": "1097--1105"
-    }
-  },
-  {
-    "key": "devlin2019bert",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina",
-      "title": "{BERT}: Pre-training of Deep Bidirectional Transformers for the the Language Understanding",
-      "booktitle": "Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics",
-      "year": "2019",
-      "pages": "4171--4186",
-      "doi": "10.18653/v1/N19-1423"
-    }
-  },
-  {
-    "key": "silver2016mastering",
-    "entry_type": "article",
-    "fields": {
-      "author": "Silver, David and Huang, Aja and Maddison, Chris J. and Guez, Arthur and Sifre, Laurent and van den Driessche, George and Schrittwieser, Julian and Antonoglou, Ioannis and Panneershelvam, Veda and Lanctot, Marc and Dieleman, Sven and Grewe, Dominik and Nham, John and Kalchbrenner, Nal and Sutskever, Ilya and Lillicrap, Timothy and Leach, Madeleine and Kavukcuoglu, Koray and Graepel, Thore and Hassabis, Demis",
-      "title": "Mastering the Game of {Go} with Deep Neural Networks and Tree Search",
-      "year": "2016",
-      "doi": "10.1038/nature16961"
-    }
-  },
-  {
-    "key": "lewis2020retrieval",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K{\\\"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt{\\\"a}schel, Tim and Riedel, Sebastian and Kiela, Douwe",
-      "title": "Retrieval-Augmented Generation for Knowledge-Intensive {NLP} Tasks",
-      "booktitle": "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics ({ACL})",
-      "year": "2020",
-      "pages": "9459--9474"
-    }
-  },
-  {
-    "key": "raffel2020exploring",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Raffel, Colin and Shazeer, Noam and Roberts, Adam and Lee, Katherine and and others",
-      "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
-      "journal": "Journal of Machine Learning Research",
-      "volume": "21",
-      "pages": "1--67",
-      "year": "2020"
-    }
-  },
-  {
-    "key": "jumper2021highly",
-    "entry_type": "article",
-    "fields": {
-      "author": "Jumper, John and Evans, Richard and Pritzel, Alexander and Green, Tim and Figurnov, Michael and Ronneberger, Olaf and Tunyasuvunakool, Kathryn and Bates, Russ and {\\v{Z}}{\\'\\i}dek, Augustin and Potapenko, Anna and Bridgland, Alex and Meyer, Clements and Kohl, Simon A. A. and Ballard, Andrew J. and Cowie, Andrew and Romera-Paredes, Bernardino and Nikolov, Stanislav and Jain, Rishub and Adler, Jonas and Back, Trevor and Petersen, Stig and Reiman, David and Clancy, Ellen and Zielinski, Michal and Steinegger, Martin and Pacholska, Michalina and Berghammer, Tamas and Bodenstein, Sebastian and Silver, David and Vinyals, Oriol and Senior, Andrew W. and Kavukcuoglu, Koray and Kohli, Pushmeet and Hassabis, Demis",
-      "title": "Highly Accurate Protein Structure Prediction with {AlphaFold}",
-      "journal": "Science",
-      "volume": "596",
-      "pages": "583--589",
+      "pages": "524--552",
       "year": "2021",
-      "doi": "10.1038/s41586-021-03819-2"
+      "url": "https://doi.org/10.1109/COMST.2020.3036778",
+      "doi": "10.1109/COMST.2020.3036778",
+      "timestamp": "Mon, 03 Mar 2025 21:31:18 +0100",
+      "biburl": "https://dblp.org/rec/journals/comsur/OlowononiRL21.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "wei2022chain",
-    "entry_type": "misc",
-    "fields": {
-      "author": "Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Ichter, Brian and Xia, Fei and Chi, Ed and Le, Quoc and Zhou, Denny",
-      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
-      "year": "2022",
-      "eprint": "2201.11903",
-      "primaryClass": "stat.ML"
-    }
-  },
-  {
-    "key": "szeider2026unmediated",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Szeider, Stefan",
-      "title": "Unmediated {AI}-Assisted Scholarly Citations",
-      "booktitle": "Proceedings of the International Conference on Learning Representations ({ICLR}) 2026",
-      "year": "2026",
-      "doi": "10.52825/ocp.v8i.3161"
-    }
-  },
-  {
-    "key": "wang2024llmagents",
+    "key": "DBLP:journals/algorithms/PantLR25",
     "entry_type": "article",
     "fields": {
-      "author": "Wang, Lei and Ma, Chen and Feng, Xueyang and Zhang, Zeyu and Yang, Hao and Zhang, Jingsen and Chen, Zhiyuan and Tang, Jiakai and Chen, Xu and Lin, Yankai and Zhao, Wayne Xin and Wei, Zhewei and Wen, Ji-Rong",
-      "title": "A Survey on Large Language Model Based Autonomous Agents",
-      "journal": "Frontiers of Computer Science",
+      "author": "Yuv Raj Pant and\n                  Larry Leigh and\n                  Juliana Fajardo Rueda",
+      "title": "Improving K-Means Clustering: {A} Comparative Study of Parallelized\n                  Version of Modified K-Means Algorithm for Clustering of Satellite\n                  Images",
+      "journal": "Algorithms",
       "volume": "18",
-      "number": "6",
-      "year": "2024",
-      "doi": "https://doi.org/10.1007/s11704-024-40231-1"
-    }
-  },
-  {
-    "key": "ghosal2025llm",
-    "entry_type": "article",
-    "fields": {
-      "author": "Ghosal, Soumyajit Seal and others",
-      "title": "Large Language Models: An Overview of Foundational Architectures, Recent Trends, and a New Taxonomy",
-      "journal": "Discover Applied Sciences",
-      "publisher": "Springer Nature",
-      "pages": "1--5",
+      "number": "8",
+      "pages": "532",
       "year": "2025",
-      "doi": "10.1007/s42452-025-07668-w"
+      "url": "https://doi.org/10.3390/a18080532",
+      "doi": "10.3390/A18080532",
+      "timestamp": "Tue, 30 Sep 2025 08:54:45 +0200",
+      "biburl": "https://dblp.org/rec/journals/algorithms/PantLR25.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "vaswani2017transformer",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Vaswanee, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, Lukasz and Polosukhin, Illia",
-      "title": "Attention Is All You Need",
-      "booktitle": "Advances in Neural Information Processing Systems",
-      "volume": "30",
-      "year": "2017",
-      "pages": "5998--6008"
-    }
-  },
-  {
-    "key": "schmidhuber2015deep",
+    "key": "DBLP:journals/access/TrojovskaDT22",
     "entry_type": "article",
     "fields": {
-      "author": "Schmidhuber, Jurgen",
-      "title": "Deep Learning in Neural Networks: An Overview",
-      "journal": "Neural Networks",
-      "volume": "61",
-      "pages": "85--117",
-      "year": "2015",
-      "doi": "10.1016/j.neunet.2014.09.003"
-    }
-  },
-  {
-    "key": "nakamura1995semantic",
-    "entry_type": "article",
-    "fields": {
-      "author": "Nakamura, Hiroshi and Bergmann, Klaus and Ostrowski, Maria",
-      "title": "Semantic Memory Consolidation in Recurrent Neural Architectures",
-      "journal": "International Journal of Intelligent Systems",
+      "author": "Eva Trojovsk{\\'{a}} and\n                  Mohammad Dehghani and\n                  Pavel Trojovsk{\\'{y}}",
+      "title": "Zebra Optimization Algorithm: {A} New Bio-Inspired Optimization Algorithm\n                  for Solving Optimization Algorithm",
+      "journal": "{IEEE} Access",
       "volume": "10",
-      "number": "3",
-      "pages": "441--467",
-      "year": "1995",
-      "doi": "10.1002/int.4550100308"
+      "pages": "49445--49473",
+      "year": "2022",
+      "url": "https://doi.org/10.1109/ACCESS.2022.3172789",
+      "doi": "10.1109/ACCESS.2022.3172789",
+      "timestamp": "Thu, 02 Jun 2022 16:42:17 +0200",
+      "biburl": "https://dblp.org/rec/journals/access/TrojovskaDT22.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "okonkwo1993reasoning",
+    "key": "DBLP:journals/biodb/NgHTT17",
     "entry_type": "article",
     "fields": {
-      "author": "Okonkwo, Emeka and Delacroix, Henri and Yamamoto, Sato",
-      "title": "Monotonic Reasoning Architectures for Industrial Knowledge Bases",
-      "journal": "Transactions on Applied Logic and Machine Cognition",
-      "volume": "2",
-      "pages": "55--78",
-      "year": "1993"
+      "author": "I{-}Man Ng and\n                  Jia{-}Hsin Huang and\n                  Shang{-}Chi Tsai and\n                  Huai{-}Kuang Tsai",
+      "title": "IsoPlot: a database for comparison of mRNA isoforms in fruit fly and\n                  mosquitoes",
+      "journal": "Database J. Biol. Databases Curation",
+      "volume": "2017",
+      "pages": "bax069",
+      "year": "2017",
+      "url": "https://doi.org/10.1093/database/bax069",
+      "doi": "10.1093/DATABASE/BAX069",
+      "timestamp": "Thu, 13 Aug 2020 12:41:39 +0200",
+      "biburl": "https://dblp.org/rec/journals/biodb/NgHTT17.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "shannon1948transformer",
+    "key": "DBLP:journals/nar/BlakeEKRSBG17",
     "entry_type": "article",
     "fields": {
-      "author": "Shannon, Claude E.",
-      "title": "Information Transmission in Transformer-Based Communication Channels",
-      "journal": "Bell System Technical Journal",
-      "volume": "27",
-      "number": "3",
-      "pages": "379--423",
-      "year": "1948",
-      "doi": "10.1002/j.1538-7305.1948.tb99999.x"
+      "author": "Judith A. Blake and\n                  Janan T. Eppig and\n                  James A. Kadin and\n                  Joel E. Richardson and\n                  Cynthia L. Smith and\n                  Carol J. Bult and\n                  The Mouse Genome Database Group",
+      "title": "Mouse Genome Database {(MGD)-2017:} community knowledge resource for\n                  the laboratory mouse",
+      "journal": "Nucleic Acids Res.",
+      "volume": "45",
+      "number": "Database-Issue",
+      "pages": "D723--D729",
+      "year": "2017",
+      "url": "https://doi.org/10.1093/nar/gkw1040",
+      "doi": "10.1093/NAR/GKW1040",
+      "timestamp": "Sun, 17 May 2020 11:47:46 +0200",
+      "biburl": "https://dblp.org/rec/journals/nar/BlakeEKRSBG17.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
     }
   },
   {
-    "key": "silva2055unified",
+    "key": "DBLP:journals/jcal/SpikolRDC18",
+    "entry_type": "article",
+    "fields": {
+      "author": "Daniel Spikol and\n                  Emanuele Ruffaldi and\n                  Giacomo Dabisias and\n                  Mutlu Cukurova",
+      "title": "Supervised machine learning in multimodal learning analytics for estimating\n                  success in project-based learning",
+      "journal": "J. Comput. Assist. Learn.",
+      "volume": "34",
+      "number": "4",
+      "pages": "366--377",
+      "year": "2018",
+      "url": "https://doi.org/10.1111/jcal.12263",
+      "doi": "10.1111/JCAL.12263",
+      "timestamp": "Sun, 19 Jan 2025 14:37:14 +0100",
+      "biburl": "https://dblp.org/rec/journals/jcal/SpikolRDC18.bib",
+      "bibsource": "dblp computer science bibliography, https://dblp.org"
+    }
+  },
+  {
+    "key": "wiener1948cybernetics",
     "entry_type": "book",
     "fields": {
-      "author": "Silva, Ana Paula and Thompson, George R.",
-      "title": "Unified Theory of Mind, Machine, and Meaning",
-      "publisher": "Oxford University Press",
-      "address": "Oxford",
-      "year": "2055"
+      "title": "Cybernetics: Or Control and Communication in the Animal and the Machine",
+      "publisher": "MIT Press",
+      "year": "1948",
+      "address": "Cambridge, MA"
     }
   },
   {
-    "key": "einstein1985ai",
-    "entry_type": "inproceedings",
-    "fields": {
-      "author": "Einstein, Albert and Turing, Alan M.",
-      "title": "Relativistic Constraints on Computational Speed in Intelligent Systems",
-      "booktitle": "Workshop on Physics and Computation, {IEEE}",
-      "year": "1985",
-      "pages": "1--14"
-    }
-  },
-  {
-    "key": "kim2041embodied",
-    "entry_type": "misc",
-    "fields": {
-      "author": "Kim, Soo-Jin and Petrov, Ivan and Wanjiku, Grace",
-      "title": "Embodied {AGI} Using Neuromorphic Substrate Coupling",
-      "year": "2041",
-      "eprint": "2041.99999",
-      "archivePrefix": "arXiv",
-      "primaryClass": "cs.AI"
-    }
-  },
-  {
-    "key": "church1950deeplearning",
+    "key": "rosenblatt1957perceptron",
     "entry_type": "techreport",
     "fields": {
-      "author": "Church, Alonzo",
-      "title": "Lambda Calculus as a Foundation for Deep Learning Architectures",
-      "institution": "Princeton Institute for Advanced Study",
-      "year": "1950"
+      "author": "N. Rosenblatt, F.",
+      "title": "The Perceptron: A Perceiving and Recognizing Automaton",
+      "institution": "Cornell Aeronautical Laboratory",
+      "number": "85-460-1",
+      "year": "1957"
     }
   },
   {
-    "key": "tolkien1978transformers",
+    "key": "mccarthy1956dartmouth",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "McCarthy, John and Minsky, Marvin L. and Rochester, Nathaniel and Shannon, Claude E.",
+      "title": "A Proposal for the {Dartmouth} Summer Research Project on Artificial Intelligence",
+      "booktitle": "Dartmouth Conference Proposal",
+      "year": "1955"
+    }
+  },
+  {
+    "key": "vonneumann1958computer",
+    "entry_type": "book",
+    "fields": {
+      "author": "{von Neumann}, John",
+      "title": "The Computer and the Brain",
+      "publisher": "Yale University Press",
+      "address": "London",
+      "year": "1958"
+    }
+  },
+  {
+    "key": "rumelhart1986learning",
     "entry_type": "article",
     "fields": {
-      "author": "Tolkien, J. R. R. and Minsky, Marvin L.",
-      "title": "Transformer Rings of Power: Attention Mechanisms in Hierarchical World Models",
-      "journal": "Journal of Fantasy Computing",
-      "volume": "1",
+      "author": "Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.",
+      "title": "Learning Representations by Back-Propogating Errors",
+      "journal": "Nature",
+      "volume": "323",
+      "pages": "533--536",
+      "year": "1986",
+      "doi": "10.1038/323533a0"
+    }
+  },
+  {
+    "key": "bengio1994learning",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Bengio, Yoshua and Simard, Patrice and Frasconi, Paolo",
+      "title": "Learning Long-Term Dependencies with Gradient Descent is Difficult",
+      "booktitle": "Proceedings of the International Conference on Machine Learning",
+      "year": "1994",
+      "pages": "157--166",
+      "doi": "10.1109/72.279181"
+    }
+  },
+  {
+    "key": "collobert2008unified",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Collobert, Ronan and Weston, Jason",
+      "title": "A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning",
+      "booktitle": "Proceedings of the 25th International Conference on Machine Learning",
+      "year": "2008",
+      "doi": "10.1145/1390156"
+    }
+  },
+  {
+    "key": "tibshirani1996regression",
+    "entry_type": "article",
+    "fields": {
+      "author": "Tibshirani, Robert",
+      "title": "Regression Shrinkage and Selection via the Lasso",
+      "journal": "Journal of the Royal Statistical Society: Series B",
+      "volume": "58",
+      "number": "12",
+      "pages": "267--288",
+      "year": "1996",
+      "doi": "10.1111/j.2517-6161.1996.tb02080.x"
+    }
+  },
+  {
+    "key": "quinlan1986induction",
+    "entry_type": "article",
+    "fields": {
+      "author": "Quinlan, J. Ross",
+      "title": "Induction of Decision Trees",
+      "journal": "Machine Learning",
+      "volume": "9",
       "number": "1",
-      "pages": "1--24",
-      "year": "1978"
+      "pages": "81--106",
+      "year": "1986",
+      "doi": "10.1007/BF00116251"
+    }
+  },
+  {
+    "key": "mnih2008scalable",
+    "entry_type": "article",
+    "fields": {
+      "author": "Mnih, Andriy and Hinton, Geoffrey E.",
+      "title": "A Scalable Hierarchical Distributed Language Model",
+      "journal": "Advances in Neural Information Processing Systems",
+      "volume": "21",
+      "pages": "1081--1088",
+      "year": "2008",
+      "doi": "10.5555 /2981780.2981913"
+    }
+  },
+  {
+    "key": "he2016deep",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian",
+      "title": "Deep Residual Learning for Image Recognition",
+      "booktitle": "CVPR",
+      "year": "2016",
+      "doi": "10.1109/CVPR.2016.90"
+    }
+  },
+  {
+    "key": "touvron2023llama",
+    "entry_type": "misc",
+    "fields": {
+      "author": "Touvron, Hugo and Lavril, Thibaut and Izacard, Gautier and Martinet, Xavier and Lachaux, Marie-Anne and Lacroix, Timoth{\\'e}e and Rozi{\\`e}re, Baptiste and Goyal, Naman and Hambro, Eric and Azhar, Faisal and Rodriguez, Aurelien and Joulin, Armand and Grave, Edouard and Lample, Guillaume",
+      "title": "{LLaMA}: Open and Efficient Foundation Language Models",
+      "year": "2023",
+      "eprint": "2302.31901",
+      "archivePrefix": "arXiv",
+      "primaryClass": "cs.CL"
+    }
+  },
+  {
+    "key": "agrawal2024hallucination",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Agrawl, Aditya and Suzgun, Mirac and Mackey, Lester and Kalai, Adam Tauman",
+      "title": "Do Language Models Know When They're Hallucinating References?",
+      "booktitle": "Findings of the Association for Computational Linguistics: {EACL} 2024",
+      "year": "2024",
+      "pages": "912--928",
+      "doi": "10.18653/v1/2024.findings-eacl.62"
+    }
+  },
+  {
+    "key": "anthropic2024mcp",
+    "entry_type": "misc",
+    "fields": {
+      "author": "{Anthropic}",
+      "title": "Introducing the Model Context Protocol",
+      "howpublished": "Anthropic Blog",
+      "year": "2023",
+      "url": "https://www.anthropic.com/news/model-context-protocol"
+    }
+  },
+  {
+    "key": "radford2019gpt2",
+    "entry_type": "misc",
+    "fields": {
+      "author": "Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya",
+      "title": "Language Models are Unsupervised Multitask Learners",
+      "year": "2019"
+    }
+  },
+  {
+    "key": "karpukhin2020dense",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Karpukhin, Vladimir and O{\\u{g}}uz, Barlas and Min, Sewon and Lewis, Patrick and Wu, Ledell and Edunov, Sergey and Chen, Danqi and Yih, Wen-tau",
+      "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+      "booktitle": "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing",
+      "year": "2020",
+      "pages": "94--107",
+      "doi": "10.18653/v1/2020.emnlp-main.550"
+    }
+  },
+  {
+    "key": "yuan2026citeaudit",
+    "entry_type": "misc",
+    "fields": {
+      "author": "Yuan, Zihan and Liu, Yue and Cao, Yanru and Sun, Weiwei and Jia, Hao and Chen, Ran and Li, Zheng and Lin, Baoyi and Yuan, Lin and He, Li",
+      "title": "{CiteAudit}: You Cited It, But Did You Read It? A Benchmark for Verifying Scientific References in the {LLM} Era",
+      "year": "2026",
+      "eprint": "2602.23452",
+      "archivePrefix": "arxiv",
+      "primaryClass": "cs.CL"
+    }
+  },
+  {
+    "key": "turing1965bayes",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Turing, Alan M. and Bayes, Thomas and Lovelace, Ada",
+      "title": "Probabilistic Inference in Mechanical Computation",
+      "booktitle": "Proceedings of the Royal Society Symposium on Computation and Probability",
+      "year": "1965",
+      "pages": "1--28"
+    }
+  },
+  {
+    "key": "li2021knowledge",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Li, Fang and Okonkwo, Chukwuemeka and Russo, Elena",
+      "title": "Knowledge-Infused Transformers for Zero-Shot Commonsense Inference",
+      "booktitle": "Proceedings of the International Symposium on Cognitive Artificial Intelligence ({ISCAI})",
+      "year": "2021",
+      "pages": "302--317"
+    }
+  },
+  {
+    "key": "stapel2011social",
+    "entry_type": "article",
+    "fields": {
+      "author": "Stapel, Diederik A.",
+      "title": "Social Categorization and Moral Judgements: Environmental Priming Effects",
+      "journal": "Science",
+      "volume": "332",
+      "number": "6026",
+      "pages": "251--253",
+      "year": "2011",
+      "doi": "10.1126/science.1201148"
+    }
+  },
+  {
+    "key": "wakefield1998autism",
+    "entry_type": "article",
+    "fields": {
+      "author": "Wakefield, Andrew J. and Murch, Simon H. and Anthony, Amar and Linnell, John and Casson, David M. and Malik, Mohsin and Berelowitz, Mark and Dhillon, Amar P. and Thomson, Michael A. and Harvey, Peter and Valentine, Alan and Davies, Susan E. and Walker-Smith, John A.",
+      "title": "Ileal-Lymphoid-Nodular Hyperplasia, Non-Specific Colitis, and Pervasive Developmental Disorder in Children",
+      "journal": "The Lancet",
+      "volume": "351",
+      "number": "9103",
+      "pages": "637--641",
+      "year": "1998",
+      "doi": "10.1016/S0140-6736(97)11096-0"
+    }
+  },
+  {
+    "key": "hwang2005patient",
+    "entry_type": "article",
+    "fields": {
+      "author": "Hwang, Woo Suk and Ryu, Young June and Park, Jong Hyuk and Park, Eu Suk and Lee, Eu Gene and Koo, Ja Min and Jeon, Hyun Yul and Lee, Bu Chang and Kang, Sung Keun and Kim, Sun Jong and Ahn, Curie and Hwang, Jung Hye and Park, Ky Young and Cibelli, Jose B. and Moon, Shin Yong",
+      "title": "Patient-Specific Embryonic Stem Cells Derived from Human {SCNT} Blastocysts",
+      "journal": "Science",
+      "volume": "308",
+      "number": "5729",
+      "pages": "1777--1783",
+      "year": "2005",
+      "doi": "10.1126/science.1112286"
+    }
+  },
+  {
+    "key": "babbage1842bert",
+    "entry_type": "article",
+    "fields": {
+      "author": "Babbage, Charles",
+      "title": "{BERT}: Bidirectional Encoding in the Analytical Engine",
+      "journal": "Philosophical Transactions of the Royal Society",
+      "volume": "132",
+      "pages": "199--214",
+      "year": "1842"
+    }
+  },
+  {
+    "key": "poe2022hallucination",
+    "entry_type": "inproceedings",
+    "fields": {
+      "author": "Poe, Edgar Allan and Bengio, Yoshua and LeCun, Yann",
+      "title": "The Hallucinating Machine: Gothic Perspectives on Neural Confabulation",
+      "booktitle": "Workshop on Creative {AI}, {NeurIPS} 2022",
+      "year": "2022",
+      "pages": "1--12"
     }
   }
 ]

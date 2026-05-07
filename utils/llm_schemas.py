@@ -9,8 +9,9 @@ class ValidationResult(BaseModel):
     model_config = ConfigDict(extra="ignore", str_strip_whitespace=True)
 
     entry_id: str
-    status: Literal["valid", "partially_valid", "invalid"]
+    status: Literal["valid", "partially_valid", "invalid", "unverifiable"]
     confidence: float = Field(0.0, ge=0.0, le=1.0)
+    access_error: bool = Field(default=False)
     issues: list[str] = Field(default_factory=list)
     suggested_fixes: dict[str, Any] = Field(default_factory=dict)
 

@@ -76,6 +76,7 @@ class PipelineState(TypedDict):
     validation_structured: list[dict]   # per-entry structured results
     raw_data:            list[dict]
     validation_metrics:  dict
+    validation_telemetry: dict
     validation_error:    str
 
     # ── correction ────────────────────────────────────────────
@@ -341,6 +342,13 @@ async def validate_node(state: PipelineState) -> dict:
         markdown_parts: list[str] = []
         all_structured: list[dict] = []
         all_raw_data: list[dict] = []
+        all_validation_telemetry: dict[str, Any] = {
+            "total_requests": 0,
+            "cache_hits": 0,
+            "total_retries": 0,
+            "duration_seconds": 0.0,
+            "retries_by_tool": {},
+        }
 
         for batch_index, start in enumerate(range(0, total_entries, batch_size), start=1):
             batch_entries = entries[start:start + batch_size]
@@ -374,6 +382,16 @@ async def validate_node(state: PipelineState) -> dict:
 
             all_raw_data.extend(report.get("raw_data", []))
             all_structured.extend(report.get("structured", []))
+            telemetry = report.get("telemetry", {}) or {}
+            all_validation_telemetry["total_requests"] += int(telemetry.get("total_requests", 0) or 0)
+            all_validation_telemetry["cache_hits"] += int(telemetry.get("cache_hits", 0) or 0)
+            all_validation_telemetry["total_retries"] += int(telemetry.get("total_retries", 0) or 0)
+            all_validation_telemetry["duration_seconds"] += float(telemetry.get("duration_seconds", 0.0) or 0.0)
+            retries_by_tool = telemetry.get("retries_by_tool", {}) or {}
+            for tool_name, count in retries_by_tool.items():
+                all_validation_telemetry["retries_by_tool"][tool_name] = (
+                    all_validation_telemetry["retries_by_tool"].get(tool_name, 0) + int(count or 0)
+                )
 
             batch_markdown = report.get("markdown_report", "").strip()
             if batch_markdown:
@@ -427,9 +445,26 @@ async def validate_node(state: PipelineState) -> dict:
             ground_truth_path=state.get("ground_truth_path", "bibtex/ground_truth/stefan_train2_truth.json"),
         )
 
+        total_lookups = all_validation_telemetry["cache_hits"] + all_validation_telemetry["total_requests"]
+        all_validation_telemetry["cache_hit_rate"] = round(
+            (all_validation_telemetry["cache_hits"] / total_lookups * 100) if total_lookups > 0 else 0.0,
+            2,
+        )
+        all_validation_telemetry["requests_per_second"] = round(
+            (all_validation_telemetry["total_requests"] / all_validation_telemetry["duration_seconds"])
+            if all_validation_telemetry["duration_seconds"] > 0 else 0.0,
+            3,
+        )
+
         validation_metrics_path = validation_dir / "validation_metrics.json"
         validation_metrics_path.write_text(
             json.dumps(validation_metrics or {}, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+
+        validation_telemetry_path = validation_dir / "validation_telemetry.json"
+        validation_telemetry_path.write_text(
+            json.dumps(all_validation_telemetry, indent=2, ensure_ascii=False),
             encoding="utf-8",
         )
 
@@ -437,6 +472,7 @@ async def validate_node(state: PipelineState) -> dict:
         print(f"  ✓ validation structured saved   → {validation_structured_path}")
         print(f"  ✓ validation grouped saved      → {grouped_path}")
         print(f"  ✓ validation metrics saved      → {validation_metrics_path}")
+        print(f"  ✓ validation telemetry saved    → {validation_telemetry_path}")
         if validation_error:
             print(f"  ⚠ {validation_error}")
 
@@ -445,6 +481,7 @@ async def validate_node(state: PipelineState) -> dict:
             "validation_structured": all_structured,
             "raw_data":              all_raw_data,
             "validation_metrics":    validation_metrics,
+            "validation_telemetry":  all_validation_telemetry,
             "validation_error":      validation_error,
         }
     except Exception as e:
@@ -575,11 +612,20 @@ async def save_outputs_node(state: PipelineState) -> dict:
         )
         saved.append(str(validation_metrics_file))
 
+    if state.get("validation_telemetry"):
+        validation_telemetry_file = output_dir / "validation_telemetry.json"
+        validation_telemetry_file.write_text(
+            json.dumps(state.get("validation_telemetry", {}), indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        saved.append(str(validation_telemetry_file))
+
     # Combined one-file summary for validation + correction performance.
     performance_json = output_dir / "performance_summary.json"
     performance_payload = {
         "validation": {
             "metrics": state.get("validation_metrics", {}),
+            "telemetry": state.get("validation_telemetry", {}),
             "error": state.get("validation_error", ""),
         },
         "correction": {

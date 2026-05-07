@@ -63,6 +63,97 @@ from langchain_openrouter import ChatOpenRouter
 # Base cap used as a lower bound. Actual per-run cap is scaled by entry count.
 MAX_REACT_ITERATIONS = 120
 REACT_RECURSION_BUFFER = 20  # extra graph steps for START/END + finalization overhead
+DBLP_MIRRORS = [
+  "dblp.org",
+  "dblp.uni-trier.de",
+  "dblp.dagstuhl.de",
+]
+
+
+# ─────────────────────────────────────────────────────────────
+# Telemetry Tracking
+# ─────────────────────────────────────────────────────────────
+
+class ValidationTelemetry:
+    """Track API usage metrics: requests, cache hits, retries, and request rate."""
+    
+    def __init__(self):
+        self.total_requests = 0  # actual API calls made
+        self.cache_hits = 0      # requests served from cache
+        self.total_retries = 0   # total retry attempts
+        self.retry_by_tool = {}  # retry count by tool name
+        self.start_time = None
+        self.end_time = None
+    
+    def start(self):
+        self.start_time = time.monotonic()
+    
+    def end(self):
+        self.end_time = time.monotonic()
+    
+    def record_cache_hit(self):
+        self.cache_hits += 1
+    
+    def record_request(self):
+        self.total_requests += 1
+    
+    def record_retry(self, tool_name: str):
+        self.total_retries += 1
+        self.retry_by_tool[tool_name] = self.retry_by_tool.get(tool_name, 0) + 1
+    
+    def get_duration(self) -> float:
+        """Get elapsed time in seconds."""
+        if self.start_time and self.end_time:
+            return self.end_time - self.start_time
+        return 0.0
+    
+    def get_requests_per_second(self) -> float:
+        """Calculate actual requests per second."""
+        duration = self.get_duration()
+        if duration > 0:
+            return self.total_requests / duration
+        return 0.0
+    
+    def print_summary(self):
+        """Print comprehensive telemetry summary."""
+        duration = self.get_duration()
+        total_lookups = self.cache_hits + self.total_requests
+        total_with_retries = self.total_requests + self.total_retries
+        qps = self.get_requests_per_second()
+        cache_hit_rate = (self.cache_hits / total_lookups * 100) if total_lookups > 0 else 0
+        
+        print(f"\n{'─'*60}")
+        print(f"VALIDATION TELEMETRY")
+        print(f"{'─'*60}")
+        print(f"  Total API calls (net)    : {self.total_requests}")
+        print(f"  Cache hits               : {self.cache_hits}")
+        print(f"  Cache hit rate           : {cache_hit_rate:.1f}%")
+        print(f"  Total retry attempts     : {self.total_retries}")
+        print(f"  Requests with ≥1 retry  : {total_with_retries if self.total_retries > 0 else 'none'}")
+        
+        if self.retry_by_tool:
+            print(f"  Retries by tool:")
+            for tool_name in sorted(self.retry_by_tool.keys()):
+                count = self.retry_by_tool[tool_name]
+                print(f"    • {tool_name}: {count}")
+        
+        print(f"  Total duration           : {duration:.2f}s")
+        print(f"  Effective request rate   : {qps:.1f} req/s")
+        print(f"{'─'*60}\n")
+
+    def to_dict(self) -> dict:
+        """Serialize telemetry for persistence in pipeline artefacts."""
+        duration = self.get_duration()
+        total_lookups = self.cache_hits + self.total_requests
+        return {
+            "total_requests": self.total_requests,
+            "cache_hits": self.cache_hits,
+            "cache_hit_rate": round((self.cache_hits / total_lookups * 100) if total_lookups > 0 else 0.0, 2),
+            "total_retries": self.total_retries,
+            "retries_by_tool": dict(self.retry_by_tool),
+            "duration_seconds": round(duration, 3),
+            "requests_per_second": round(self.get_requests_per_second(), 3),
+        }
 
 
 # ─────────────────────────────────────────────────────────────
@@ -142,14 +233,9 @@ You will receive a list of BibTeX entries. For EACH entry:
 1. SEARCH — call dblp_fuzzy_title_search with the entry title and authors.
    - similarity >= 0.75  -> strong evidence, no need for Scholar.
    - similarity < 0.75   -> call google_scholar_search as fallback.
-   - Scholar also fails  -> try DBLP again with a shorter title (3-5 keywords).
-   - All searches fail   -> mark as invalid.
-  - If DBLP returns timeout/connection reset/API error/[EXHAUSTED] message:
-    1) call set_dblp_mirror with host="dblp.uni-trier.de", retry the exact same query.
-    2) if it STILL fails or says [EXHAUSTED], call set_dblp_mirror with host="dblp.dagstuhl.de", retry.
-    3) if THAT fails, try a shorter title query (just first 3-5 words) with the new mirror.
-    4) only if all DBLP mirrors fail do you proceed to Scholar fallback.
-    5) if Scholar also fails, mark as invalid.
+  - Scholar also fails  -> mark as unverifiable if the returned tool output contains an error marker.
+  - All searches fail   -> mark as invalid only if the searches completed successfully and the paper is provably fabricated.
+  - If a tool returns [EXHAUSTED] or another error marker, assume the backend could not verify the entry.
 
 2. COMPARE — check each field against the best match:
    title, author, year, journal / booktitle / venue.
@@ -157,21 +243,23 @@ You will receive a list of BibTeX entries. For EACH entry:
 3. ASSIGN:
    - valid          : strong match AND all major fields are correct
    - partially_valid: paper EXISTS in database BUT 1+ fields are wrong (typo, misspelling, author name variant, wrong year, wrong venue, incomplete author list, capitalization error, etc.)
-   - invalid        : no credible match found anywhere OR paper provably doesn't exist
+   - invalid        : searches succeeded (no API errors) but no match found AND paper provably doesn't exist / is fabricated
+   - unverifiable   : could not verify due to API/network failures (DBLP mirrors + Scholar all failed with errors)
   
 CRITICAL FIELD ERROR HANDLING:
   - If DBLP/Scholar confirms the paper EXISTS (similarity >= 0.70) but has field errors → PARTIALLY_VALID
   - Only mark as INVALID if:
-    * No database match found at all (tried all mirrors + Scholar)
-    * OR paper is provably non-existent (e.g., author died before publication year)
-    * OR completely fabricated (impossible author combinations, fictional venues)
+    * Searches succeeded (no API errors) and returned no match
+    * AND paper is provably non-existent (e.g., author died before year, impossible combination)
+  - Do NOT mark as INVALID when API/network errors prevented verification → use UNVERIFIABLE instead
+  - Do NOT confuse "field errors" with "paper doesn't exist"
+  - Do NOT confuse "API access failure" with "paper doesn't exist"
 
 EFFICIENCY RULES:
   - Do NOT call Scholar if DBLP similarity is already >= 0.75
   - One DBLP call per entry is usually enough (but retry with mirrors if it fails)
   - Only retry with a shorter query search with the dblp_search tool if the full-title search returns nothing
-  - Mirror switching retries are for DBLP transport errors ([EXHAUSTED], timeout, connection reset, 503)
-  - If you see [EXHAUSTED] in an error message, it means 4 retries already failed → try mirror immediately
+  - If you see [EXHAUSTED] or an error marker in a tool response, stop treating the entry as verifiable
 
 Produce a complete markdown report with summary table and per-entry
 details showing which evidence source was used and what issues were found.
@@ -181,6 +269,7 @@ Markdown format requirements (MANDATORY):
   - ## 🟢 Valid References
   - ## 🟡 Partially Valid References
   - ## 🔴 Invalid References
+  - ## 🟠 Unverifiable References
 2. Every reference must appear in exactly one of those three sections.
 3. Do not create any other status section names.
 4. Keep entry IDs in each section so they are easy to trace.
@@ -191,8 +280,9 @@ Then append a JSON block in EXACTLY this format:
   "results": [
     {
       "entry_id": "...",
-      "status": "valid|partially_valid|invalid",
+      "status": "valid|partially_valid|invalid|unverifiable",
       "confidence": 0.0,
+      "access_error": false,
       "issues": ["field: description"],
       "suggested_fixes": {"field": "corrected value"}
     }
@@ -210,13 +300,9 @@ reason step by step before assigning a verdict:
 
 Step 1 — SEARCH
   Call dblp_fuzzy_title_search with the entry title.
-  - If you see an error like [EXHAUSTED], timeout, connection reset, or 503:
-    1) immediately call set_dblp_mirror with host="dblp.uni-trier.de", then retry the same query
-    2) if that ALSO fails, call set_dblp_mirror with host="dblp.dagstuhl.de", retry again
-    3) if mirrors fail, try a shorter title query (first 3-5 keywords)
-    4) if all DBLP attempts fail, call google_scholar_search as fallback
+  - If the tool response contains [EXHAUSTED] or another error marker, treat the backend as unavailable and move to Scholar fallback.
   - If similarity < 0.75, call google_scholar_search as fallback.
-  - If all searches fail, the entry is invalid — stop here.
+  - If all searches fail with no results and no error markers, proceed to step 6.
 
 Step 2 — Title check
   Does the title closely match the best hit?
@@ -238,12 +324,15 @@ Step 6 — Verdict
   Based on steps 2–5 assign:
   - valid          : strong match AND all fields correct
   - partially_valid: paper EXISTS in database BUT has field errors (typo, misspelling, author variant, year mismatch, venue error, incomplete author list, etc.)
-  - invalid        : no credible match found in any database (tried all mirrors + Scholar) OR paper provably non-existent
+  - invalid        : searches succeeded (no API errors) but no match found AND paper provably non-existent
+  - unverifiable   : could not verify due to API/network errors (set access_error: true)
 
 CRITICAL RULE:
   - If you confirmed the paper EXISTS (similarity >= 0.70) but found field errors → PARTIALLY_VALID
-  - Only INVALID if paper truly doesn't exist or is fabricated
+  - Only INVALID if searches completed successfully with no results AND paper is provably fabricated
+  - If searches failed due to API errors → UNVERIFIABLE (not INVALID)
   - Do NOT confuse "field errors" with "paper doesn't exist"
+  - Do NOT confuse "API access failure" with "paper doesn't exist"
 
 EFFICIENCY RULES:
   - Do NOT call Scholar if DBLP similarity is already >= 0.75
@@ -258,6 +347,7 @@ Markdown format requirements (MANDATORY):
   - ## 🟢 Valid References
   - ## 🟡 Partially Valid References
   - ## 🔴 Invalid References
+  - ## 🟠 Unverifiable References
 2. Every reference must appear in exactly one of those three sections.
 3. Do not create any other status section names.
 4. Keep entry IDs in each section so they are easy to trace.
@@ -268,8 +358,9 @@ Then append a JSON block in EXACTLY this format:
   "results": [
     {
       "entry_id": "...",
-      "status": "valid|partially_valid|invalid",
+      "status": "valid|partially_valid|invalid|unverifiable",
       "confidence": 0.0,
+      "access_error": false,
       "issues": ["field: description"],
       "suggested_fixes": {"field": "corrected value"}
     }
@@ -339,10 +430,10 @@ class LLMValidationAgent:
         # )
         
         self.llm = ChatOpenRouter(
-            # model="anthropic/claude-3-haiku",
-            # model="google/gemini-2.5-pro",
-             model ="openai/gpt-5.4",
-            # model="x-ai/grok-4.20",
+            #model="anthropic/claude-sonnet-4.6",
+            #model="google/gemini-2.5-pro",
+            #model ="openai/gpt-5.4",
+            model="x-ai/grok-4.20",
             temperature=0.1,
             max_tokens=30000,
             openrouter_api_key=os.getenv("OPENROUTER_API_KEY")
@@ -381,6 +472,10 @@ class LLMValidationAgent:
         print(f"LLM VALIDATION AGENT [REACT/{self.strategy.value.upper()}] — {len(entries)} entries")
         print(f"{'='*60}\n")
 
+        # Initialize telemetry
+        telemetry = ValidationTelemetry()
+        telemetry.start()
+
         # Load MCP tools
         with open(self.mcp_config_path, "r") as f:
             config = json.load(f)
@@ -405,6 +500,7 @@ class LLMValidationAgent:
         # DBLP rate limit: default 50 requests / second (API limit)
         MAX_QPS = int(os.getenv("DBLP_MAX_QPS", "50"))
         _recent_requests: deque[float] = deque()
+        _tool_map: dict[str, object] = {}
 
         async def _acquire_slot():
           # simple sliding-window rate limiter
@@ -427,6 +523,7 @@ class LLMValidationAgent:
             try:
               val = self.data.pop(key)
               self.data[key] = val
+              telemetry.record_cache_hit()
               return val
             except KeyError:
               return None
@@ -449,6 +546,36 @@ class LLMValidationAgent:
             kw_key = str(kwargs)
           return (tool_name, args_key, kw_key)
 
+        def _is_cacheable_response(resp) -> bool:
+          if isinstance(resp, str):
+            txt = resp.strip().lower()
+            if not txt:
+              return False
+            if txt.startswith("[") and "error" in txt:
+              return False
+            if "[exhausted]" in txt:
+              return False
+            if txt.startswith("error:"):
+              return False
+          return True
+
+        def _select_mirror_tool():
+          return _tool_map.get("set_dblp_mirror")
+
+        def _set_dblp_mirror(host: str):
+          mirror_tool = _select_mirror_tool()
+          if mirror_tool is None:
+            return None
+          try:
+            return mirror_tool.invoke({"host": host})
+          except Exception:
+            return None
+
+        def _cacheable_or_error(resp):
+          if _is_cacheable_response(resp):
+            return resp
+          return None
+
         def _acquire_slot_sync():
           while True:
             now = time.monotonic()
@@ -460,23 +587,38 @@ class LLMValidationAgent:
             time.sleep(0.01)
 
         def _looks_transient_error(resp, exc: Exception | None = None) -> bool:
+          """Heuristic detector for transient transport/API errors.
+
+          Extended to catch a wider range of real-world network messages
+          returned by different MCP adapters and HTTP clients.
+          """
+          keywords = [
+            "503",
+            "service unavailable",
+            "connection reset",
+            "connection refused",
+            "could not connect",
+            "failed to establish",
+            "temporary failure",
+            "temporarily unavailable",
+            "timeout",
+            "timed out",
+            "name or service not known",
+            "could not resolve host",
+            "exhausted",
+            "error:",
+            "mirror",
+            "503 service",
+          ]
+
+          def contains_any(text: str) -> bool:
+            t = text.lower()
+            return any(k in t for k in keywords)
+
           if exc is not None:
-            msg = str(exc).lower()
-            return (
-              "503" in msg
-              or "service unavailable" in msg
-              or "connection reset" in msg
-              or "timeout" in msg
-              or "temporarily unavailable" in msg
-            )
+            return contains_any(str(exc))
           if isinstance(resp, str):
-            txt = resp.lower()
-            return (
-              "503" in txt
-              or "service unavailable" in txt
-              or "connection reset" in txt
-              or txt.startswith("error:")
-            )
+            return contains_any(resp)
           return False
 
         def _normalize_tool_input(tool_input=None, **kwargs):
@@ -503,30 +645,41 @@ class LLMValidationAgent:
             if cached is not None:
               return cached
 
-            max_attempts = 4
-            base_delay = 0.5
+            max_attempts = int(os.getenv("TOOL_MAX_RETRIES", "4"))
+            base_delay = float(os.getenv("TOOL_BASE_DELAY", "0.5"))
             last_exc = None
-            for attempt in range(max_attempts):
-              _acquire_slot_sync()
-              try:
-                resp = original_invoke(normalized_input)
-                if _looks_transient_error(resp):
-                  raise RuntimeError(f"Transient tool error: {resp}")
-                _cache.set(key, resp)
-                return resp
-              except Exception as e:
-                last_exc = e
-                if not _looks_transient_error(None, e):
-                  raise
-                delay = base_delay * (2 ** attempt) + random.random() * 0.2
-                error_msg = str(e)[:100]  # truncate long error messages
-                print(f"    [RETRY {attempt+1}/4] {name}: {error_msg} → waiting {delay:.2f}s")
-                time.sleep(delay)
-            
-            # All retries exhausted
-            error_msg = str(last_exc)[:200]
-            print(f"    [EXHAUSTED] {name}: giving up after 4 retries. Last error: {error_msg}")
-            raise last_exc
+            search_tool_names = {"dblp_fuzzy_title_search", "dblp_search"}
+
+            mirror_sequence = DBLP_MIRRORS if name in search_tool_names else [None]
+            for mirror in mirror_sequence:
+              if mirror and name in search_tool_names:
+                _set_dblp_mirror(mirror)
+              for attempt in range(max_attempts):
+                _acquire_slot_sync()
+                try:
+                  telemetry.record_request()
+                  resp = original_invoke(normalized_input)
+                  if _looks_transient_error(resp):
+                    raise RuntimeError(f"Transient tool error: {resp}")
+                  if _is_cacheable_response(resp):
+                    _cache.set(key, resp)
+                  return resp
+                except Exception as e:
+                  last_exc = e
+                  if not _looks_transient_error(None, e):
+                    error_msg = str(e)[:200]
+                    return f"[ERROR] {name}: {error_msg}"
+                  telemetry.record_retry(name)
+                  delay = base_delay * (2 ** attempt) + random.random() * 0.2
+                  error_msg = str(e)[:100]  # truncate long error messages
+                  print(f"    [RETRY {attempt+1}/{max_attempts}] {name}: {error_msg} → waiting {delay:.2f}s")
+                  time.sleep(delay)
+
+            # All retries / mirrors exhausted
+            error_msg = str(last_exc)[:200] if last_exc is not None else "unknown failure"
+            exhausted_msg = f"[EXHAUSTED] All DBLP mirrors failed. Last error: {error_msg}"
+            print(f"    {exhausted_msg}")
+            return exhausted_msg
 
           async def _async_wrapped(tool_input=None, **kwargs):
             """Rate-limited and retried async wrapper around MCP tool invocation."""
@@ -536,33 +689,44 @@ class LLMValidationAgent:
             if cached is not None:
               return cached
 
-            max_attempts = 4
-            base_delay = 0.5
+            max_attempts = int(os.getenv("TOOL_MAX_RETRIES", "4"))
+            base_delay = float(os.getenv("TOOL_BASE_DELAY", "0.5"))
             last_exc = None
-            for attempt in range(max_attempts):
-              await _acquire_slot()
-              try:
-                if callable(original_ainvoke):
-                  resp = await original_ainvoke(normalized_input)
-                else:
-                  resp = original_invoke(normalized_input)
-                if _looks_transient_error(resp):
-                  raise RuntimeError(f"Transient tool error: {resp}")
-                _cache.set(key, resp)
-                return resp
-              except Exception as e:
-                last_exc = e
-                if not _looks_transient_error(None, e):
-                  raise
-                delay = base_delay * (2 ** attempt) + random.random() * 0.2
-                error_msg = str(e)[:100]  # truncate long error messages
-                print(f"    [RETRY {attempt+1}/4] {name}: {error_msg} → waiting {delay:.2f}s")
-                await asyncio.sleep(delay)
-            
-            # All retries exhausted
-            error_msg = str(last_exc)[:200]
-            print(f"    [EXHAUSTED] {name}: giving up after 4 retries. Last error: {error_msg}")
-            raise last_exc
+            search_tool_names = {"dblp_fuzzy_title_search", "dblp_search"}
+
+            mirror_sequence = DBLP_MIRRORS if name in search_tool_names else [None]
+            for mirror in mirror_sequence:
+              if mirror and name in search_tool_names:
+                _set_dblp_mirror(mirror)
+              for attempt in range(max_attempts):
+                await _acquire_slot()
+                try:
+                  telemetry.record_request()
+                  if callable(original_ainvoke):
+                    resp = await original_ainvoke(normalized_input)
+                  else:
+                    resp = original_invoke(normalized_input)
+                  if _looks_transient_error(resp):
+                    raise RuntimeError(f"Transient tool error: {resp}")
+                  if _is_cacheable_response(resp):
+                    _cache.set(key, resp)
+                  return resp
+                except Exception as e:
+                  last_exc = e
+                  if not _looks_transient_error(None, e):
+                    error_msg = str(e)[:200]
+                    return f"[ERROR] {name}: {error_msg}"
+                  telemetry.record_retry(name)
+                  delay = base_delay * (2 ** attempt) + random.random() * 0.2
+                  error_msg = str(e)[:100]  # truncate long error messages
+                  print(f"    [RETRY {attempt+1}/{max_attempts}] {name}: {error_msg} → waiting {delay:.2f}s")
+                  await asyncio.sleep(delay)
+
+            # All retries / mirrors exhausted
+            error_msg = str(last_exc)[:200] if last_exc is not None else "unknown failure"
+            exhausted_msg = f"[EXHAUSTED] All DBLP mirrors failed. Last error: {error_msg}"
+            print(f"    {exhausted_msg}")
+            return exhausted_msg
 
           return StructuredTool.from_function(
             func=_sync_wrapped,
@@ -575,8 +739,15 @@ class LLMValidationAgent:
 
         instrumented_dblp_tools = [_make_wrapped_tool(t) for t in dblp_tools]
         instrumented_scholar_tools = [_make_wrapped_tool(t) for t in scholar_tools]
+        _tool_map = {t.name: t for t in dblp_tools + scholar_tools}
 
-        return await self._run_react(entries, instrumented_dblp_tools, instrumented_scholar_tools)
+        result = await self._run_react(entries, instrumented_dblp_tools, instrumented_scholar_tools)
+        
+        telemetry.end()
+        telemetry.print_summary()
+        
+        result["telemetry"] = telemetry.to_dict()
+        return result
 
     # ─────────────────────────────────────────────────────────
     # ReAct graph
@@ -645,6 +816,14 @@ class LLMValidationAgent:
                 1 for msg in state["messages"] if isinstance(msg, ToolMessage)
             )
             if tool_messages_so_far >= tool_budget:
+                return END
+
+            exhausted_messages = sum(
+                1
+                for msg in state["messages"]
+                if isinstance(msg, ToolMessage) and "[EXHAUSTED]" in str(msg.content)
+            )
+            if exhausted_messages >= 2:
                 return END
 
             if (

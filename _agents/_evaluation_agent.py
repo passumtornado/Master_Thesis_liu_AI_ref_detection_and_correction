@@ -183,11 +183,11 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         #     openai_api_key=os.getenv("OPENAI_API_KEY"),
         # )
         self.llm = ChatOpenRouter(
-            # model="anthropic/claude-sonnet-4.6",
-                # model="google/gemini-2.5-pro",
-                 model ="openai/gpt-5.4",
+                model="anthropic/claude-sonnet-4.6",
+                #model="google/gemini-2.5-pro",
+                 #model ="openai/gpt-5.4",
                 temperature=0.1,
-                max_tokens=30000,
+                max_tokens=10000,
                 openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
         )
         

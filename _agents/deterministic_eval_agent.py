@@ -373,14 +373,14 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         # )
 
         # Ollama backend — uncomment to switch
-        self.llm = ChatOllama(
-            model="qwen3-coder:480b-cloud",
-            base_url="https://ollama.com",
-            temperature=0.1,
-            client_kwargs={
-                "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-            },
-        )
+        # self.llm = ChatOllama(
+        #     model="qwen3-coder:480b-cloud",
+        #     base_url="https://ollama.com",
+        #     temperature=0.1,
+        #     client_kwargs={
+        #         "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+        #     },
+        # )
         # OpenAI backend (uncomment to switch)
         # self.llm = ChatOpenAI(
         #     model="gpt-5.2",
@@ -388,14 +388,14 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         #     openai_api_key=os.getenv("OPENAI_API_KEY"),
         # )
         
-        # self.llm = ChatOpenRouter(
-        #     # model="anthropic/claude-sonnet-4.6",
-        #     #   model="google/gemini-2.5-pro", 
-        #     model ="openai/gpt-5.4",
-        #         # model="x-ai/grok-4.20",
-        #         temperature=0.1,
-        #         openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
-        # )
+        self.llm = ChatOpenRouter(
+            #model="anthropic/claude-sonnet-4.6",
+            #model="google/gemini-2.5-pro", 
+            #model ="openai/gpt-5.4",
+                model="x-ai/grok-4.20",
+                temperature=0.1,
+                openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
+        )
 
 
     # ── public ────────────────────────────────────────────────

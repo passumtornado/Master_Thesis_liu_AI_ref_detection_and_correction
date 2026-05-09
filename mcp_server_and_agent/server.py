@@ -9,6 +9,7 @@ from fastmcp import FastMCP
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.google_scholar import search_google_scholar
+from utils.openalex import search_openalex
 
 
 current_dir = Path(__file__).parent
@@ -135,6 +136,45 @@ def google_scholar_search(
             "title": title,
             "author": author,
             "year": year,
+            "max_results": max_results,
+        },
+        "total_hits": len(hits),
+        "results": hits,
+    }
+
+
+@mcp.tool()
+def openalex_search(
+    title: str,
+    author: str = "",
+    year: str = "",
+    doi: str = "",
+    max_results: int = 3,
+) -> Dict[str, Any]:
+    """Search OpenAlex API and return normalized candidate matches.
+    
+    Used as a second fallback when DBLP results are weak.
+
+    Args:
+        title: reference title to query
+        author: optional author string
+        year: optional publication year
+        doi: optional DOI string
+        max_results: number of result candidates to return
+    """
+    hits = search_openalex(
+        title=title,
+        author=author,
+        year=year,
+        max_results=max_results,
+    )
+
+    return {
+        "query": {
+            "title": title,
+            "author": author,
+            "year": year,
+            "doi": doi,
             "max_results": max_results,
         },
         "total_hits": len(hits),

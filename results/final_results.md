@@ -116,3 +116,73 @@ $$
 - The first table is based on correction-agent metrics because those are available for all six models.
 - Validation metrics for GPT-5 are marked `NR` because [results/gpt-5_result.md](results/gpt-5_result.md) does not include validation-agent outputs.
 - Explicit per-field values are available in [results/gpt-5_result.md](results/gpt-5_result.md#L20) and [results/qwen480b_result.md](results/qwen480b_result.md#L66); other model files do not report field-level tables.
+
+
+
+
+# End-to-End Performance Summary
+
+## Validation Agent (Classification)
+
+| Metric | Value |
+|---|---|
+| Accuracy | 0.760 |
+| Precision | 0.760 |
+| Recall | 0.760 |
+| F1 | 0.760 |
+| True Positives (correctly classified) | 38 |
+| False Positives | 12 |
+| False Negatives | 12 |
+| Ground-truth entries | 50 |
+| Predicted entries | 50 |
+| Matched entries | 50 |
+| Coverage vs ground truth | 1.000 |
+
+### Validation Per-Class Metrics
+
+| Class | Count | Precision | Recall | F1 | TP | FP | FN |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| valid | 26 | 0.703 | 1.000 | 0.825 | 26 | 11 | 0 |
+| partially_valid | 17 | 1.000 | 0.412 | 0.583 | 7 | 0 | 10 |
+| invalid | 7 | 0.833 | 0.714 | 0.769 | 5 | 1 | 2 |
+
+### BibTeX Entry Type Statistics
+
+| Entry Type | Count | Valid | Partially Valid | Invalid |
+|---|---:|---:|---:|---:|
+| @article | 31 | 23 | 4 | 4 |
+| @book | 2 | 0 | 2 | 0 |
+| @inproceedings | 12 | 3 | 6 | 3 |
+| @misc | 4 | 0 | 4 | 0 |
+| @techreport | 1 | 0 | 1 | 0 |
+
+## Correction Agent
+
+| Metric | Value |
+|---|---|
+| True Positives | 33 |
+| False Positives | 1 |
+| False Negatives | 3 |
+| Precision | 0.971 |
+| Recall | 0.917 |
+| F1 | 0.943 |
+| Partially-valid in ground truth | 17 |
+| Correctly identified partially-valid | 7 |
+
+### Field-Level Metrics (Partially Valid, Correctly Identified)
+
+| Field | Errors in Original | Errors Corrected | False Corrections | Accuracy |
+|---|---|---|---|---|
+| address | 1 | 1 | 0 | 1.000 |
+| author | 6 | 5 | 0 | 0.833 |
+| booktitle | 3 | 3 | 0 | 1.000 |
+| doi | 3 | 3 | 0 | 1.000 |
+| howpublished | 1 | 1 | 0 | 1.000 |
+| institution | 1 | 1 | 0 | 1.000 |
+| journal | 1 | 1 | 1 | 1.000 |
+| number | 1 | 1 | 0 | 1.000 |
+| pages | 3 | 3 | 0 | 1.000 |
+| publisher | 1 | 1 | 0 | 1.000 |
+| title | 7 | 6 | 0 | 0.857 |
+| volume | 1 | 1 | 0 | 1.000 |
+| year | 7 | 6 | 0 | 0.857 |

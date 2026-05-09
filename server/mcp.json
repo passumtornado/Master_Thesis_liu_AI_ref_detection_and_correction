@@ -14,7 +14,8 @@
       "transport": "stdio",
       "command": "uvx",
       "args": ["mcp-dblp"]
-    },
+    }
+  ,
     "mcp-scholar": {
       "transport": "stdio",
       "command": "uv",

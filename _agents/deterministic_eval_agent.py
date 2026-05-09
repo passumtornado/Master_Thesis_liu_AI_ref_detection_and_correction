@@ -390,9 +390,11 @@ You MUST respond with valid JSON in EXACTLY this structure — no extra text, no
         
         self.llm = ChatOpenRouter(
             #model="anthropic/claude-sonnet-4.6",
-            model="google/gemini-2.5-pro", 
-            #model ="openai/gpt-5.4",
+            #model="google/gemini-2.5-pro", 
+            model="google/gemini-3.1-pro-preview",
+            # model ="openai/gpt-5.4",
                 #model="x-ai/grok-4.20",
+                #model="qwen/qwen3.6-35b-a3b",
                 temperature=0.1,
                 openrouter_api_key=os.getenv("OPENROUTER_API_KEY") 
         )

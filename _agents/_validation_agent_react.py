@@ -530,24 +530,35 @@ DBLP, OpenAlex, and Google Scholar search tools.
 You will receive a list of BibTeX entries. For EACH entry you must
 reason step by step before assigning a verdict:
 
-Step 1 — SEARCH (DBLP primary)
- Call fuzzy_title_search with the entry's title and authors.
-  • similarity >= 0.75  → strong match. Skip OpenAlex & Scholar.
-  • similarity < 0.75   → proceed to STEP 1B (OpenAlex).
-  • Tool returns [FALLBACK_TO_OPENALEX] or any error marker → 
-    IMMEDIATELY call openalex_search. Do NOT retry DBLP again.
-    ⚠️ CRITICAL: [FALLBACK_TO_OPENALEX] means DBLP is unavailable.
-       You must use OpenAlex for this entry.
-       
-Step 1B — FALLBACK (OpenAlex)
-  Call openalex_search with title, author(s), and year.
-  - If similarity >= 0.70: good match. Proceed to Step 2.
-  - If similarity < 0.70 or error marker: proceed to Step 1C (Scholar).
+════════════════════════════════════════
+STEP 1 — SEARCH (Primary: DBLP)
+════════════════════════════════════════
+Call fuzzy_title_search with the entry's title and authors.
+  • Priotize DBLP API Error over similarity score and switch to OpenAlex immediately if you see an error (e.g., 500 Server Error).
+  • similarity >= 0.75  → strong match found. Skip OpenAlex & Scholar; proceed to STEP 2.
+  • similarity < 0.75   → proceed to STEP 1B (OpenAlex fallback).
+  • Tool returns [EXHAUSTED] or any error marker (500, timeout, connection reset) →
+    IMMEDIATELY proceed to STEP 1B (OpenAlex fallback).
+    ⚠️ CRITICAL: API errors mean "backend unavailable", NOT "paper not found".
+       Always try the next source.
 
-Step 1C — FINAL FALLBACK (Google Scholar)
-  Call google_scholar_search.
-  - If Scholar finds a match: Proceed to Step 2 using Scholar's result.
-  - If Scholar also fails: All sources exhausted. Proceed to Step 6.
+════════════════════════════════════════
+STEP 1B — FALLBACK: OpenAlex
+════════════════════════════════════════
+Call openalex_search with the entry's title, author(s), and year.
+
+  • OpenAlex similarity >= 0.70 → good match. Proceed to STEP 2 using OpenAlex result.
+  • OpenAlex similarity < 0.70 → proceed to STEP 1C (Scholar).
+  • Tool returns [EXHAUSTED] or any error marker → proceed to STEP 1C (Scholar).
+    ⚠️ CRITICAL: OpenAlex error means "try next source", NOT "paper not found".
+
+════════════════════════════════════════
+STEP 1C — FINAL FALLBACK: Google Scholar
+════════════════════════════════════════
+Call google_scholar_search.
+
+  • Scholar finds a match → proceed to STEP 2 using Scholar's result.
+  • Scholar also fails → mark UNVERIFIABLE (see STEP 3).
 
 Step 2 — Title check
   Does the title closely match the best hit?
@@ -721,29 +732,29 @@ class LLMValidationAgent:
         #     openai_api_key=os.getenv("OPENAI_API_KEY"),
         # )
         
-        # self.llm = ChatOpenRouter(
-        #     #model="anthropic/claude-sonnet-4.6",
-        #     #model="google/gemini-2.5-pro",
-        #     #model="google/gemini-3.1-pro-preview",
-        #     #model="mistralai/mistral-medium-3-5",
-        #     # model ="openai/gpt-5.4",
-        #     #model="qwen/qwen3.6-35b-a3b",
-        #     #model="x-ai/grok-4.20",
-        #     #temperature=0.1,
-        #     # max_tokens=30000,
-        #     #openrouter_api_key=os.getenv("OPENROUTER_API_KEY")
-        # )
+        self.llm = ChatOpenRouter(
+            #model="anthropic/claude-sonnet-4.6",
+            #model="google/gemini-2.5-pro",
+            #model="google/gemini-3.1-pro-preview",
+            #model="mistralai/mistral-medium-3-5",
+            model ="openai/gpt-5.4",
+            #model="qwen/qwen3.6-35b-a3b",
+            #model="x-ai/grok-4.20",
+            #temperature=0.1,
+            #max_tokens=30000,
+            #openrouter_api_key=os.getenv("OPENROUTER_API_KEY")
+        )
 
         #Ollama backend — uncomment to switch
-        self.llm = ChatOllama(
-            model="qwen3-coder:480b-cloud",
-            # model="deepseek-v3.2:cloud",
-            base_url="https://ollama.com",
-            temperature=0.1,
-            client_kwargs={
-                "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
-            },
-        )
+        # self.llm = ChatOllama(
+        #     model="qwen3-coder:480b-cloud",
+        #     # model="deepseek-v3.2:cloud",
+        #     base_url="https://ollama.com",
+        #     temperature=0.1,
+        #     client_kwargs={
+        #         "headers": {"Authorization": f"Bearer {os.getenv('OLLAMA_API_KEY')}"}
+        #     },
+        # )
 
         #HuggingFace backend — uncomment to switch
         # self.llm = ChatHuggingFace(

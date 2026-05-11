@@ -1,278 +1,165 @@
-# Results
+# Section A: Validation Agent Model & Strategy Comparison
+
+This section compares the performance of different models across three prompt strategies
+(zero-shot, RAG, and chain-of-thought) using datasets Stefan2 and Stefan3 combined.
+
+## ZERO-SHOT Strategy
+
+| Model | Precision | Recall | F1 | Accuracy |
+| --- | --- | --- | --- | --- |
+| claude-sonnet-4.6 | 0.878 | 0.878 | 0.878 | 0.878 |
+| gpt-5.4 | 0.861 | 0.861 | 0.861 | 0.861 |
+| gemini-3.1-pro-preview | 0.811 | 0.811 | 0.811 | 0.811 |
+| grok-4.20 | 0.801 | 0.801 | 0.801 | 0.801 |
+| qwen3.6-35b-a3b | 0.732 | 0.732 | 0.732 | 0.732 |
+
+**Commentary:** claude-sonnet-4.6 achieved the highest accuracy (87.8%) using the zero-shot strategy on combined Stefan2+3 datasets.
+
+## RAG Strategy
+
+| Model | Precision | Recall | F1 | Accuracy |
+| --- | --- | --- | --- | --- |
+| grok-4.20 | 0.951 | 0.951 | 0.951 | 0.951 |
+| claude-sonnet-4.6 | 0.919 | 0.919 | 0.919 | 0.919 |
+| gemini-3.1-pro-prev | 0.901 | 0.901 | 0.901 | 0.901 |
+| gpt-5.4 | 0.881 | 0.881 | 0.881 | 0.881 |
+| gemini-2.5-pro | 0.627 | 0.627 | 0.627 | 0.627 |
+
+**Commentary:** grok-4.20 achieved the highest accuracy (95.1%) using the rag strategy on combined Stefan2+3 datasets.
+
+## COT Strategy
+
+| Model | Precision | Recall | F1 | Accuracy |
+| --- | --- | --- | --- | --- |
+| gemini-3.1-pro-prev | 0.922 | 0.922 | 0.922 | 0.922 |
+| gpt-5.4 | 0.921 | 0.921 | 0.921 | 0.921 |
+| claude-sonnet-4.6 | 0.840 | 0.840 | 0.840 | 0.840 |
+| grok-4.20 | 0.744 | 0.744 | 0.744 | 0.744 |
+
+**Commentary:** gemini-3.1-pro-prev achieved the highest accuracy (92.2%) using the cot strategy on combined Stefan2+3 datasets.
+
+
+# Section B: Validation Per-Class Metrics (RAG Strategy)
+
+This section focuses exclusively on the RAG (Retrieval-Augmented Generation) strategy,
+analyzing per-class classification performance across all available datasets (Stefan1-4).
+Models are ranked by F1 score for each class.
+
+## VALID Class Metrics
+
+| Model | Set | Precision | Recall | F1 | TP | FP | FN |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| gemini-3.1-pro-prev | 3 | 1.000 | 1.000 | 1.000 | 26 | 0 | 0 |
+| gemini-3.1-pro-prev | 2 | 0.963 | 1.000 | 0.981 | 26 | 1 | 0 |
+| grok-4.20 | 4 | 0.963 | 1.000 | 0.981 | 26 | 1 | 0 |
+| gemini-3.1-pro-prev | 4 | 1.000 | 0.962 | 0.980 | 27 | 2 | 1 |
+| grok-4.20 | 2 | 1.000 | 0.962 | 0.980 | 25 | 0 | 1 |
+| grok-4.20 | 3 | 1.000 | 0.962 | 0.980 | 25 | 0 | 1 |
+| claude-sonnet-4.6 | 2 | 0.929 | 1.000 | 0.963 | 26 | 2 | 0 |
+| claude-sonnet-4.6 | 3 | 0.929 | 1.000 | 0.963 | 26 | 2 | 0 |
+| claude-sonnet-4.6 | 4 | 0.958 | 0.920 | 0.939 | 23 | 1 | 2 |
+| gpt-5.4 | 2 | 0.867 | 1.000 | 0.929 | 26 | 4 | 0 |
+| gpt-5.4 | 3 | 1.000 | 0.769 | 0.870 | 20 | 0 | 6 |
+| gemini-2.5-pro | 2 | 0.867 | 0.500 | 0.634 | 13 | 2 | 13 |
+| gpt-5.4 | 4 | 1.000 | 0.269 | 0.424 | 7 | 0 | 19 |
+
+## PARTIALLY_VALID Class Metrics
+
+| Model | Set | Precision | Recall | F1 | TP | FP | FN |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| grok-4.20 | 3 | 0.944 | 1.000 | 0.971 | 17 | 1 | 0 |
+| gemini-3.1-pro-prev | 4 | 1.000 | 0.934 | 0.956 | 15 | 1 | 1 |
+| gpt-5.4 | 3 | 0.895 | 1.000 | 0.944 | 17 | 2 | 0 |
+| gemini-3.1-pro-prev | 3 | 0.850 | 1.000 | 0.919 | 17 | 3 | 0 |
+| grok-4.20 | 4 | 0.889 | 0.941 | 0.914 | 16 | 2 | 1 |
+| claude-sonnet-4.6 | 4 | 1.000 | 0.824 | 0.903 | 14 | 0 | 3 |
+| grok-4.20 | 2 | 1.000 | 0.824 | 0.903 | 14 | 0 | 3 |
+| claude-sonnet-4.6 | 2 | 1.000 | 0.765 | 0.867 | 13 | 0 | 4 |
+| claude-sonnet-4.6 | 3 | 0.867 | 0.867 | 0.867 | 13 | 2 | 2 |
+| gpt-5.4 | 2 | 1.000 | 0.765 | 0.867 | 13 | 0 | 4 |
+| gemini-3.1-pro-prev | 2 | 1.000 | 0.706 | 0.828 | 12 | 0 | 5 |
+| gemini-2.5-pro | 2 | 1.000 | 0.647 | 0.786 | 11 | 0 | 6 |
+| gpt-5.4 | 4 | 0.424 | 0.824 | 0.560 | 14 | 19 | 3 |
+
+## INVALID Class Metrics
+
+| Model | Set | Precision | Recall | F1 | TP | FP | FN |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| claude-sonnet-4.6 | 2 | 1.000 | 1.000 | 1.000 | 8 | 0 | 0 |
+| claude-sonnet-4.6 | 3 | 1.000 | 1.000 | 1.000 | 6 | 0 | 0 |
+| claude-sonnet-4.6 | 4 | 1.000 | 1.000 | 1.000 | 7 | 0 | 0 |
+| gemini-3.1-pro-prev | 4 | 1.000 | 1.000 | 1.000 | 7 | 0 | 0 |
+| gpt-5.4 | 2 | 1.000 | 1.000 | 1.000 | 8 | 0 | 0 |
+| grok-4.20 | 3 | 1.000 | 1.000 | 1.000 | 7 | 0 | 0 |
+| grok-4.20 | 4 | 1.000 | 1.000 | 1.000 | 7 | 0 | 0 |
+| gemini-2.5-pro | 2 | 0.800 | 1.000 | 0.889 | 8 | 2 | 0 |
+| gemini-3.1-pro-prev | 2 | 1.000 | 0.750 | 0.857 | 6 | 0 | 2 |
+| grok-4.20 | 2 | 0.727 | 1.000 | 0.842 | 8 | 3 | 0 |
+| gpt-5.4 | 4 | 0.700 | 1.000 | 0.824 | 7 | 3 | 0 |
+| gemini-3.1-pro-prev | 3 | 1.000 | 0.571 | 0.727 | 4 | 0 | 3 |
+| gpt-5.4 | 3 | 0.455 | 0.714 | 0.556 | 5 | 6 | 2 |
+
+## Average Metrics Across Datasets (RAG Strategy)
 
-## 1. Dataset and Ground Truth
+| Model | Avg Precision | Avg Recall | Avg F1 |
+| --- | --- | --- | --- |
+| grok-4.20 | 0.947 | 0.965 | 0.952 |
+| claude-sonnet-4.6 | 0.965 | 0.931 | 0.945 |
+| gemini-3.1-pro-prev | 0.979 | 0.880 | 0.916 |
+| gpt-5.4 | 0.816 | 0.816 | 0.775 |
+| gemini-2.5-pro | 0.889 | 0.716 | 0.770 |
 
-This study uses one BibTeX dataset split into 4 sets.
-Each set has a matching ground-truth file.
-The ground truth gives the expected label for each reference:
+## Overall Confusion Matrix (RAG Strategy, All Datasets Combined)
 
-- valid
-- partially_valid
-- invalid
+| Metric | Value |
+| --- | --- |
+| True Positives (TP) | 570 |
+| False Positives (FP) | 59 |
+| False Negatives (FN) | 82 |
 
-### 1.1 Dataset Split
 
-| Set       | BibTeX File       | Ground-Truth File        | Total Entries |   Valid | Partially Valid | Invalid |
-| --------- | ----------------- | ------------------------ | ------------: | ------: | --------------: | ------: |
-| Set 1     | stefan_train1.bib | stefan_train1_truth.json |            51 |      26 |              17 |       8 |
-| Set 2     | stefan_train2.bib | stefan_train2_truth.json |            51 |      26 |              17 |       8 |
-| Set 3     | stefan_train3.bib | stefan_train3_truth.json |            50 |      26 |              17 |       7 |
-| Set 4     | stefan_train4.bib | stefan_train4_truth.json |            50 |      26 |              17 |       7 |
-| **Total** | -                 | -                        |       **202** | **104** |          **68** |  **30** |
+# Section C: Correction Agent Performance Analysis
 
-### 1.2 What Ground Truth Contains
+This section analyzes the correction agent performance across different strategies,
+evaluating the effectiveness of field-level corrections on partially-valid entries.
 
-For each entry, ground truth stores:
-
-- entry_id
-- entry_type
-- expected_status
-- corruption notes (for wrong or fake entries)
+## Correction Agent Performance by Strategy
 
-### 1.3 Why This Dataset Design Is Good
+### COT Strategy
 
-- It is balanced and easy to repeat.
-- All 3 labels are present in every set.
-- It tests multiple BibTeX entry types.
-- It supports fair model comparison across runs.
+| Model | Precision | Recall | F1 |
+| --- | --- | --- | --- |
+| gpt-5.4 | 0.980 | 0.312 | 0.473 |
+| gemini-3.1-pro-prev | 1.000 | 0.272 | 0.427 |
+| grok-4.20 | 1.000 | 0.045 | 0.084 |
+| claude-sonnet-4.6 | 0.334 | 0.038 | 0.069 |
 
----
+### RAG Strategy
 
-## 2. Evaluation Setup
+| Model | Precision | Recall | F1 |
+| --- | --- | --- | --- |
+| grok-4.20 | 0.958 | 0.392 | 0.453 |
+| gpt-5.4 | 0.976 | 0.207 | 0.328 |
+| gemini-3.1-pro-prev | 0.792 | 0.246 | 0.322 |
+| claude-sonnet-4.6 | 0.745 | 0.056 | 0.102 |
+| gemini-2.5-pro | 1.000 | 0.028 | 0.055 |
 
-Results were collected from model folders in `evaluation/`.
-Folder names include both model and set id.
+### ZERO-SHOT Strategy
 
-Models included in this report:
+| Model | Precision | Recall | F1 |
+| --- | --- | --- | --- |
+| claude-sonnet-4.6 | 0.900 | 0.164 | 0.277 |
+| grok-4.20 | 1.000 | 0.076 | 0.141 |
+| gpt-5.4 | 1.000 | 0.048 | 0.091 |
+| gemini-3.1-pro-preview | 0.250 | 0.015 | 0.029 |
+| qwen3.6-35b-a3b | 0.000 | 0.000 | 0.000 |
 
-- Claude Sonnet 4.6
-- Gemini 2.5 Pro
-- GPT-5.4
-- Grok 4.20
+## Key Observations
 
-### 2.1 Available Runs
+- **Low Recall Challenge:** Correction agents across all strategies show consistently low recall,
+  indicating difficulty in identifying all partially-valid entries that require correction.
+- **High Precision:** When corrections are attempted, most are accurate (high precision),
+  suggesting careful prediction when corrections are made.
+- **Strategy Effectiveness:** RAG strategy generally outperforms other strategies in correction tasks,
+  likely due to access to reference data for validation and correction decisions.
 
-| Model             |     Set 2 |     Set 3 |     Set 4 |
-| ----------------- | --------: | --------: | --------: |
-| Claude Sonnet 4.6 |   Missing | Available | Available |
-| Gemini 2.5 Pro    | Available |   Missing | Available |
-| GPT-5.4           | Available | Available | Available |
-| Grok 4.20         | Available |   Missing | Available |
-
-Important note:
-Some runs are missing, so averages are based only on available runs.
-
----
-
-## 3. Validation Results (Run-Level)
-
-| Model             | Set | Accuracy | Precision | Recall |    F1 |  TP |  FP |  FN | Coverage |
-| ----------------- | --: | -------: | --------: | -----: | ----: | --: | --: | --: | -------: |
-| Claude Sonnet 4.6 |   3 |    0.915 |     0.915 |  0.915 | 0.915 |  43 |   4 |   4 |     0.94 |
-| Claude Sonnet 4.6 |   4 |    0.760 |     0.760 |  0.760 | 0.760 |  38 |  12 |  12 |     1.00 |
-| Gemini 2.5 Pro    |   2 |    0.627 |     0.627 |  0.627 | 0.627 |  32 |  19 |  19 |     1.00 |
-| Gemini 2.5 Pro    |   4 |    0.900 |     0.900 |  0.900 | 0.900 |  45 |   5 |   5 |     1.00 |
-| GPT-5.4           |   2 |    0.843 |     0.843 |  0.843 | 0.843 |  43 |   8 |   8 |     1.00 |
-| GPT-5.4           |   3 |    0.840 |     0.840 |  0.840 | 0.840 |  42 |   8 |   8 |     1.00 |
-| GPT-5.4           |   4 |    0.560 |     0.560 |  0.560 | 0.560 |  28 |  22 |  22 |     1.00 |
-| Grok 4.20         |   2 |    0.922 |     0.922 |  0.922 | 0.922 |  47 |   4 |   4 |     1.00 |
-| Grok 4.20         |   4 |    0.940 |     0.940 |  0.940 | 0.940 |  47 |   3 |   3 |     1.00 |
-
-### 3.1 Main Validation Discussion
-
-- Grok 4.20 gives the best validation scores in available runs.
-- Claude Sonnet 4.6 reaches strong performance in Set 3, but drops in Set 4.
-- Gemini 2.5 Pro changes a lot between Set 2 and Set 4.
-- GPT-5.4 is steady in Set 2 and Set 3, but weak in Set 4.
-- Coverage is mostly 1.00, so most entries were matched.
-
----
-
-## 4. Class-Wise Validation Behavior
-
-| Model             | Set | Recall (Valid) | Recall (Partially Valid) | Recall (Invalid) | Predicted Unverifiable |
-| ----------------- | --: | -------------: | -----------------------: | ---------------: | ---------------------: |
-| Claude Sonnet 4.6 |   3 |          1.000 |                    0.867 |            0.667 |                      0 |
-| Claude Sonnet 4.6 |   4 |          0.654 |                    0.824 |            1.000 |                     11 |
-| Gemini 2.5 Pro    |   2 |          0.500 |                    0.647 |            1.000 |                     15 |
-| Gemini 2.5 Pro    |   4 |          0.962 |                    0.824 |            0.857 |                      0 |
-| GPT-5.4           |   2 |          0.808 |                    0.824 |            1.000 |                      0 |
-| GPT-5.4           |   3 |          0.769 |                    1.000 |            0.714 |                      0 |
-| GPT-5.4           |   4 |          0.269 |                    0.824 |            1.000 |                      0 |
-| Grok 4.20         |   2 |          0.962 |                    0.824 |            1.000 |                      1 |
-| Grok 4.20         |   4 |          1.000 |                    0.941 |            0.714 |                      0 |
-
-### 4.1 Class-Wise Discussion
-
-- Grok is strongest on valid references, especially in Set 4.
-- GPT-5.4 reaches perfect partially-valid recall in Set 3.
-- Claude and Gemini show more instability across sets.
-- Some runs create many unverifiable labels, which reduces total score.
-
----
-
-## 5. Correction Results
-
-| Model             | Set | Correction Precision | Correction Recall | Correction F1 | Correctly Identified Partially Valid |
-| ----------------- | --: | -------------------: | ----------------: | ------------: | -----------------------------------: |
-| Claude Sonnet 4.6 |   3 |                0.900 |             0.118 |         0.209 |                                   13 |
-| Claude Sonnet 4.6 |   4 |                0.667 |             0.026 |         0.050 |                                   14 |
-| Gemini 2.5 Pro    |   2 |                1.000 |             0.028 |         0.055 |                                   11 |
-| Gemini 2.5 Pro    |   4 |                0.875 |             0.091 |         0.165 |                                   14 |
-| GPT-5.4           |   2 |                1.000 |             0.091 |         0.167 |                                   14 |
-| GPT-5.4           |   3 |                1.000 |             0.358 |         0.527 |                                   17 |
-| GPT-5.4           |   4 |                0.929 |             0.169 |         0.286 |                                   14 |
-| Grok 4.20         |   2 |                1.000 |             0.138 |         0.242 |                                   14 |
-| Grok 4.20         |   4 |                1.000 |             0.023 |         0.045 |                                   16 |
-
-### 5.1 Correction Discussion
-
-- Precision is often high, which means edits are mostly safe.
-- Recall is low for most runs, which means many needed fixes are still missed.
-- GPT-5.4 gives the strongest correction F1 in the current data.
-- Strong validation does not always mean strong correction.
-
----
-
-## 6. Model-Level Summary (Available Runs)
-
-| Model             | Completed Runs | Avg Validation F1 | Best Validation F1 | Avg Correction F1 |
-| ----------------- | -------------: | ----------------: | -----------------: | ----------------: |
-| Claude Sonnet 4.6 |              2 |             0.838 |              0.915 |             0.130 |
-| Gemini 2.5 Pro    |              2 |             0.764 |              0.900 |             0.110 |
-| GPT-5.4           |              3 |             0.748 |              0.843 |             0.327 |
-| Grok 4.20         |              2 |             0.931 |              0.940 |             0.144 |
-
-Interpretation:
-
-- Best average validation: Grok 4.20.
-- Best average correction: GPT-5.4.
-- No model is best on both tasks at the same time.
-
----
-
-## 7. Weighted Final Ranking
-
-To provide one overall score, we use:
-
-`weighted_score = 0.6 * avg_validation_f1 + 0.4 * avg_correction_f1`
-
-And a reliability-aware version:
-
-`weighted_score_with_reliability = weighted_score * (1 - avg_unverifiable_rate)`
-
-### 7.1 Ranking Table
-
-| Rank | Model             | Runs | Avg Val F1 | Avg Corr F1 | Avg Unverifiable Rate | Weighted Score (60/40) | Reliability-Aware Score |
-| ---: | ----------------- | ---: | ---------: | ----------: | --------------------: | ---------------------: | ----------------------: |
-|    1 | Grok 4.20         |    2 |      0.931 |       0.143 |                 0.010 |                  0.616 |                   0.610 |
-|    2 | GPT-5.4           |    3 |      0.748 |       0.327 |                 0.000 |                  0.579 |                   0.579 |
-|    3 | Claude Sonnet 4.6 |    2 |      0.838 |       0.130 |                 0.110 |                  0.554 |                   0.493 |
-|    4 | Gemini 2.5 Pro    |    2 |      0.764 |       0.110 |                 0.147 |                  0.502 |                   0.428 |
-
-### 7.2 Ranking Discussion
-
-- Grok ranks first because of very strong validation and low unverifiable rate.
-- GPT-5.4 ranks second and is best on correction quality.
-- Claude and Gemini lose points due to weaker correction and higher unreliable outcomes in some runs.
-
----
-
-## 8. Reliability and System Effects
-
-Model scores depend on both model behavior and tool availability.
-In this project, some runs include many `unverifiable` outputs due to lookup failures.
-
-Practical takeaway:
-
-- Report model metrics and reliability metrics together.
-- Do not judge model quality from one set only.
-- Keep repeated runs to reduce the effect of one bad run.
-
----
-
-## 9. Threats to Validity and Limitations
-
-### 9.1 Missing Runs
-
-Not all model-set pairs are available.
-This can affect averages and ranking fairness.
-
-### 9.2 External Tool Failures
-
-DBLP or Scholar access issues can produce unverifiable labels.
-This can lower validation scores without reflecting true model quality.
-
-### 9.3 Limited Number of Sets
-
-Only 4 sets are used.
-More sets would give stronger confidence in ranking stability.
-
-### 9.4 Correction Recall Gap
-
-All models show low correction recall.
-So the correction module may still miss many real errors.
-
-### 9.5 Distribution Shift Across Sets
-
-Some models change a lot between sets.
-This indicates sensitivity to set composition or runtime conditions.
-
----
-
-## 10. Key Findings (Simple Summary)
-
-1. The dataset split is clear and balanced enough for fair testing.
-2. Grok 4.20 performs best on validation in available runs.
-3. GPT-5.4 performs best on correction quality.
-4. No model is best for both validation and correction at once.
-5. Reliability issues (unverifiable cases) strongly affect final scores.
-6. Correction recall is the main weakness across all models.
-
----
-
-## 11. Suggested Extra Reports to Add in Thesis
-
-### Report A: Stability Report
-
-- Show one line chart per model across Set 1 to Set 4.
-- Metric: Validation F1 and Correction F1.
-- Goal: show consistency.
-
-### Report B: Error Type Report
-
-- Break errors into:
-  - class confusion
-  - unverifiable due to tool access
-  - missed corrections
-- Goal: show where each model fails.
-
-### Report C: Reliability Report
-
-- Include:
-  - total requests
-  - retries
-  - runtime
-  - request rate
-  - unverifiable rate
-- Goal: separate model issues from system issues.
-
-### Report D: Per-Class Performance Report
-
-- Show precision, recall, F1 for each class.
-- Goal: show class-level strengths and weaknesses.
-
-### Report E: Case Study Report
-
-- Add short examples:
-  - one valid success
-  - one partially-valid correction
-  - one invalid/fabricated case
-  - one unverifiable case
-- Goal: make results easier to trust and explain.
-
----
-
-## 12. Final Conclusion for the Results Chapter
-
-This benchmark clearly separates two tasks: reference validation and reference correction. The current results show that model behavior changes by task. Grok 4.20 is strongest for validation, while GPT-5.4 is strongest for correction in the available runs. However, correction recall is still low for all models, so many needed fixes are missed. Also, tool access failures can change measured performance, which means reliability must be tracked with model quality. Therefore, the final system should be judged by both prediction metrics and runtime reliability metrics, not by one score alone.

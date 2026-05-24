@@ -733,11 +733,11 @@ class LLMValidationAgent:
         # )
         
         self.llm = ChatOpenRouter(
-            #model="anthropic/claude-sonnet-4.6",
+            model="anthropic/claude-sonnet-4.6",
             #model="google/gemini-2.5-pro",
             #model="google/gemini-3.1-pro-preview",
             #model="mistralai/mistral-medium-3-5",
-            model ="openai/gpt-5.4",
+            #model ="openai/gpt-5.5",
             #model="qwen/qwen3.6-35b-a3b",
             #model="x-ai/grok-4.20",
             #temperature=0.1,

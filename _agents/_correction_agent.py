@@ -93,11 +93,13 @@ You will receive:
 USE THE VALIDATION STRUCTURED DATA FIRST. It contains issues and suggested fixes already identified.
 For each entry:
 1. Review the validation entry for status, issues, and suggested_fixes.
-2. Apply the suggested fixes where confidence is high (especially if status = partially_valid or invalid).
+2. Apply the suggested fixes where confidence is high (especially if status = partially_valid).
 3. Compare remaining fields against the DBLP record.
 4. Correct only fields that genuinely differ — do NOT blindly copy all DBLP fields.
 5. Preserve fields that are already correct.
 6. Generate the corrected BibTeX string.
+7. Field with uppercase as part of the name (e.g., SPP, IEEE, ACM) must be corrected in {SPP}, {IEEE}, {ACM} format to avoid BibTeX parsing issues.
+
 
 You MUST respond with valid JSON in EXACTLY this structure — no extra text.
 The `corrected_entries` array is mandatory. Do not return markdown only.
@@ -245,8 +247,8 @@ class CorrectionAgent:
                 #model="anthropic/claude-sonnet-4.6",
                 #model="google/gemini-2.5-pro", 
                 #model="google/gemini-3.1-pro-preview",
-                model ="openai/gpt-5.4",
-                #model="x-ai/grok-4.20",
+                #model ="openai/gpt-5.4",
+                model="x-ai/grok-4.20",
                 #model="qwen/qwen3.6-35b-a3b",
                 temperature=0.1,
                 #max_tokens=30000,
@@ -624,7 +626,25 @@ class CorrectionAgent:
 
     @staticmethod
     def _generate_bib(corrected_entries: list[dict]) -> str:
-        """Generate BibTeX text from corrected entries."""
+        """Generate BibTeX text from corrected entries.
+           Output examples:
+           @inproceedings{DBLP:conf/aaai/Standley10,
+                author       = {Trevor Scott Standley},
+                editor       = {Maria Fox and
+                                David Poole},
+                title        = {Finding Optimal Solutions to Cooperative Pathfinding Problems},
+                booktitle    = {Proceedings of the Twenty-Fourth {AAAI} Conference on Artificial Intelligence,
+                                {AAAI} 2010, Atlanta, Georgia, USA, July 11-15, 2010},
+                pages        = {173--178},
+                publisher    = {{AAAI} Press},
+                year         = {2010},
+                url          = {https://doi.org/10.1609/aaai.v24i1.7564},
+                doi          = {10.1609/AAAI.V24I1.7564},
+                timestamp    = {Mon, 04 Sep 2023 16:50:27 +0200},
+                biburl       = {https://dblp.org/rec/conf/aaai/Standley10.bib},
+                bibsource    = {dblp computer science bibliography, https://dblp.org}
+                }
+        """
         lines = []
 
         for item in corrected_entries:
